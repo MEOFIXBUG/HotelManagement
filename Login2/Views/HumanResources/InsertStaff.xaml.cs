@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login2.Views
+namespace Login2.Views.HumanResources
 {
     /// <summary>
     /// Interaction logic for InsertStaff.xaml

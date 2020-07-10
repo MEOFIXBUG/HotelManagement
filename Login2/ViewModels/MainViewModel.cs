@@ -4,6 +4,7 @@ using Login2.Auxiliary.DomainObjects;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Commands;
+using Login2.ViewModels.HumanResources;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -140,7 +141,7 @@ namespace Login2.ViewModels
         /// </summary>
         /// <param name="arg"></param>
         public ICommand updateViewCommand { get; set; }
-        [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_SwitchView(object param)
         {
             var p = param as ParametersForSwitchView;

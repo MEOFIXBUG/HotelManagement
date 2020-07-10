@@ -1,5 +1,6 @@
 ﻿using Login2.Auxiliary.Enums;
 using Login2.ViewModels;
+using Login2.ViewModels.HumanResources;
 using System;
 using System.Collections.Generic;
 using System.Linq;

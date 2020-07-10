@@ -84,11 +84,11 @@
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\InsertStaffViewModel.cs" />
+    <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MyBaseViewModel.cs" />
-    <Compile Include="ViewModels\StaffListViewModel.cs" />
+    <Compile Include="ViewModels\HumanResources\StaffListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -97,13 +97,13 @@
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InsertStaff.xaml.cs">
+    <Compile Include="Views\HumanResources\InsertStaff.xaml.cs">
       <DependentUpon>InsertStaff.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StaffList.xaml.cs">
+    <Compile Include="Views\HumanResources\StaffList.xaml.cs">
       <DependentUpon>StaffList.xaml</DependentUpon>
     </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
@@ -114,7 +114,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InsertStaff.xaml">
+    <Page Include="Views\HumanResources\InsertStaff.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,7 +122,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StaffList.xaml">
+    <Page Include="Views\HumanResources\StaffList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

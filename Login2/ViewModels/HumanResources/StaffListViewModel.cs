@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Login2.ViewModels
+namespace Login2.ViewModels.HumanResources
 {
-    public class InsertStaffViewModel:MyBaseViewModel
+    public class StaffListViewModel: MyBaseViewModel
     {
-        public InsertStaffViewModel()
+        public StaffListViewModel()
         {
 
         }
     }
+
 }

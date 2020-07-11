@@ -21,13 +21,13 @@
                     <TextBlock Text="Hotel Management" VerticalAlignment="Center" FontSize="24" FontFamily="Champagne &amp; Limousines" Margin="13,10,13,11"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen">
                         <materialDesign:PackIcon Kind="BellOutline"/>
                     </Button>
-                    <Button Command="{Binding Path=TestCommand}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
+                    <Button Command="{Binding Path=OpenProfileCommand}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen" Margin="0 0 10 0">
                         <materialDesign:PackIcon Kind="Settings"/>
                     </Button>
-                    <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="ButtonFechar_Click">
+                    <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen" Click="ButtonFechar_Click">
                         <materialDesign:PackIcon Kind="Power"/>
                     </Button>
                 </StackPanel>

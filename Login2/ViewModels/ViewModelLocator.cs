@@ -44,6 +44,7 @@ namespace Login2.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<ProfileViewModel>();
         }
 
         public MainViewModel Main
@@ -58,6 +59,13 @@ namespace Login2.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        }
+        public ProfileViewModel Profile
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ProfileViewModel>();
             }
         }
         public static void Cleanup()

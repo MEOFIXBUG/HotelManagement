@@ -5,6 +5,7 @@ using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Commands;
 using Login2.ViewModels.HumanResources;
+using Login2.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,13 +75,13 @@ namespace Login2.ViewModels
 
 
 
-        private ICommand _testCommand;
-        public ICommand TestCommand
+        private ICommand _openProfileCommand;
+        public ICommand OpenProfileCommand
         {
             get
             {
-                return _testCommand ??
-                     (_testCommand = new RoleBasedSecurityCommand<object>(CanExecute_Test, Execute_Test));
+                return _openProfileCommand ??
+                     (_openProfileCommand = new RoleBasedSecurityCommand<object>(CanExecute_OpenProfile, Execute_OpenProfile));
             }
         }
 
@@ -99,7 +100,7 @@ namespace Login2.ViewModels
         /// </summary>
         /// <param name="arg">We're passing an int from the xaml.</param>
         /// <returns></returns>
-        private bool CanExecute_Test(object o)
+        private bool CanExecute_OpenProfile(object o)
         {
             return true;
         }
@@ -108,10 +109,11 @@ namespace Login2.ViewModels
         /// This happens when you click the button.
         /// </summary>
         /// <param name="arg"></param>
-        [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
-        private void Execute_Test(object o)
+        //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        private void Execute_OpenProfile(object o)
         {
-            MessageBox.Show("Sang dep trai");
+            var profilePage = new Profile();
+            profilePage.ShowDialog();
         }
         #endregion
 

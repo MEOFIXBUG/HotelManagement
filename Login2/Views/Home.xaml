@@ -41,7 +41,7 @@
 
         <Grid Width="250" HorizontalAlignment="Left" Background="#FF2281D1">
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="Orange" Width="10" HorizontalAlignment="Left" Height="55" VerticalAlignment="Top"/>
+                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="Orange" Width="10" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
             <ListView x:Name="ListViewMenu" Margin="0 100" 
                       Foreground="LightGray"

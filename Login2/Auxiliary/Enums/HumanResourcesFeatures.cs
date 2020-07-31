@@ -11,7 +11,7 @@ namespace Login2.Auxiliary.Enums
     {
         [Description("Danh Sách Nhân Viên")]
         staffList=0,
-        [Description("Tạo Tài Khoản")]
+        [Description("Thêm Tài Khoản")]
         addAccount=1
     }
 }

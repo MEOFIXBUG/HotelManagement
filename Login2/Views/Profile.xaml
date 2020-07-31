@@ -1,78 +1,110 @@
-﻿<Window x:Class="Login2.Views.Profile"
+﻿<Window Name="ProfileWindow"
+        x:Class="Login2.Views.Profile"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login2"
+        xmlns:converter="clr-namespace:Login2.Auxiliary.Converters"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Login" Height="610" Width="350" 
+        Title="Profile" Height="620" Width="350" 
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
         FontFamily="Segoe UI Emoji"
         DataContext="{Binding Profile, Source={StaticResource Locator}}"
         >
+    <Window.Resources>
+        <converter:ConvertObjectToString x:Key="ConverterToString"></converter:ConvertObjectToString>
+
+    </Window.Resources>
     <Grid>
-        <StackPanel Grid.Column="2" Background="GhostWhite">
+        <StackPanel  Background="GhostWhite">
             <Grid Background="DarkGray">
-                <Button x:Name="ButtonExit" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="DarkGreen"  VerticalAlignment="Top" HorizontalAlignment="Right">
+                <TextBlock Text="Profile" FontSize="20" Margin="10,0,0,0" Foreground="Blue"></TextBlock>
+                <Button x:Name="ButtonExit" 
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" 
+                        Foreground="White"  VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Command="{Binding Path=CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=ProfileWindow}">
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
             </Grid>
-          
-            <Border Width="120" Height="120" CornerRadius="80" BorderThickness="1" BorderBrush="Gray">
-               
-            </Border>
-
-            <TextBox Text="Full Name" HorizontalAlignment="Center" Margin="0 10 0 0" Foreground="Gray" FontSize="18" FontWeight="Bold"/>
-            <TextBox Text="Role" FontSize="13" Foreground="Gray" HorizontalAlignment="Center" Opacity="0.8"/>
-            <TextBox Text="DOB" FontSize="8" Foreground="Gray" HorizontalAlignment="Center" Opacity="0.8"/>
-
-            <StackPanel Margin="20 10 20 10">
-                <StackPanel Orientation="Horizontal" Margin="0 3">
-                    <materialDesign:PackIcon Kind="AccountLocation" Foreground="Gray"/>
-                    <TextBox Text="Address" Margin="10 0" Foreground="Gray"/>
+            <Border Width="120" Height="120" CornerRadius="80" BorderThickness="1" BorderBrush="Black" Margin="115,0"/>
+            <TextBlock Name="ID" Visibility="Hidden"></TextBlock>
+            <TextBox x:Name="fullname" Text="Sang Đoàn" materialDesign:HintAssist.Hint="Tên" HorizontalAlignment="Center" Margin="130,10,129,0" Foreground="DarkViolet" FontSize="18" FontWeight="Bold"/>
+            <TextBox IsReadOnly="True" Name="role" Text="HumanResources" materialDesign:HintAssist.Hint="Chức vụ" FontSize="13" Foreground="Black" HorizontalAlignment="Center" Opacity="0.8"/>
+            <DockPanel   Margin="20 10 20 10" LastChildFill="True">
+                <StackPanel Width="150" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="0 3">
+                        <materialDesign:PackIcon Kind="Bookmark" Foreground="Gray"/>
+                        <TextBox Name="address" materialDesign:HintAssist.Hint="Địa Chỉ" Text="Bình Định" Margin="10 0" Foreground="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 3">
+                        <materialDesign:PackIcon Kind="Cellphone" Foreground="Gray"/>
+                        <TextBox Name="phone" materialDesign:HintAssist.Hint="SĐT" Text="0389005648" Margin="10 0" Foreground="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 3">
+                        <materialDesign:PackIcon Kind="Email" Foreground="Gray"/>
+                        <TextBox Name="email" materialDesign:HintAssist.Hint="Email" Text="email@gmail.com" Margin="10 0" Foreground="Black"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 3">
-                    <materialDesign:PackIcon Kind="Cellphone" Foreground="Gray"/>
-                    <TextBox Text="Phone" Margin="10 0" Foreground="Gray"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 3">
+                        <materialDesign:PackIcon Kind="AccountLocation" Foreground="Gray"/>
+                        <TextBox Name="identityCard" materialDesign:HintAssist.Hint="CMND" Text="215483062" Margin="10 0" Foreground="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0 3">
+                        <materialDesign:PackIcon Kind="ViewDay" Foreground="Gray"/>
+                        <TextBox Name="DOB" materialDesign:HintAssist.Hint="Sinh ngày" Text="19/09/1999" Margin="10 0" Foreground="Black"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 3">
-                    <materialDesign:PackIcon Kind="Email" Foreground="Gray"/>
-                    <TextBox Text="email@gmail.com" Margin="10 0" Foreground="Gray"/>
-                </StackPanel>
-            </StackPanel>
-
+            </DockPanel>
             <TextBlock Text="ACTION" Margin="20 0" Foreground="Gray"/>
             <StackPanel Orientation="Vertical" Margin="20 0">
                 <Button Width="150" HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom" Margin="5"
                 Content="Sửa" Background="#FF2281D1"
-                Command="{}" 
-        CommandParameter="{}"/>
+                Command="{Binding Path=UpdateProfileCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ConverterToString }">
+                            <Binding Path="Text" ElementName="fullname"/>
+                            <Binding Path="Text" ElementName="role"/>
+                            <Binding Path="Text" ElementName="DOB"/>
+                            <Binding Path="Text" ElementName="phone"/>
+                            <Binding Path="Text" ElementName="address"/>
+                            <Binding Path="Text" ElementName="email"/>
+                            <Binding Path="Text" ElementName="identityCard"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </StackPanel>
-            <Expander Name="ExpanderControl" Header="Đổi Mật Khẩu" Height="205" >
+            <Expander Name="ExpanderControl" Header="Đổi Mật Khẩu" Height="213" >
                 <StackPanel x:Name="RePass" >
                     <StackPanel Orientation="Vertical" Margin="20 0">
-                        <PasswordBox x:Name="curpassBox" Margin="3" materialDesign:HintAssist.Hint="Curent Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="12">
+                        <PasswordBox x:Name="curpassBox" Margin="3" materialDesign:HintAssist.Hint="Curent Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
                         </PasswordBox>
-                        <PasswordBox x:Name="newpassBox" Margin="3" materialDesign:HintAssist.Hint="New Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="12">
+                        <PasswordBox x:Name="newpassBox" Margin="3" materialDesign:HintAssist.Hint="New Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
                         </PasswordBox>
-                        <PasswordBox x:Name="repassBox" Margin="3" materialDesign:HintAssist.Hint="Re Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="12">
+                        <PasswordBox x:Name="repassBox" Margin="3" materialDesign:HintAssist.Hint="Re Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
                         </PasswordBox>
                         <Button Width="150" HorizontalAlignment="Center" 
-                VerticalAlignment="Bottom" Margin="5"
-                Content="OK" Background="#FF2281D1"
-                Command="{}" 
-        CommandParameter="{}"/>
+                            VerticalAlignment="Bottom" Margin="5"
+                            Content="OK" Background="#FF2281D1"
+                            Command="{Binding Path=UpdatePassCommand}">
+                            <Button.CommandParameter>
+                                <MultiBinding Converter="{StaticResource ConverterToString }">
+                                    <Binding Path="Password" ElementName="curpassBox"/>
+                                    <Binding Path="Password" ElementName="newpassBox"/>
+                                    <Binding Path="Password" ElementName="repassBox"/>
+                                </MultiBinding>
+                            </Button.CommandParameter>
+                        </Button>
                     </StackPanel>
-
                 </StackPanel>
             </Expander>
-            
-            
-           
         </StackPanel>
     </Grid>
 </Window>

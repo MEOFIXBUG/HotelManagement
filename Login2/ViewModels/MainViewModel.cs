@@ -113,6 +113,7 @@ namespace Login2.ViewModels
         private void Execute_OpenProfile(object o)
         {
             var profilePage = new Profile();
+            //ParameterSetter.SetParameter(LoginViewModel.session.getAccountID());
             profilePage.ShowDialog();
         }
         #endregion

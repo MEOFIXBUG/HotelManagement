@@ -57,6 +57,18 @@
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.Data.WPF, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WPF.18.2.0.47\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.18.2.0.47\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGrid.WPF.18.2.0.47\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.18.2.0.47\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -86,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
+    <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
     <Compile Include="Auxiliary\Enums\AuthorizationType .cs" />
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />
@@ -94,8 +107,57 @@
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
     <Compile Include="Auxiliary\Helpers\ConvertEnumToList.cs" />
     <Compile Include="Auxiliary\Helpers\ExtraFunction.cs" />
+    <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
+    <Compile Include="Models\account.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking_details.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer_type.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\hotel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hotel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\hotel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\hotel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>hotel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\role.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_status.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_type.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\staff.cs">
+      <DependentUpon>hotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -166,6 +228,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\hotel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>hotel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\hotel.edmx.diagram">
+      <DependentUpon>hotel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -179,7 +248,16 @@
     <Resource Include="Assets\home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Content Include="Models\hotel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>hotel.edmx</DependentUpon>
+      <LastGenOutput>hotel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\hotel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>hotel.edmx</DependentUpon>
+      <LastGenOutput>hotel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

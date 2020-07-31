@@ -4,9 +4,131 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Login2.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="syncfusion:GridHeaderCellControl" x:Key="headerStyle">
+            <Setter Property="Background" Value="#FF7AA732"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="HelloABC"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="0.65*"></RowDefinition>
+            <RowDefinition Height="2*"  />
+        </Grid.RowDefinitions>
+        
+        <Border MinHeight="230" MaxHeight="800" Margin="5,0,5,5" Grid.Row="0"  Background="White" VerticalAlignment="Center" Padding="0,15,0,0" CornerRadius="10" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBox x:Name="Name" Text="{Binding Path=CustomerName}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" Text="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <!--<Button Content="Register" Margin="0 20"/>-->
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Content="Sửa" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Margin="15,0,0,0" Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+                
+            </Grid>
+        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="1"  
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Margin="20,7">
+            <materialDesign:PackIcon Margin="0,5,5,0" Width="30" Height="30" Kind="AccountSearch" Foreground="Gray" VerticalAlignment="Center"/>
+            <TextBox
+            Background="White"
+            materialDesign:HintAssist.Hint="Key Word"  
+            FontFamily="Champagne &amp; Limousines" 
+            Height="40"
+            FontSize="16"
+            Width="250"
+            Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            >
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+                <TextBox.Style>
+                    <StaticResource ResourceKey="MaterialDesignFloatingHintTextBox"/>
+                </TextBox.Style>
+            </TextBox>
+        </StackPanel>
+        <Button Grid.Row="1" Width="100" HorizontalAlignment="Center" 
+                VerticalAlignment="Bottom" Margin="346,0,354,15" 
+                Content="Search" Background="#FF2281D1"
+                Command="{Binding Path=SearchCommand}" 
+        CommandParameter="{Binding ElementName=dataGrid}"/>
+        <Button Grid.Row="1" Width="100" HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" Margin="0,0,226,15" 
+                Content="Reset" Background="#FF2281D1"
+                Command="{Binding Path=ResetCommand}" 
+        CommandParameter="{Binding ElementName=dataGrid}"/>
+        <Border MinHeight="230" MaxHeight="800" Margin="5,0,5,5" Grid.Row="2"  Background="White" VerticalAlignment="Center" Padding="0,15,0,0" CornerRadius="10" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+            </Border.Effect>
+            <StackPanel>
+                <syncfusion:SfDataGrid
+            SelectionUnit="Row"
+            ColumnSizer="Star"
+            HeaderStyle="{StaticResource headerStyle}" 
+            x:Name="dataGrid" 
+            Margin="5"
+            SelectedIndex="{Binding SelectedIndex}"
+            SelectedItem="{Binding SelectedItem}"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"
+            ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}">
+                    <syncfusion:SfDataGrid.SortColumnDescriptions>
+                        <syncfusion:SortColumnDescription ColumnName="CustomerName">
+                        </syncfusion:SortColumnDescription>
+                    </syncfusion:SfDataGrid.SortColumnDescriptions>
+                </syncfusion:SfDataGrid>
+                <syncfusion:SfDataPager
+                x:Name="dataPager"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                AutoEllipsisMode="Both"
+                NumericButtonCount="5"
+                AutoEllipsisText="..." 
+                PageSize="6"
+                UseOnDemandPaging="True"
+                AccentBackground="#FF8CBF26"
+                AccentForeground="White" 
+                Source="{Binding Orders}"/>
+            </StackPanel>
+        </Border>
+       
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.Licensing;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,11 @@ namespace Login2
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            //Register Syncfusion license
+            SyncfusionLicenseProvider.RegisterLicense("Mjk2ODUxQDMxMzgyZTMyMmUzMEFOYzB1NnJieDc3QUNkRUQrQ3pUZHVqR0w3UjB5S3BBNW5qdmRsS1RQZ2s9");
+        }
+      
     }
 }

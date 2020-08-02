@@ -16,5 +16,7 @@
     <DataTemplate DataType="{x:Type humanResources_vm:InsertStaffViewModel}">
         <humanResources_views:InsertStaff/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type humanResources_vm:PopUpRoleViewModel}">
+        <humanResources_views:PopUpRole/>
+    </DataTemplate>
 </ResourceDictionary>

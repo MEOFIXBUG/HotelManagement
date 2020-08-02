@@ -6,6 +6,7 @@ using Login2.Auxiliary.Helpers;
 using Login2.Commands;
 using Login2.ViewModels.HumanResources;
 using Login2.Views;
+using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,8 +93,6 @@ namespace Login2.ViewModels
             get { return _selectedViewModel; }
             set { _selectedViewModel = value; RaisePropertyChanged(); }
         }
-
-
         /// <summary>
         /// If you select 1 in the drop down menu, the button will become disable. 
         /// Rather simple, but it's a place holder for whatever logic you might want.
@@ -117,7 +116,7 @@ namespace Login2.ViewModels
             profilePage.ShowDialog();
         }
         #endregion
-
+       
         private ICommand _switchViewCommand;
         public ICommand SwitchViewCommand
         {

@@ -21,17 +21,16 @@
             <RowDefinition Height="0.65*"></RowDefinition>
             <RowDefinition Height="2*"  />
         </Grid.RowDefinitions>
-        
         <Border MinHeight="230" MaxHeight="800" Margin="5,0,5,5" Grid.Row="0"  Background="White" VerticalAlignment="Center" Padding="0,15,0,0" CornerRadius="10" >
             <Border.Effect>
                 <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
             </Border.Effect>
-            <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+            <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid>
+                <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -55,7 +54,10 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="1" Content="Sửa" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Margin="15,0,0,0" Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Margin="15,0,0,0" 
+                            Command="{Binding Path=UpdateRoleViewCommand}"
+                            CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"
+                            Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
                 
             </Grid>
@@ -70,14 +72,14 @@
             materialDesign:HintAssist.Hint="Key Word"  
             FontFamily="Champagne &amp; Limousines" 
             Height="40"
-            FontSize="16"
+            FontSize="14"
             Width="250"
             Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             >
                 <TextBox.Resources>
-                    <Style TargetType="{x:Type Border}">
+                    <!--<Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
+                    </Style>-->
                 </TextBox.Resources>
                 <TextBox.Style>
                     <StaticResource ResourceKey="MaterialDesignFloatingHintTextBox"/>
@@ -129,6 +131,5 @@
                 Source="{Binding Orders}"/>
             </StackPanel>
         </Border>
-       
     </Grid>
 </UserControl>

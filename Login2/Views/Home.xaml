@@ -14,9 +14,9 @@
         <converter:ConverterForSelectedChange x:Key="ConverterForSelectedChange"></converter:ConverterForSelectedChange>
         
     </Window.Resources>
-    <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
+    <Grid Background="Azure" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="DarkGray" Height="45">
+            <Grid Background="WhiteSmoke" Height="45">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Text="Hotel Management" VerticalAlignment="Center" FontSize="24" FontFamily="Champagne &amp; Limousines" Margin="13,10,13,11"/>
                 </StackPanel>

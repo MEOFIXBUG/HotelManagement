@@ -34,7 +34,7 @@
             </Grid>
         </StackPanel>
 
-        <Grid Margin="250 50 0 0">
+        <Grid Margin="250 45 0 0">
             <!--<Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
             <ContentControl Content="{Binding SelectedViewModel}"></ContentControl>
         </Grid>

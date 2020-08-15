@@ -112,52 +112,55 @@
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
     <Compile Include="Models\account.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\booking.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\booking_details.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer_type.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Context.cs">
+    <Compile Include="Models\Hotel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>Hotel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.cs">
+    <Compile Include="Models\Hotel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
+    <Compile Include="Models\Hotel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>Hotel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room_status.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room_type.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\service.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service_details.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\staff.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
@@ -237,12 +240,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\Model1.edmx">
+    <EntityDeploy Include="Models\Hotel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Hotel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="Models\Hotel.edmx.diagram">
+      <DependentUpon>Hotel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -261,15 +264,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Models\Model1.Context.tt">
+    <Content Include="Models\Hotel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.tt">
+    <Content Include="Models\Hotel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -55,7 +55,12 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.10.9\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.10.9\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Data.WPF, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Data.WPF.18.2.0.47\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
@@ -70,12 +75,19 @@
       <HintPath>..\packages\Syncfusion.Shared.WPF.18.2.0.47\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -113,57 +125,6 @@
     <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
-    <Compile Include="Models\account.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\booking.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\booking_details.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\customer.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\customer_type.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Hotel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hotel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Hotel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Hotel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Hotel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\role.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room_status.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room_type.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\service.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\service_details.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\staff.cs">
-      <DependentUpon>Hotel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\PopUpRoleViewModel.cs" />
@@ -270,13 +231,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\Hotel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Hotel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\Hotel.edmx.diagram">
-      <DependentUpon>Hotel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -292,18 +246,8 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Models\Hotel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Hotel.edmx</DependentUpon>
-      <LastGenOutput>Hotel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Hotel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Hotel.edmx</DependentUpon>
-      <LastGenOutput>Hotel.cs</LastGenOutput>
-    </Content>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

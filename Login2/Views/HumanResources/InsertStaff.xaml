@@ -5,8 +5,69 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Login2.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="550" d:DesignWidth="770">
     <Grid>
-        <TextBlock Text="HelloXYZ"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN CƠ BẢN" Background="White">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBox x:Name="Name" Text="{Binding Path=CustomerName}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" Text="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <!--<Button Content="Register" Margin="0 20"/>-->
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
+                    </StackPanel>
+                </Grid>
+                <DockPanel Grid.Row="1">
+                    <ComboBox Width="200"
+                              Margin="10,0,0,0"
+                      Name="cmbBoxRole"
+  materialDesign:HintAssist.Hint="Bộ Phận" 
+                              VerticalAlignment="Top"
+  IsEditable="True"  HorizontalAlignment="Left"
+                      ItemsSource="{Binding AllRole}"
+                      DisplayMemberPath="Value" 
+                      SelectedValuePath="Key"
+                      SelectedIndex="{Binding AccountID ,UpdateSourceTrigger=PropertyChanged}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    </ComboBox>
+                    <Button Grid.Column="1" Content="Thêm" Margin="0,0,160,0"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN TÀI KHOẢN" Background="White">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBox IsReadOnly="True" x:Name="UserName" Text="{Binding Path=UserName}" materialDesign:HintAssist.Hint="User Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="300"  />
+                    <TextBox IsReadOnly="True" x:Name="PassWord" Text="Là Số CMND" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="300"  />
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock  Text="Tài Khoản Đã Được Tạo Tự Động" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBlock  Text="Hãy Đăng Nhập và Đổi Mật Khẩu" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

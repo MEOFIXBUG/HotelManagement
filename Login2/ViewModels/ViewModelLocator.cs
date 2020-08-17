@@ -14,6 +14,7 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using Login2.ViewModels.HumanResources;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Login2.ViewModels
@@ -45,6 +46,7 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>();
+            SimpleIoc.Default.Register<PopUpRoleViewModel>();
         }
 
         public MainViewModel Main
@@ -66,6 +68,13 @@ namespace Login2.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<ProfileViewModel>();
+            }
+        }
+        public PopUpRoleViewModel PopUpRole
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PopUpRoleViewModel>();
             }
         }
         public static void Cleanup()

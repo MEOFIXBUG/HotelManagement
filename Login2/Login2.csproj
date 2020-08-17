@@ -76,6 +76,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -100,10 +101,8 @@
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
     <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
-    <Compile Include="Auxiliary\Enums\AccountantFeatures.cs" />
     <Compile Include="Auxiliary\Enums\AuthorizationType .cs" />
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />
-    <Compile Include="Auxiliary\Enums\ReceptionistFeatures.cs" />
     <Compile Include="Auxiliary\Enums\Roles.cs" />
     <Compile Include="Auxiliary\Enums\SalesFeatures.cs" />
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
@@ -112,8 +111,60 @@
     <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
+    <Compile Include="Models\account.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking_details.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer_type.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\role.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_status.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_type.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service_details.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\staff.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
+    <Compile Include="ViewModels\HumanResources\PopUpRoleViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MyBaseViewModel.cs" />
@@ -124,17 +175,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Accountant\Customer.xaml.cs">
-      <DependentUpon>Customer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Accountant\Room.xaml.cs">
-      <DependentUpon>Room.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HumanResources\InsertStaff.xaml.cs">
       <DependentUpon>InsertStaff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HumanResources\PopUpRole.xaml.cs">
+      <DependentUpon>PopUpRole.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -145,21 +193,7 @@
     <Compile Include="Views\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Receptionist\Report.xaml.cs">
-      <DependentUpon>Report.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Receptionist\Statistics.xaml.cs">
-      <DependentUpon>Statistics.xaml</DependentUpon>
-    </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Accountant\Customer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Accountant\Room.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HumanResources\InsertStaff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HumanResources\PopUpRole.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,14 +218,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Profile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Receptionist\Report.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Receptionist\Statistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -210,6 +240,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\Hotel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Hotel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Hotel.edmx.diagram">
+      <DependentUpon>Hotel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -225,10 +262,18 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\Accountant\" />
-    <Folder Include="ViewModels\Receptionist\" />
+    <Content Include="Models\Hotel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Hotel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

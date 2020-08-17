@@ -2,7 +2,6 @@
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Commands;
-//using Login2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +42,13 @@ namespace Login2.ViewModels
 
         #region Properties
 
+        private List<string> _myProfile;
 
+        public List<string> MyProfile
+        {
+            get { return _myProfile; }
+            set { _myProfile = value; RaisePropertyChanged(); }
+        }
         #endregion
 
         #region Command
@@ -65,7 +70,6 @@ namespace Login2.ViewModels
             //var a= new staff(obj.ToString());
             MessageBox.Show("abc");
         }
-
         private bool CanExecute_UpdateProfile(object obj)
         {
             return true;

@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
+using Login2.Commands;
+using Login2.Views.HumanResources;
+using Microsoft.Practices.ServiceLocation;
 using Syncfusion.UI.Xaml.Grid;
 
 using System;
@@ -60,16 +63,16 @@ namespace Login2.ViewModels.HumanResources
             this.ShipCity = shipCity;
         }
     }
-    public class StaffListViewModel: MyBaseViewModel
+    public class StaffListViewModel : MyBaseViewModel
     {
-        private List<string> _allRole;
+        //private List<string> _allRole;
 
-        public List<string> AllRole
-        {
-            get { return _allRole; }
-            set { _allRole = value; RaisePropertyChanged(); }
-        }
-        
+        //public List<string> AllRole
+        //{
+        //    get { return _allRole; }
+        //    set { _allRole = value; RaisePropertyChanged(); }
+        //}
+
         private ObservableCollection<OrderInfo> _orders;
         public ObservableCollection<OrderInfo> Orders
         {
@@ -102,7 +105,7 @@ namespace Login2.ViewModels.HumanResources
             {
                 if (KeyWord.Trim().Length != 0) return true;
             }
-            
+
             return false;
         }
 
@@ -130,7 +133,7 @@ namespace Login2.ViewModels.HumanResources
         {
             _orders = new ObservableCollection<OrderInfo>();
             this.GenerateOrders();
-            AllRole = ConvertEnumToList.GetListOfDescription<Roles>();
+            //AllRole = ConvertEnumToList.GetListOfDescription<Roles>();
         }
         private ICommand _resetCommand;
         public ICommand ResetCommand
@@ -152,7 +155,31 @@ namespace Login2.ViewModels.HumanResources
             var p = (SfDataGrid)obj;
             p.SearchHelper.ClearSearch();
         }
+        private ICommand _updateRoleViewCommand;
+        public ICommand UpdateRoleViewCommand
+        {
+            get
+            {
+                return _updateRoleViewCommand ??
+                     (_updateRoleViewCommand = new RoleBasedSecurityCommand<object>(CanExecute_UpdateRoleView, Execute_UpdateRoleView));
+            }
+        }
 
+        private bool CanExecute_UpdateRoleView(object arg)
+        {
+            var p = (OrderInfo)arg;
+            if (p == null) return false;
+            return true;
+        }
+        [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        private void Execute_UpdateRoleView(object obj)
+        {
+            var p = (OrderInfo)obj;
+            var index = _orders.IndexOf(p);
+            var popUpRole = new PopUpRole();
+            ParameterSetter.SetParameter(p.OrderID);
+            popUpRole.ShowDialog();
+        }
     }
 
 }

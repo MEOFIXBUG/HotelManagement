@@ -12,7 +12,7 @@
         Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Resources>
         <converter:ConverterForSelectedChange x:Key="ConverterForSelectedChange"></converter:ConverterForSelectedChange>
-        
+
     </Window.Resources>
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
@@ -71,7 +71,7 @@
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-               
+
             </ListView>
         </Grid>
 

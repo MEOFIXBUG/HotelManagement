@@ -15,6 +15,7 @@ namespace Login2.Auxiliary.Helpers
             Type t = typeof(T);
             return !t.IsEnum ? null : Enum.GetValues(t).Cast<Enum>().Select(x => x.GetDescription()).ToList();
         }
+
         public static string GetDescription(this Enum value)
         {
             Type type = value.GetType();

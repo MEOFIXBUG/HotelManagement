@@ -100,8 +100,10 @@
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
     <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
+    <Compile Include="Auxiliary\Enums\AccountantFeatures.cs" />
     <Compile Include="Auxiliary\Enums\AuthorizationType .cs" />
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />
+    <Compile Include="Auxiliary\Enums\ReceptionistFeatures.cs" />
     <Compile Include="Auxiliary\Enums\Roles.cs" />
     <Compile Include="Auxiliary\Enums\SalesFeatures.cs" />
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
@@ -110,54 +112,6 @@
     <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
-    <Compile Include="Models\account.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\booking.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\booking_details.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\customer.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\customer_type.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\hotel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hotel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\hotel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\hotel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>hotel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\role.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room_status.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\room_type.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\service.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\staff.cs">
-      <DependentUpon>hotel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -169,6 +123,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Accountant\Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accountant\Room.xaml.cs">
+      <DependentUpon>Room.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -185,7 +145,21 @@
     <Compile Include="Views\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Receptionist\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receptionist\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accountant\Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accountant\Room.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,6 +183,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Receptionist\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Receptionist\Statistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -228,13 +210,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\hotel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>hotel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\hotel.edmx.diagram">
-      <DependentUpon>hotel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -248,19 +223,12 @@
     <Resource Include="Assets\home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\hotel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hotel.edmx</DependentUpon>
-      <LastGenOutput>hotel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\hotel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>hotel.edmx</DependentUpon>
-      <LastGenOutput>hotel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\Accountant\" />
+    <Folder Include="ViewModels\Receptionist\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

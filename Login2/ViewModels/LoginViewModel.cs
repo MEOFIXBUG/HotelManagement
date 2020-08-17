@@ -104,6 +104,7 @@ namespace Login2.ViewModels
             //MessageBox.Show(UserName);
             //Xac thuc dang nhap (phan quyen )
             //var Account=get...
+
             var accountID = 1;
             var roleID = 1;
             var Role = "HumanResources";

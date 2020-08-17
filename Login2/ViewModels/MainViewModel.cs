@@ -29,6 +29,7 @@ namespace Login2.ViewModels
     /// </summary>
     public class MainViewModel : MyBaseViewModel
     {
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>

@@ -30,6 +30,7 @@ namespace Login2.Auxiliary.Helpers
             }
             return items;
         }
+
         public static MyBaseViewModel getUserControl(int index, int roleID)
         {
             MyBaseViewModel item=new MyBaseViewModel();

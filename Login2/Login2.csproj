@@ -101,8 +101,10 @@
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
     <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
+    <Compile Include="Auxiliary\Enums\AccountantFeatures.cs" />
     <Compile Include="Auxiliary\Enums\AuthorizationType .cs" />
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />
+    <Compile Include="Auxiliary\Enums\ReceptionistFeatures.cs" />
     <Compile Include="Auxiliary\Enums\Roles.cs" />
     <Compile Include="Auxiliary\Enums\SalesFeatures.cs" />
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
@@ -175,6 +177,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Accountant\Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accountant\Room.xaml.cs">
+      <DependentUpon>Room.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -193,9 +201,23 @@
     <Compile Include="Views\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Receptionist\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receptionist\Statistics.xaml.cs">
+      <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accountant\Customer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Accountant\Room.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
@@ -220,6 +242,14 @@
     <Page Include="Views\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Receptionist\Report.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Receptionist\Statistics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

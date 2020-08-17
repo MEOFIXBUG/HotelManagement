@@ -106,12 +106,12 @@ namespace Login2.ViewModels
             //var Account=get...
 
             var accountID = 1;
-            var roleID = 1;
+            var role = Roles.HumanResources;
             var Role = "HumanResources";
             //Phan Quyen (Role-base....)
             GenericIdentity identity = new GenericIdentity(UserName);
             Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Role });
-            session.SetData(accountID, roleID);
+            session.SetData(accountID, role);
             var homePage = new Home();
             homePage.Show();
             Login login = App.Current.Windows.OfType<Login>().FirstOrDefault();

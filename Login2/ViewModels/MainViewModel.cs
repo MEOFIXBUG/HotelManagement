@@ -36,7 +36,7 @@ namespace Login2.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            int role = LoginViewModel.session.getRoleID();
+            Roles role = LoginViewModel.session.getRole();
             featuresCollection = ExtraFunction.featureOfRole(role);
             ////if (IsInDesignMode)
             ////{
@@ -150,7 +150,7 @@ namespace Login2.ViewModels
             var p = param as ParametersForSwitchView;
             p.transitioningContentSlide.OnApplyTemplate();
             p.gridCursor.Margin = new Thickness(0, (100 + (60 * p.selectedIndex)), 0, 0);
-            SelectedViewModel = ExtraFunction.getUserControl(p.selectedIndex, LoginViewModel.session.getRoleID());
+            SelectedViewModel = ExtraFunction.getUserControl(p.selectedIndex, LoginViewModel.session.getRole());
         }
     }
 }

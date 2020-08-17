@@ -11,16 +11,16 @@ namespace Login2.Auxiliary.Helpers
 {
     public static class ExtraFunction
     {
-        public static List<string> featureOfRole(int roleID)
+        public static List<string> featureOfRole(Roles role)
         {
             List<string> items = new List<string>();
-            switch (roleID)
+            switch (role)
             {
-                case (int)Roles.HumanResources:
+                case Roles.HumanResources:
                     // code block
                     items= ConvertEnumToList.GetListOfDescription<HumanResourcesFeatures>();
                     break;
-                case (int)Roles.Sales:
+                case Roles.Sales:
                     // code block
                     items = ConvertEnumToList.GetListOfDescription<SalesFeatures>();
                     break;
@@ -31,33 +31,51 @@ namespace Login2.Auxiliary.Helpers
             return items;
         }
 
-        public static MyBaseViewModel getUserControl(int index, int roleID)
+        public static MyBaseViewModel getUserControl(int index, Roles role)
         {
             MyBaseViewModel item=new MyBaseViewModel();
-            switch (roleID)
+            switch (role)
             {
-                case 1:
-                    switch (index)
+                case Roles.HumanResources:
                     {
-                        case (int)0:
-                            // code block
-                            item = new StaffListViewModel();
+                        switch (index)
+                        {
+                            case (int)0:
+                                // code block
+                                item = new StaffListViewModel();
+                                break;
+                            case (int)1:
+                                // code block
+                                item = new InsertStaffViewModel();
+                                break;
+                            default:
+                                // code block
+                                item = new StaffListViewModel();
+                                break;
+                        }
+                        break;
+                    }
+
+                case Roles.Accountings:
+                    break;
+                case Roles.Receiptions:
+
+                    ReceptionistFeatures feateture = (ReceptionistFeatures) Enum.ToObject(typeof(ReceptionistFeatures), index);
+                    switch (feateture)
+                    {
+                        case ReceptionistFeatures.roomList:
                             break;
-                        case (int)1:
-                            // code block
-                            item = new InsertStaffViewModel();
-                            break;
-                        default:
-                            // code block
-                            item = new StaffListViewModel();
+                        case ReceptionistFeatures.customList:
                             break;
                     }
+                    break;
+                case Roles.Sales:
                     break;
                 default:
                     // code block
                     break;
             }
-           
+
             return item;
         }
     }

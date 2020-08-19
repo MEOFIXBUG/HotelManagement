@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login2.Views.Receptionist
+namespace Login2.Views.Accountant
 {
     /// <summary>
-    /// Interaction logic for Report.xaml
+    /// Interaction logic for Statistics.xaml
     /// </summary>
-    public partial class Report : UserControl
+    public partial class Statistics : UserControl
     {
-        public Report()
+        public Statistics()
         {
             InitializeComponent();
         }

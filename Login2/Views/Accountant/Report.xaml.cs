@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Login2.Views.Accountant
 {
     /// <summary>
-    /// Interaction logic for Room.xaml
+    /// Interaction logic for Report.xaml
     /// </summary>
-    public partial class Room : UserControl
+    public partial class Report : UserControl
     {
-        public Room()
+        public Report()
         {
             InitializeComponent();
         }

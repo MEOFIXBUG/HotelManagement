@@ -103,11 +103,11 @@ namespace Login2.ViewModels
             //Console.WriteLine(p.Password);
             //MessageBox.Show(UserName);
             //Xac thuc dang nhap (phan quyen )
-            //var Account=get...
+            //var Account=get..
 
             var accountID = 1;
-            var role = Roles.HumanResources;
-            var Role = "HumanResources";
+            var role = Roles.Receiptions;
+            var Role = Roles.Receiptions.ToString();
             //Phan Quyen (Role-base....)
             GenericIdentity identity = new GenericIdentity(UserName);
             Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Role });

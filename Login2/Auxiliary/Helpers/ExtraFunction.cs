@@ -1,6 +1,8 @@
 ﻿using Login2.Auxiliary.Enums;
 using Login2.ViewModels;
+
 using Login2.ViewModels.HumanResources;
+using Login2.ViewModels.Receptionist;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,12 @@ namespace Login2.Auxiliary.Helpers
                 case Roles.Sales:
                     // code block
                     items = ConvertEnumToList.GetListOfDescription<SalesFeatures>();
+                    break;
+                case Roles.Accountings:
+                    items = ConvertEnumToList.GetListOfDescription<AccountantFeatures>();
+                    break;
+                case Roles.Receiptions:
+                    items = ConvertEnumToList.GetListOfDescription<ReceptionistFeatures>();
                     break;
                 default:
                     // code block
@@ -64,8 +72,10 @@ namespace Login2.Auxiliary.Helpers
                     switch (feateture)
                     {
                         case ReceptionistFeatures.roomList:
+                            item = new RoomViewModel();
                             break;
                         case ReceptionistFeatures.customList:
+                            item = new CustomerViewModel();
                             break;
                     }
                     break;

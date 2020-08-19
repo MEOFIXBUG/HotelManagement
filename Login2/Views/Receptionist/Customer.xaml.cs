@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Login2.Views.Receptionist
 {
     /// <summary>
-    /// Interaction logic for Statistics.xaml
+    /// Interaction logic for Customer.xaml
     /// </summary>
-    public partial class Statistics : UserControl
+    public partial class Customer : UserControl
     {
-        public Statistics()
+        public Customer()
         {
             InitializeComponent();
         }

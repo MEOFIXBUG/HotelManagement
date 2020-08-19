@@ -280,6 +280,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\Receptionist\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Receptionist\RoomViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\PopUpRoleViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -292,10 +294,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Accountant\Customer.xaml.cs">
+    <Compile Include="Views\Receptionist\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Accountant\Room.xaml.cs">
+    <Compile Include="Views\Receptionist\Room.xaml.cs">
       <DependentUpon>Room.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
@@ -316,21 +318,21 @@
     <Compile Include="Views\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Receptionist\Report.xaml.cs">
+    <Compile Include="Views\Accountant\Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Receptionist\Statistics.xaml.cs">
+    <Compile Include="Views\Accountant\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
     </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Accountant\Customer.xaml">
+    <Page Include="Views\Receptionist\Customer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Accountant\Room.xaml">
+    <Page Include="Views\Receptionist\Room.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -358,11 +360,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Receptionist\Report.xaml">
+    <Page Include="Views\Accountant\Report.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Receptionist\Statistics.xaml">
+    <Page Include="Views\Accountant\Statistics.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -407,7 +409,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Accountant\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

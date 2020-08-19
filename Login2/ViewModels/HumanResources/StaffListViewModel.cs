@@ -180,6 +180,31 @@ namespace Login2.ViewModels.HumanResources
             ParameterSetter.SetParameter(p.OrderID);
             popUpRole.ShowDialog();
         }
+        private ICommand _updateInfoStaffCommand;
+        public ICommand UpdateInfoStaffCommand
+        {
+            get
+            {
+                return _updateInfoStaffCommand ??
+                     (_updateInfoStaffCommand = new RoleBasedSecurityCommand<object>(CanExecute_UpdateInfoStaff, Execute_UpdateInfoStaff));
+            }
+        }
+
+        private bool CanExecute_UpdateInfoStaff(object arg)
+        {
+            var p = (OrderInfo)arg;
+            if (p == null) return false;
+            return true;
+        }
+        [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        private void Execute_UpdateInfoStaff(object obj)
+        {
+            var p = (OrderInfo)obj;
+            var index = _orders.IndexOf(p);
+            var popUpRole = new PopUpRole();
+            ParameterSetter.SetParameter(p.OrderID);
+            popUpRole.ShowDialog();
+        }
     }
 
 }

@@ -26,7 +26,7 @@
                     <RowDefinition Height="2.75*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -49,7 +49,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="Sửa" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="Sửa" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding Path=UpdateInfoStaffCommand}"
+                            CommandParameter="{Binding ElementName=StaffInfo,Path=DataContext}"/>
                     <Button Grid.Column="1" Margin="15,0,0,0" 
                             Command="{Binding Path=UpdateRoleViewCommand}"
                             CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"

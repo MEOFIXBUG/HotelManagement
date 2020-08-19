@@ -13,18 +13,18 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN CƠ BẢN" Background="White">
-            <Grid >
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+                <Grid x:Name="StaffInfo" DataContext="{Binding Staff,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,0,0,0">
-                        <TextBox x:Name="Name" Text="{Binding Path=CustomerName}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <DatePicker x:Name="DOB" Text="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
@@ -49,11 +49,13 @@
                       SelectedIndex="{Binding AccountID ,UpdateSourceTrigger=PropertyChanged}"
   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                     </ComboBox>
-                    <Button Grid.Column="1" Content="Thêm" Margin="0,0,160,0"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1" Content="Thêm" Margin="0,0,160,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding Path=AddStaffCommand}"
+                            CommandParameter="{Binding ElementName=StaffInfo,Path=DataContext}"/>
                 </DockPanel>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="1" MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN TÀI KHOẢN" Background="White">
+        <GroupBox Visibility="{Binding Visibility, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN TÀI KHOẢN" Background="White">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
@@ -64,8 +66,9 @@
                     <TextBox IsReadOnly="True" x:Name="PassWord" Text="Là Số CMND" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="300"  />
                 </StackPanel>
                 <StackPanel Grid.Row="1">
-                    <TextBlock  Text="Tài Khoản Đã Được Tạo Tự Động" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <TextBlock  Text="Hãy Đăng Nhập và Đổi Mật Khẩu" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <TextBlock  Text="#Lưu ý:" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    </TextBlock>
+                    <TextBlock  Text="Hãy Đăng Nhập và Đổi Mật Khẩu" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                 </StackPanel>
             </Grid>
         </GroupBox>

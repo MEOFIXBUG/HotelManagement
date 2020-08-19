@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
+using Login2.Models;
 using Login2.Views;
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,11 @@ namespace Login2.ViewModels
         /// Initializes a new instance of the Main_ViewModel class.
         /// </summary>
         /// 
-        public static Session session=new Session();
+        public static Session session = new Session();
+        private IRepository<account> accountRepository = null;
         public LoginViewModel()
         {
-            
+            accountRepository = new BaseRepository<account>();
             /*
 			 * Not much point in this case, but for the record, you can have 
 			 * different data depending on if you're in design or runtime like this:
@@ -88,9 +90,13 @@ namespace Login2.ViewModels
         /// <returns></returns>
         private bool CanExecute_Login(object pass)
         {
-            var p = (System.Windows.Controls.PasswordBox)pass;
-            if (UserName == null || p.Password==null) return false;
-            return true;
+            if (pass != null)
+            {
+                var p = (System.Windows.Controls.PasswordBox)pass;
+                if (UserName == null || p.Password == null) return false;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -100,24 +106,30 @@ namespace Login2.ViewModels
         private void Execute_Login(object pass)
         {
             var p = (System.Windows.Controls.PasswordBox)pass;
-            //Console.WriteLine(p.Password);
-            //MessageBox.Show(UserName);
             //Xac thuc dang nhap (phan quyen )
             //var Account=get..
-
-            var accountID = 1;
-            var role = Roles.Receiptions;
-            var Role = Roles.Receiptions.ToString();
-            //Phan Quyen (Role-base....)
-            GenericIdentity identity = new GenericIdentity(UserName);
-            Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Role });
-            session.SetData(accountID, role);
-            var homePage = new Home();
-            homePage.Show();
-            Login login = App.Current.Windows.OfType<Login>().FirstOrDefault();
-            if (login != null)
+            var Account = accountRepository.Get(u => u.UserName.Equals(UserName) && u.Password.Equals(p.Password)).FirstOrDefault();
+            if (Account != null)
             {
-                login.Close();
+                var accountID = Account.ID;
+                //var role = Roles.HumanResources;
+                var role = (Roles)Account.Role;
+                var Role = role.ToString();
+                //Phan Quyen (Role-base....)
+                GenericIdentity identity = new GenericIdentity(UserName);
+                Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Role });
+                session.SetData(accountID, role);
+                var homePage = new Home();
+                homePage.Show();
+                Login login = App.Current.Windows.OfType<Login>().FirstOrDefault();
+                if (login != null)
+                {
+                    login.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sai Tai Khoan hoac Mat Khau");
             }
         }
         #endregion

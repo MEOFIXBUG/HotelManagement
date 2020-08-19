@@ -47,6 +47,8 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>();
             SimpleIoc.Default.Register<PopUpRoleViewModel>();
+            SimpleIoc.Default.Register<StaffListViewModel>();
+            SimpleIoc.Default.Register<InsertStaffViewModel>();
         }
 
         public MainViewModel Main
@@ -77,9 +79,30 @@ namespace Login2.ViewModels
                 return ServiceLocator.Current.GetInstance<PopUpRoleViewModel>();
             }
         }
+        public StaffListViewModel StaffList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StaffListViewModel>();
+            }
+        }
+        public InsertStaffViewModel InsertStaff
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InsertStaffViewModel>();
+            }
+        }
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+
+            
+        }
+        public static void UnRegisterMainViewModel()
+        {
+            SimpleIoc.Default.Unregister<MainViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
         }
     }
 }

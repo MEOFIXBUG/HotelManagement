@@ -21,11 +21,11 @@
                     <TextBlock Text="Hotel Management" VerticalAlignment="Center" FontSize="24" FontFamily="Champagne &amp; Limousines" Margin="13,10,13,11"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen">
-                        <materialDesign:PackIcon Kind="BellOutline"/>
-                    </Button>
                     <Button Command="{Binding Path=OpenProfileCommand}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen" Margin="0 0 10 0">
                         <materialDesign:PackIcon Kind="Settings"/>
+                    </Button>
+                    <Button Command="{Binding Path=LogOutCommand}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen">
+                        <materialDesign:PackIcon Kind="Logout"/>
                     </Button>
                     <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen" Click="ButtonFechar_Click">
                         <materialDesign:PackIcon Kind="Power"/>
@@ -36,7 +36,7 @@
 
         <Grid Margin="250 45 0 0">
             <!--<Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-            <ContentControl Content="{Binding SelectedViewModel}"></ContentControl>
+            <ContentControl Content="{Binding SelectedViewModel,UpdateSourceTrigger=PropertyChanged}"></ContentControl>
         </Grid>
 
         <Grid Width="250" HorizontalAlignment="Left" Background="#FF2281D1">
@@ -48,7 +48,7 @@
                       FontFamily="Champagne &amp; Limousines" 
                       FontSize="18"
                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ItemsSource="{Binding featuresCollection, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  
+                      ItemsSource="{Binding FeaturesCollection,UpdateSourceTrigger=PropertyChanged}"  
                      SelectionMode="Extended"
                       SelectedIndex="0">
                 <i:Interaction.Triggers>

@@ -26,7 +26,8 @@
                     <StackPanel Margin="10,0,0,0">
                         <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" Text="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <DatePicker x:Name="DOB" DisplayDate="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5">
+                        </DatePicker>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
@@ -46,7 +47,7 @@
                       ItemsSource="{Binding AllRole}"
                       DisplayMemberPath="Value" 
                       SelectedValuePath="Key"
-                      SelectedIndex="{Binding AccountID ,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding RoleID ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                     </ComboBox>
                     <Button Grid.Column="1" Content="Thêm" Margin="0,0,160,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 

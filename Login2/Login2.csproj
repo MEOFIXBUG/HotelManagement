@@ -83,6 +83,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
@@ -123,8 +124,10 @@
     <Compile Include="Auxiliary\Enums\Roles.cs" />
     <Compile Include="Auxiliary\Enums\SalesFeatures.cs" />
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
+    <Compile Include="Auxiliary\Helpers\BaseRepository.cs" />
     <Compile Include="Auxiliary\Helpers\ConvertEnumToList.cs" />
     <Compile Include="Auxiliary\Helpers\ExtraFunction.cs" />
+    <Compile Include="Auxiliary\Helpers\IRepository.cs" />
     <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />

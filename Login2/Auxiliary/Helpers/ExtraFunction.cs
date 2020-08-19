@@ -1,4 +1,5 @@
 ﻿using Login2.Auxiliary.Enums;
+using Login2.Models;
 using Login2.ViewModels;
 
 using Login2.ViewModels.HumanResources;
@@ -87,6 +88,19 @@ namespace Login2.Auxiliary.Helpers
             }
 
             return item;
+        }
+
+        public static string generateUserName(staff p)
+        {
+            StringBuilder res = new StringBuilder();
+            string[] words = p.Name.Split(' ');
+            for (int i = 0; i < words.Length-1; i++)
+            {
+                res.Append(words[i][0]);
+            }
+            res.Append(words[words.Length - 1]);
+            res.Append(p.DOB.Year);
+            return res.ToString();
         }
     }
 }

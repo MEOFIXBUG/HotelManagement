@@ -32,7 +32,7 @@
                       ItemsSource="{Binding AllRole}"
                       DisplayMemberPath="Value" 
                       SelectedValuePath="Key"
-                      SelectedIndex="{Binding AccountID ,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding RoleID ,UpdateSourceTrigger=PropertyChanged}"
   Style="{StaticResource MaterialDesignFloatingHintComboBox}">
             </ComboBox>
             <StackPanel Orientation="Horizontal" Margin="20">

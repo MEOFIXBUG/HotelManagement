@@ -33,5 +33,9 @@ namespace Login2.Auxiliary.Helpers
         {
             return _role;
         }
+        public void clear()
+        {
+            _accountID = -1;
+        }
     }
 }

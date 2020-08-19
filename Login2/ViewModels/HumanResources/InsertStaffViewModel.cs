@@ -43,8 +43,24 @@ namespace Login2.ViewModels.HumanResources
                 RaisePropertyChanged();
             }
         }
+        private int _roleId;
+        public int RoleID
+        {
+            get { return _roleId; }
+            set { _roleId = value; RaisePropertyChanged(); }
+        }
+        private string _userName;
+        public string UserName
+        {
+            get { return _userName; }
+            set { _userName = value; RaisePropertyChanged(); }
+        }
+        private IRepository<staff> staffRepository = null;
+        private IRepository<account> accountRepository = null;
         public InsertStaffViewModel()
         {
+            staffRepository=new BaseRepository<staff>();
+            accountRepository = new BaseRepository<account>();
             _visibility = Visibility.Hidden;
             _allRole = new Dictionary<int, string>();
             _allRole = Enum.GetValues(typeof(Roles))
@@ -65,9 +81,19 @@ namespace Login2.ViewModels.HumanResources
         {
             var p = (staff)obj;
             //insert account
-
+            UserName = ExtraFunction.generateUserName(p);
+            var acc = new account
+            {
+                UserName = UserName,
+                Password = p.IdentityCard,
+                Role = RoleID + 1,
+            };
+            accountRepository.Insert(acc);
+            accountRepository.Save();
             //insert staff
-
+            p.Account_id = acc.ID;
+            staffRepository.Insert(p);
+            staffRepository.Save();
             Visibility = Visibility.Visible;
             MessageBox.Show("Tài Khoản Đã Được Tạo Tự Động");
         }

@@ -10,6 +10,7 @@ using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -36,8 +37,10 @@ namespace Login2.ViewModels
         /// </summary>
         public MainViewModel()
         {
+            _selectedViewModel = new MyBaseViewModel();
+            _selectedViewModel=ExtraFunction.getUserControl(0, LoginViewModel.session.getRole());
             Roles role = LoginViewModel.session.getRole();
-            featuresCollection = ExtraFunction.featureOfRole(role);
+            _featuresCollection = ExtraFunction.featureOfRole(role);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -47,9 +50,23 @@ namespace Login2.ViewModels
             ////    // Code runs "for real"
             ////}
         }
+        public StaffListViewModel StaffList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StaffListViewModel>();
+            }
+        }
+        public InsertStaffViewModel InsertStaff
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<InsertStaffViewModel>();
+            }
+        }
         private List<string> _featuresCollection;
 
-        public List<string> featuresCollection
+        public List<string> FeaturesCollection
         {
             get { return _featuresCollection; }
             set { _featuresCollection = value; RaisePropertyChanged(); }
@@ -87,7 +104,7 @@ namespace Login2.ViewModels
             }
         }
 
-        private MyBaseViewModel _selectedViewModel = new StaffListViewModel();
+        private MyBaseViewModel _selectedViewModel ;
 
         public MyBaseViewModel SelectedViewModel
         {
@@ -143,7 +160,6 @@ namespace Login2.ViewModels
         /// This happens when you click the button.
         /// </summary>
         /// <param name="arg"></param>
-        public ICommand updateViewCommand { get; set; }
         //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_SwitchView(object param)
         {
@@ -151,6 +167,39 @@ namespace Login2.ViewModels
             p.transitioningContentSlide.OnApplyTemplate();
             p.gridCursor.Margin = new Thickness(0, (100 + (60 * p.selectedIndex)), 0, 0);
             SelectedViewModel = ExtraFunction.getUserControl(p.selectedIndex, LoginViewModel.session.getRole());
+        }
+        private ICommand _logOutCommand;
+        public ICommand LogOutCommand
+        {
+            get
+            {
+                return _logOutCommand ??
+                     (_logOutCommand = new RoleBasedSecurityCommand<object>(CanExecute_LogOut, Execute_LogOut));
+            }
+        }
+        private bool CanExecute_LogOut(object o)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// This happens when you click the button.
+        /// </summary>
+        /// <param name="arg"></param>
+        //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        private void Execute_LogOut(object o)
+        {
+            LoginViewModel.session.clear();
+            var Login = new Login();
+            Login.Show();
+            
+            var HomePage = App.Current.Windows.OfType<Home>().FirstOrDefault();
+            if (HomePage != null)
+            {
+                this.Cleanup();
+                ViewModelLocator.UnRegisterMainViewModel();
+                HomePage.Close();
+            }
         }
     }
 }

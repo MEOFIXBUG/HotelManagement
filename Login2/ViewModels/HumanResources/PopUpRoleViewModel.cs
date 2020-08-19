@@ -23,11 +23,11 @@ namespace Login2.ViewModels.HumanResources
             get { return _allRole; }
             set { _allRole = value; RaisePropertyChanged(); }
         }
-        private int _acountId;
-        public int AccountID
+        private int _roleId;
+        public int RoleID
         {
-            get { return _acountId; }
-            set { _acountId = value; RaisePropertyChanged(); }
+            get { return _roleId; }
+            set { _roleId = value; RaisePropertyChanged(); }
         }
         public PopUpRoleViewModel()
         {
@@ -39,7 +39,7 @@ namespace Login2.ViewModels.HumanResources
         }
         private  void Function(object obj)
         {
-            AccountID = (int)obj%4;
+            RoleID = (int)obj%4;
         }
         private ICommand _closeWindowCommand;
         public ICommand CloseWindowCommand

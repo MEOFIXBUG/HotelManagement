@@ -35,18 +35,15 @@
                     <ItemsControl.Resources>
                         <Style TargetType="Button">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Trống">
+                                <DataTrigger Binding="{Binding Phong.Type}" Value="0">
                                     <Setter Property="Background" Value="#F1F1F1"></Setter>
                                     <Setter Property="Foreground" Value="#DD292525"></Setter>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Đang thuê">
+                                <DataTrigger Binding="{Binding Phong.Type}" Value="1">
                                     <Setter Property="Background" Value="#A58A72"></Setter>
                                     <Setter Property="Foreground" Value="#DDFFFFFF"></Setter>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Đã đặt trước">
-                                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                                    <Setter Property="Foreground" Value="Gold"></Setter>
-                                </DataTrigger>
+
                                 <EventTrigger RoutedEvent="Click">
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>

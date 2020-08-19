@@ -38,6 +38,8 @@ namespace Login2.ViewModels
         {
             Roles role = LoginViewModel.session.getRole();
             featuresCollection = ExtraFunction.featureOfRole(role);
+
+            SelectedViewModel = ExtraFunction.getUserControl(0, LoginViewModel.session.getRole());
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -87,7 +89,7 @@ namespace Login2.ViewModels
             }
         }
 
-        private MyBaseViewModel _selectedViewModel = new StaffListViewModel();
+        private MyBaseViewModel _selectedViewModel;
 
         public MyBaseViewModel SelectedViewModel
         {

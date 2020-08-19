@@ -3,6 +3,7 @@ using Login2.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,11 @@ namespace Login2.ViewModels.Receptionist
 {
     class RoomViewModel : MyBaseViewModel
     {
-        private List<room> _listAllRoom;
+        private BindingList<room> _listAllRoom;
         private int _totalRoom;
         public RoomViewModel()
         {
-            _listAllRoom = new List<room>();
+            _listAllRoom = new BindingList<room>();
             _totalRoom = 0;
         }
 
@@ -31,13 +32,20 @@ namespace Login2.ViewModels.Receptionist
             }
         }
 
-        public List<room> ListAllRoom { get => _listAllRoom;  }
+        public BindingList<room> ListAllRoom { get => _listAllRoom;
+            set
+            {
+                _listAllRoom = value;
+                RaisePropertyChanged("ListAllRoom");
+                TotalRoom = _listAllRoom.Count;
+            }
+        }
         public int TotalRoom { get => _totalRoom;
-            //set 
-            //{ 
-            //    TotalRoom = value;
-            //    RaisePropertyChanged("TotalRoom");
-            //} 
+            set
+            {
+                TotalRoom = value;
+                RaisePropertyChanged("TotalRoom");
+            }
         }
 
         private bool CanExcute_LoadAllRoom(object o)
@@ -50,13 +58,10 @@ namespace Login2.ViewModels.Receptionist
             using(var db = new hotelEntities())
             {
                 var rooms = from room in db.rooms select room;
-                _listAllRoom = rooms.ToList<room>();
-                Console.Error.WriteLine("load done");
-                foreach (var item in _listAllRoom)
-                {
-                    Console.Error.WriteLine(item.RoomName);
-                }
-                
+                _listAllRoom = new BindingList<room>(rooms.ToList<room>());
+                _totalRoom = _listAllRoom.Count;
+                RaisePropertyChanged("TotalRoom");
+                RaisePropertyChanged("ListAllRoom");
             }
         }
     }

@@ -230,7 +230,9 @@
       <DependentUpon>Hotel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\Receptionist\BookingRoomViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Receptionist\RentRoomViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RoomViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\PopUpRoleViewModel.cs" />
@@ -244,8 +246,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Receptionist\BookingRoom.xaml.cs">
+      <DependentUpon>BookingRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Receptionist\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receptionist\RentRoom.xaml.cs">
+      <DependentUpon>RentRoom.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Receptionist\Room.xaml.cs">
       <DependentUpon>Room.xaml</DependentUpon>
@@ -278,9 +286,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Receptionist\BookingRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Receptionist\Customer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Receptionist\RentRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Receptionist\Room.xaml">
       <Generator>MSBuild:Compile</Generator>

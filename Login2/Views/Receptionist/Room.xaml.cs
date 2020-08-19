@@ -24,5 +24,7 @@ namespace Login2.Views.Receptionist
         {
             InitializeComponent();
         }
+
+        
     }
 }

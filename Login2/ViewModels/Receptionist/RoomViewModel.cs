@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Login2.Commands;
 using Login2.Models;
 using System;
 using System.Collections;
@@ -13,12 +14,15 @@ namespace Login2.ViewModels.Receptionist
 {
     class RoomViewModel : MyBaseViewModel
     {
-        private BindingList<room> _listAllRoom;
+        private List<room> _listAllRoom;
         private int _totalRoom;
+
+
         public RoomViewModel()
         {
-            _listAllRoom = new BindingList<room>();
+            _listAllRoom = new List<room>();
             _totalRoom = 0;
+            Excute_LoadAllRoom(null);
         }
 
         private ICommand _LoadAllRoomCommand;
@@ -28,11 +32,11 @@ namespace Login2.ViewModels.Receptionist
             get
             {
                 return _LoadAllRoomCommand ?? 
-                    (_LoadAllRoomCommand = new RelayCommand<object>(Excute_LoadAllRoom, CanExcute_LoadAllRoom));
+                    (_LoadAllRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_LoadAllRoom));
             }
         }
 
-        public BindingList<room> ListAllRoom { get => _listAllRoom;
+        public List<room> ListAllRoom { get => _listAllRoom;
             set
             {
                 _listAllRoom = value;
@@ -40,6 +44,7 @@ namespace Login2.ViewModels.Receptionist
                 TotalRoom = _listAllRoom.Count;
             }
         }
+
         public int TotalRoom { get => _totalRoom;
             set
             {
@@ -58,7 +63,7 @@ namespace Login2.ViewModels.Receptionist
             using(var db = new hotelEntities())
             {
                 var rooms = from room in db.rooms select room;
-                _listAllRoom = new BindingList<room>(rooms.ToList<room>());
+                _listAllRoom = rooms.ToList<room>();
                 _totalRoom = _listAllRoom.Count;
                 RaisePropertyChanged("TotalRoom");
                 RaisePropertyChanged("ListAllRoom");

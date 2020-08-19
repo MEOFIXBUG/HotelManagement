@@ -61,11 +61,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.21\lib\net452\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.10.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.Entity.6.10.9\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
+    <Reference Include="MySql.Data, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 8.0.20\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,6 +90,7 @@
       <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.4.4.32.7\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -129,6 +128,57 @@
     <Compile Include="Auxiliary\Helpers\MessengerClass.cs" />
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
+    <Compile Include="Models\account.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\booking_details.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer_type.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hotel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\role.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_status.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\room_type.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\service_details.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\staff.cs">
+      <DependentUpon>Hotel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\Receptionist\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RoomViewModel.cs" />
@@ -237,6 +287,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Models\Hotel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Hotel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Hotel.edmx.diagram">
+      <DependentUpon>Hotel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -253,8 +310,19 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="ViewModels\Accountant\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Hotel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Hotel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Hotel.edmx</DependentUpon>
+      <LastGenOutput>Hotel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

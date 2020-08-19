@@ -1,0 +1,820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hotelModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="booking_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Booking_id" Type="int" Nullable="false" />
+          <Property Name="Room_id" Type="int" Nullable="false" />
+          <Property Name="NumberOfPeople" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="double" Nullable="false" />
+          <Property Name="DateOfRentStart" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatesOfRent" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="bookings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_id" Type="int" Nullable="false" />
+          <Property Name="HasForeignPeople" Type="bit" Nullable="false" />
+          <Property Name="Total" Type="double" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="customer_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ByName" Type="int" Nullable="false" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+        </EntityType>
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="IdentityCard" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="int" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ByName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room_status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rooms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="MaxPeople" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="service_details">
+          <Key>
+            <PropertyRef Name="BookDetailID" />
+            <PropertyRef Name="ServiceDetailsID" />
+          </Key>
+          <Property Name="BookDetailID" Type="int" Nullable="false" />
+          <Property Name="ServiceDetailsID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Date" Type="timestamp" Precision="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="services">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Price" Type="double" Nullable="false" />
+          <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeletedAt" Type="timestamp" Precision="0" />
+          <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Account_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentityCard" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="account_ibfk_1">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="booking_details_ibfk_1">
+          <End Role="bookings" Type="Self.bookings" Multiplicity="1" />
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="booking_details">
+              <PropertyRef Name="Booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="booking_details_ibfk_2">
+          <End Role="rooms" Type="Self.rooms" Multiplicity="1" />
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="booking_details">
+              <PropertyRef Name="Room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bookings_ibfk_1">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="Customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customers_ibfk_1">
+          <End Role="customer_type" Type="Self.customer_type" Multiplicity="1" />
+          <End Role="customers" Type="Self.customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="customers">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SD_BOOKINGDETAIL">
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="1" />
+          <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="booking_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="service_details">
+              <PropertyRef Name="BookDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SD_SERVICE">
+          <End Role="services" Type="Self.services" Multiplicity="1" />
+          <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="service_details">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_ibfk_1">
+          <End Role="room_type" Type="Self.room_type" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_ibfk_2">
+          <End Role="room_status" Type="Self.room_status" Multiplicity="1" />
+          <End Role="rooms" Type="Self.rooms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_ibfk_1">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="Account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotelModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="booking_details" EntityType="Self.booking_details" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="bookings" EntityType="Self.bookings" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="customer_type" EntityType="Self.customer_type" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="customers" EntityType="Self.customers" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="room_status" EntityType="Self.room_status" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="room_type" EntityType="Self.room_type" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="rooms" EntityType="Self.rooms" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="service_details" EntityType="Self.service_details" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="services" EntityType="Self.services" Schema="hotel" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="hotel" store:Type="Tables" />
+          <AssociationSet Name="account_ibfk_1" Association="Self.account_ibfk_1">
+            <End Role="role" EntitySet="role" />
+            <End Role="account" EntitySet="account" />
+          </AssociationSet>
+          <AssociationSet Name="booking_details_ibfk_1" Association="Self.booking_details_ibfk_1">
+            <End Role="bookings" EntitySet="bookings" />
+            <End Role="booking_details" EntitySet="booking_details" />
+          </AssociationSet>
+          <AssociationSet Name="booking_details_ibfk_2" Association="Self.booking_details_ibfk_2">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="booking_details" EntitySet="booking_details" />
+          </AssociationSet>
+          <AssociationSet Name="bookings_ibfk_1" Association="Self.bookings_ibfk_1">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="customers_ibfk_1" Association="Self.customers_ibfk_1">
+            <End Role="customer_type" EntitySet="customer_type" />
+            <End Role="customers" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SD_BOOKINGDETAIL" Association="Self.FK_SD_BOOKINGDETAIL">
+            <End Role="booking_details" EntitySet="booking_details" />
+            <End Role="service_details" EntitySet="service_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SD_SERVICE" Association="Self.FK_SD_SERVICE">
+            <End Role="services" EntitySet="services" />
+            <End Role="service_details" EntitySet="service_details" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_ibfk_1" Association="Self.rooms_ibfk_1">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_ibfk_2" Association="Self.rooms_ibfk_2">
+            <End Role="room_status" EntitySet="room_status" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="staff_ibfk_1" Association="Self.staff_ibfk_1">
+            <End Role="account" EntitySet="account" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="role1" Relationship="Self.account_ibfk_1" FromRole="account" ToRole="role" />
+          <NavigationProperty Name="staffs" Relationship="Self.staff_ibfk_1" FromRole="account" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="booking_details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Booking_id" Type="Int32" Nullable="false" />
+          <Property Name="Room_id" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfPeople" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="DateOfRentStart" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatesOfRent" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <NavigationProperty Name="booking" Relationship="Self.booking_details_ibfk_1" FromRole="booking_details" ToRole="bookings" />
+          <NavigationProperty Name="room" Relationship="Self.booking_details_ibfk_2" FromRole="booking_details" ToRole="rooms" />
+          <NavigationProperty Name="service_details" Relationship="Self.FK_SD_BOOKINGDETAIL" FromRole="booking_details" ToRole="service_details" />
+        </EntityType>
+        <EntityType Name="booking">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_id" Type="Int32" Nullable="false" />
+          <Property Name="HasForeignPeople" Type="Boolean" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="booking_details" Relationship="Self.booking_details_ibfk_1" FromRole="bookings" ToRole="booking_details" />
+          <NavigationProperty Name="customer" Relationship="Self.bookings_ibfk_1" FromRole="bookings" ToRole="customers" />
+        </EntityType>
+        <EntityType Name="customer_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ByName" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <NavigationProperty Name="customers" Relationship="Self.customers_ibfk_1" FromRole="customer_type" ToRole="customers" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="IdentityCard" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="Int32" />
+          <NavigationProperty Name="bookings" Relationship="Self.bookings_ibfk_1" FromRole="customers" ToRole="bookings" />
+          <NavigationProperty Name="customer_type" Relationship="Self.customers_ibfk_1" FromRole="customers" ToRole="customer_type" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="accounts" Relationship="Self.account_ibfk_1" FromRole="role" ToRole="account" />
+        </EntityType>
+        <EntityType Name="room_status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.rooms_ibfk_2" FromRole="room_status" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="room_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rooms" Relationship="Self.rooms_ibfk_1" FromRole="room_type" ToRole="rooms" />
+        </EntityType>
+        <EntityType Name="room">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="MaxPeople" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="booking_details" Relationship="Self.booking_details_ibfk_2" FromRole="rooms" ToRole="booking_details" />
+          <NavigationProperty Name="room_status" Relationship="Self.rooms_ibfk_2" FromRole="rooms" ToRole="room_status" />
+          <NavigationProperty Name="room_type" Relationship="Self.rooms_ibfk_1" FromRole="rooms" ToRole="room_type" />
+        </EntityType>
+        <EntityType Name="service_details">
+          <Key>
+            <PropertyRef Name="BookDetailID" />
+            <PropertyRef Name="ServiceDetailsID" />
+          </Key>
+          <Property Name="BookDetailID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceDetailsID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="booking_details" Relationship="Self.FK_SD_BOOKINGDETAIL" FromRole="service_details" ToRole="booking_details" />
+          <NavigationProperty Name="service" Relationship="Self.FK_SD_SERVICE" FromRole="service_details" ToRole="services" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeletedAt" Type="DateTime" />
+          <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="service_details" Relationship="Self.FK_SD_SERVICE" FromRole="services" ToRole="service_details" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Account_id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentityCard" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="account" Relationship="Self.staff_ibfk_1" FromRole="staff" ToRole="account" />
+        </EntityType>
+        <Association Name="account_ibfk_1">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="account" Type="Self.account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="account">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="staff_ibfk_1">
+          <End Role="account" Type="Self.account" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="Account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="booking_details_ibfk_1">
+          <End Role="bookings" Type="Self.booking" Multiplicity="1" />
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bookings">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="booking_details">
+              <PropertyRef Name="Booking_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="booking_details_ibfk_2">
+          <End Role="rooms" Type="Self.room" Multiplicity="1" />
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rooms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="booking_details">
+              <PropertyRef Name="Room_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SD_BOOKINGDETAIL">
+          <End Role="booking_details" Type="Self.booking_details" Multiplicity="1" />
+          <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="booking_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="service_details">
+              <PropertyRef Name="BookDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bookings_ibfk_1">
+          <End Role="customers" Type="Self.customer" Multiplicity="1" />
+          <End Role="bookings" Type="Self.booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="Customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customers_ibfk_1">
+          <End Role="customer_type" Type="Self.customer_type" Multiplicity="1" />
+          <End Role="customers" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="customers">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_ibfk_2">
+          <End Role="room_status" Type="Self.room_status" Multiplicity="1" />
+          <End Role="rooms" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rooms_ibfk_1">
+          <End Role="room_type" Type="Self.room_type" Multiplicity="1" />
+          <End Role="rooms" Type="Self.room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="room_type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="rooms">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SD_SERVICE">
+          <End Role="services" Type="Self.service" Multiplicity="1" />
+          <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="service_details">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="booking_details" EntityType="Self.booking_details" />
+          <EntitySet Name="bookings" EntityType="Self.booking" />
+          <EntitySet Name="customer_type" EntityType="Self.customer_type" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="room_status" EntityType="Self.room_status" />
+          <EntitySet Name="room_type" EntityType="Self.room_type" />
+          <EntitySet Name="rooms" EntityType="Self.room" />
+          <EntitySet Name="service_details" EntityType="Self.service_details" />
+          <EntitySet Name="services" EntityType="Self.service" />
+          <EntitySet Name="staffs" EntityType="Self.staff" />
+          <AssociationSet Name="account_ibfk_1" Association="Self.account_ibfk_1">
+            <End Role="role" EntitySet="roles" />
+            <End Role="account" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="staff_ibfk_1" Association="Self.staff_ibfk_1">
+            <End Role="account" EntitySet="accounts" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <AssociationSet Name="booking_details_ibfk_1" Association="Self.booking_details_ibfk_1">
+            <End Role="bookings" EntitySet="bookings" />
+            <End Role="booking_details" EntitySet="booking_details" />
+          </AssociationSet>
+          <AssociationSet Name="booking_details_ibfk_2" Association="Self.booking_details_ibfk_2">
+            <End Role="rooms" EntitySet="rooms" />
+            <End Role="booking_details" EntitySet="booking_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SD_BOOKINGDETAIL" Association="Self.FK_SD_BOOKINGDETAIL">
+            <End Role="booking_details" EntitySet="booking_details" />
+            <End Role="service_details" EntitySet="service_details" />
+          </AssociationSet>
+          <AssociationSet Name="bookings_ibfk_1" Association="Self.bookings_ibfk_1">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="customers_ibfk_1" Association="Self.customers_ibfk_1">
+            <End Role="customer_type" EntitySet="customer_type" />
+            <End Role="customers" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_ibfk_2" Association="Self.rooms_ibfk_2">
+            <End Role="room_status" EntitySet="room_status" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="rooms_ibfk_1" Association="Self.rooms_ibfk_1">
+            <End Role="room_type" EntitySet="room_type" />
+            <End Role="rooms" EntitySet="rooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SD_SERVICE" Association="Self.FK_SD_SERVICE">
+            <End Role="services" EntitySet="services" />
+            <End Role="service_details" EntitySet="service_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hotelModelStoreContainer" CdmEntityContainer="hotelEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="hotelModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="booking_details">
+            <EntityTypeMapping TypeName="hotelModel.booking_details">
+              <MappingFragment StoreEntitySet="booking_details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Booking_id" ColumnName="Booking_id" />
+                <ScalarProperty Name="Room_id" ColumnName="Room_id" />
+                <ScalarProperty Name="NumberOfPeople" ColumnName="NumberOfPeople" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DateOfRentStart" ColumnName="DateOfRentStart" />
+                <ScalarProperty Name="DatesOfRent" ColumnName="DatesOfRent" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="hotelModel.booking">
+              <MappingFragment StoreEntitySet="bookings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="HasForeignPeople" ColumnName="HasForeignPeople" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_type">
+            <EntityTypeMapping TypeName="hotelModel.customer_type">
+              <MappingFragment StoreEntitySet="customer_type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ByName" ColumnName="ByName" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="hotelModel.customer">
+              <MappingFragment StoreEntitySet="customers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="hotelModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ByName" ColumnName="ByName" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_status">
+            <EntityTypeMapping TypeName="hotelModel.room_status">
+              <MappingFragment StoreEntitySet="room_status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_type">
+            <EntityTypeMapping TypeName="hotelModel.room_type">
+              <MappingFragment StoreEntitySet="room_type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rooms">
+            <EntityTypeMapping TypeName="hotelModel.room">
+              <MappingFragment StoreEntitySet="rooms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MaxPeople" ColumnName="MaxPeople" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service_details">
+            <EntityTypeMapping TypeName="hotelModel.service_details">
+              <MappingFragment StoreEntitySet="service_details">
+                <ScalarProperty Name="BookDetailID" ColumnName="BookDetailID" />
+                <ScalarProperty Name="ServiceDetailsID" ColumnName="ServiceDetailsID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="services">
+            <EntityTypeMapping TypeName="hotelModel.service">
+              <MappingFragment StoreEntitySet="services">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="hotelModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Account_id" ColumnName="Account_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

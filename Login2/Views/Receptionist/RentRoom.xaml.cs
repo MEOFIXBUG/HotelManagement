@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Login2.Views
+namespace Login2.Views.Receptionist
 {
     /// <summary>
-    /// Login Window (code behind)
+    /// Interaction logic for RentRoom.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class RentRoom : Window
     {
-        public Login()
+        public RentRoom()
         {
             InitializeComponent();
         }
-
-        private void ButtonPower_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        
     }
 }

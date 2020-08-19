@@ -9,6 +9,13 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              >
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="availableColor" Color="#FF0CB132"/>
+        <SolidColorBrush x:Key="rentedColor" Color="#FFBA4C4C"/>
+        <SolidColorBrush x:Key="cleaningColor" Color="#FFA58A72"/>
+        <SolidColorBrush x:Key="fixingColor" Color="#FFEDD53E"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
@@ -16,18 +23,18 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Name="groupStatusTrangChu" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
-                <Label Height="25" Width="auto" Content="Tất cả:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
-                <Button Margin="5,0,5,0" Command="{Binding Path=LoadAllRoomCommand}" Height="25" Width="60" Content="{Binding TotalRoom}" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" Foreground="#DD292525"></Button>
+                <Label Height="25" Width="auto" Content="Phòng trống:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadAvailableRoomCommand}" Height="25" Width="60" Content="{Binding AvailableRoom}" Background="{StaticResource availableColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" Foreground="#DD292525"></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
-                <Label Height="25" Width="auto" Content="Còn trống:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
-                <Button Margin="5,0,5,0" Command="{Binding LoadPhongTrongCommand}" Height="25" Width="60" Content="{Binding SoPhongTrong}" Background="#FFF1F1F1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="#DD292525" FontSize="12"></Button>
+                <Label Height="25" Width="auto" Content="Có khách:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
+                <Button Margin="5,0,5,0" Command="{Binding LoadRentedRoom}" Height="25" Width="60" Content="{Binding RentedRoom}" Background="{StaticResource rentedColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="#DD292525" FontSize="12" ></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
-                <Label Height="25" Width="auto" Content="Đang thuê:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
-                <Button Margin="5,0,5,0" Command="{Binding LoadPhongDangThueCommand}" Height="25" Width="60" Content="{Binding SoPhongDangThue}" Background="#FFA58A72" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" ></Button>
+                <Label Height="25" Width="auto" Content="Đang dọn:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <Button Margin="5,0,5,0" Command="{Binding LoadCleaningRoom}" Height="25" Width="60" Content="{Binding CleaningRoom}" Background="{StaticResource cleaningColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" ></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
-                <Label Height="25" Width="auto" Content="Phòng đã chọn:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
-                <Button Margin="5,0,5,0" Height="25" Width="60" Content="{Binding MaPhongChonThue}" Background="#FFA58A72" Foreground="#FFDDFFFF" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" ></Button>
-            </StackPanel>
+                <Label Height="25" Width="auto" Content="Đang sữa chữa:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <Button Margin="5,0,5,0" Command="{Binding LoadFixingRoom}" Height="25" Width="60" Content="{Binding FixingRoom}" Background="{StaticResource fixingColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" ></Button>
+                </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Name="gridTrangChu">
             <ScrollViewer Name="SrViewTrangChu" Margin="5,10,20,20">
@@ -35,18 +42,23 @@
                     <ItemsControl.Resources>
                         <Style TargetType="Button">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Trống">
-                                    <Setter Property="Background" Value="#F1F1F1"></Setter>
+                                <DataTrigger Binding="{Binding Type}" Value="0">
+                                    <Setter Property="Background" Value="{StaticResource availableColor}"></Setter>
                                     <Setter Property="Foreground" Value="#DD292525"></Setter>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Đang thuê">
-                                    <Setter Property="Background" Value="#A58A72"></Setter>
+                                <DataTrigger Binding="{Binding Type}" Value="1">
+                                    <Setter Property="Background" Value="{StaticResource rentedColor}"></Setter>
                                     <Setter Property="Foreground" Value="#DDFFFFFF"></Setter>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding Phong.TINHTRANG_PHONG}" Value="Đã đặt trước">
-                                    <Setter Property="Background" Value="WhiteSmoke"></Setter>
-                                    <Setter Property="Foreground" Value="Gold"></Setter>
+                                <DataTrigger Binding="{Binding Type}" Value="2">
+                                    <Setter Property="Background" Value="{StaticResource cleaningColor}"></Setter>
+                                    <Setter Property="Foreground" Value="#DDFFFFFF"></Setter>
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding Type}" Value="3">
+                                    <Setter Property="Background" Value="{StaticResource fixingColor}"></Setter>
+                                    <Setter Property="Foreground" Value="#DDFFFFFF"></Setter>
+                                </DataTrigger>
+
                                 <EventTrigger RoutedEvent="Click">
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>
@@ -68,15 +80,25 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Width="127" Height="80" Margin="5" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold"
-                                        >
-                                <Grid HorizontalAlignment="Center">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition></RowDefinition>
-                                        <RowDefinition></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Name="txtMaPhong"  Grid.Row="0" Text="{Binding RoomName}" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding Type}" HorizontalAlignment="Center"></TextBlock>
+                                        Command="{Binding Path=SelectedRoomCommand}" CommandParameter="{Binding ID}" Tag="{Binding ID}" >
+                            <Grid HorizontalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Name="txtMaPhong"  Grid.Row="0" Text="{Binding RoomName}" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Row="1" Text="{Binding Type}" HorizontalAlignment="Center"></TextBlock>
+                                    
                                 </Grid>
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Command="RentRoomCommand" CommandParameter="{Binding}" Header="Khách thuê phòng" />
+                                        <MenuItem  Command="BookingRoomCommand" Header="Đặt phòng" />
+                                        <Separator />
+                                        <MenuItem Command="CleanRoomCommand" Header="Dọn phòng" />
+                                        <MenuItem Command="FixRoomCommand" Header="Sửa phòng" />
+                                    </ContextMenu>
+                                </Button.ContextMenu>
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

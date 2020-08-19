@@ -8,60 +8,16 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
              >
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Content="Room"></Label>
-        <Grid Name="gridTrangChu">
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Setter Property="Visibility" Value="Hidden"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ChucNangKS}" Value="0">
-                            <Setter Property="Visibility" Value="Visible"></Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-
-            <Rectangle Margin="0,160,10,10" Stroke="#FFD6D6D6"/>
-             <!--Button trang chủ--> 
-            <StackPanel Name="groupButtonsTrangChu" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,120">
-                <Image Height="25" Width="25" Cursor="Hand" Source="Resources\Icons\btnThuePhong.png" ToolTip="Thuê phòng">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ThuePhongCommand}">
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
-                <Image Height="25" Width="25" Cursor="Hand" Source="Resources\Icons\btnThanhToan.png" ToolTip="Thanh toán">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding ShowHDTongCommand}">
-                            </i:InvokeCommandAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-                <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
-                <Image Height="25" Width="25" Cursor="Hand" Source="Resources\Icons\btnLamMoi.png" ToolTip="Làm mới">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding RefreshCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Image>
-            </StackPanel>
-
-            <StackPanel Name="groupStatusTrangChu" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,120">
+        <Grid Grid.Row="0">
+            <StackPanel Name="groupStatusTrangChu" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
                 <Label Height="25" Width="auto" Content="Tất cả:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
-                <Button Margin="5,0,5,0" Command="{Binding LoadTatCaPhongCommand}" Height="25" Width="60" Content="{Binding TongSoPhong}" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" Foreground="#DD292525"></Button>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadAllRoomCommand}" Height="25" Width="60" Content="{Binding TotalRoom}" Background="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" Foreground="#DD292525"></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
                 <Label Height="25" Width="auto" Content="Còn trống:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
                 <Button Margin="5,0,5,0" Command="{Binding LoadPhongTrongCommand}" Height="25" Width="60" Content="{Binding SoPhongTrong}" Background="#FFF1F1F1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="#DD292525" FontSize="12"></Button>
@@ -72,9 +28,10 @@
                 <Label Height="25" Width="auto" Content="Phòng đã chọn:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
                 <Button Margin="5,0,5,0" Height="25" Width="60" Content="{Binding MaPhongChonThue}" Background="#FFA58A72" Foreground="#FFDDFFFF" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="12" ></Button>
             </StackPanel>
-
-            <ScrollViewer Name="SrViewTrangChu" Margin="5,170,20,20">
-                <ItemsControl ItemsSource="{Binding ListTTPhong}">
+        </Grid>
+        <Grid Grid.Row="1" Name="gridTrangChu">
+            <ScrollViewer Name="SrViewTrangChu" Margin="5,10,20,20">
+                <ItemsControl ItemsSource="{Binding ListAllRoom}">
                     <ItemsControl.Resources>
                         <Style TargetType="Button">
                             <Style.Triggers>
@@ -103,24 +60,22 @@
                             </Style.Triggers>
                         </Style>
                     </ItemsControl.Resources>
-
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Name="panelPhong" Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Width="127" Height="80" Margin="5" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold"
-                                        Command="{Binding Path=DataContext.ChonPhongCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="{Binding Phong.MA_PHONG}" Cursor="Hand">
+                                        >
                                 <Grid HorizontalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Name="txtMaPhong"  Grid.Row="0" Text="{Binding Phong.MA_PHONG}" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding LoaiPhong.TEN_LP}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Name="txtMaPhong"  Grid.Row="0" Text="{Binding RoomName}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="{Binding Type}" HorizontalAlignment="Center"></TextBlock>
                                 </Grid>
                             </Button>
                         </DataTemplate>

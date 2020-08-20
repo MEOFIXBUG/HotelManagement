@@ -47,13 +47,14 @@ namespace Login2.Auxiliary.Helpers
             {
                 case Roles.HumanResources:
                     {
-                        switch (index)
+                        HumanResourcesFeatures feateture = (HumanResourcesFeatures)Enum.ToObject(typeof(HumanResourcesFeatures), index);
+                        switch (feateture)
                         {
-                            case (int)0:
+                            case HumanResourcesFeatures.staffList:
                                 // code block
                                 item = new StaffListViewModel();
                                 break;
-                            case (int)1:
+                            case HumanResourcesFeatures.addAccount:
                                 // code block
                                 item = new InsertStaffViewModel();
                                 break;
@@ -68,18 +69,20 @@ namespace Login2.Auxiliary.Helpers
                 case Roles.Accountings:
                     break;
                 case Roles.Receiptions:
-
-                    ReceptionistFeatures feateture = (ReceptionistFeatures) Enum.ToObject(typeof(ReceptionistFeatures), index);
-                    switch (feateture)
                     {
-                        case ReceptionistFeatures.roomList:
-                            item = new RoomViewModel();
-                            break;
-                        case ReceptionistFeatures.customList:
-                            item = new CustomerViewModel();
-                            break;
+                        ReceptionistFeatures feateture = (ReceptionistFeatures)Enum.ToObject(typeof(ReceptionistFeatures), index);
+                        switch (feateture)
+                        {
+                            case ReceptionistFeatures.roomList:
+                                item = new RoomViewModel();
+                                break;
+                            case ReceptionistFeatures.customList:
+                                item = new CustomerViewModel();
+                                break;
+                        }
+                        break;
                     }
-                    break;
+                    
                 case Roles.Sales:
                     break;
                 default:

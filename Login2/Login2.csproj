@@ -116,6 +116,8 @@
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />
     <Compile Include="Auxiliary\Enums\ReceptionistFeatures.cs" />
     <Compile Include="Auxiliary\Enums\Roles.cs" />
+    <Compile Include="Auxiliary\Enums\RoomStatus.cs" />
+    <Compile Include="Auxiliary\Enums\RoomType.cs" />
     <Compile Include="Auxiliary\Enums\SalesFeatures.cs" />
     <Compile Include="Auxiliary\Helpers\AuthorizationAttribute.cs" />
     <Compile Include="Auxiliary\Helpers\BaseRepository.cs" />

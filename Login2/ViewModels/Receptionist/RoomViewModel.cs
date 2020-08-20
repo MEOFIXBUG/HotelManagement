@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Login2.Auxiliary.Enums;
 using Login2.Commands;
 using Login2.Models;
 using System;
@@ -14,60 +15,143 @@ namespace Login2.ViewModels.Receptionist
 {
     class RoomViewModel : MyBaseViewModel
     {
-        private List<room> _listAllRoom;
+        private List<room> _listRoom;
         private int _totalRoom;
-
+        private int _availableRoom;
+        private int _rentedRoom;
+        private int _cleaningRoom;
+        private int _fixingRoom;
 
         public RoomViewModel()
         {
-            _listAllRoom = new List<room>();
-            _totalRoom = 0;
+            ListRoom = new List<room>();
+            resetRoom();
+
             Excute_LoadAllRoom(null);
         }
+        
 
+        public List<room> ListRoom
+        {
+            get => _listRoom;
+            set
+            {
+                _listRoom = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int TotalRoom
+        {
+            get => _totalRoom;
+            set
+            {
+                _totalRoom = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int AvailableRoom { get => _availableRoom; set { _availableRoom = value; RaisePropertyChanged(); } }
+        public int RentedRoom { get => _rentedRoom; set { _rentedRoom = value; RaisePropertyChanged(); } }
+        public int CleaningRoom { get => _cleaningRoom; set { _cleaningRoom = value; RaisePropertyChanged(); } }
+        public int FixingRoom { get => _fixingRoom; set { _fixingRoom = value; RaisePropertyChanged(); } }
+
+
+        #region load All Room
         private ICommand _LoadAllRoomCommand;
-
         public ICommand LoadAllRoomCommand
         {
             get
             {
-                return _LoadAllRoomCommand ?? 
+                return _LoadAllRoomCommand ??
                     (_LoadAllRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_LoadAllRoom));
             }
         }
 
-        public List<room> ListAllRoom { get => _listAllRoom;
-            set
-            {
-                _listAllRoom = value;
-                RaisePropertyChanged("ListAllRoom");
-                TotalRoom = _listAllRoom.Count;
-            }
-        }
-
-        public int TotalRoom { get => _totalRoom;
-            set
-            {
-                TotalRoom = value;
-                RaisePropertyChanged("TotalRoom");
-            }
-        }
-
-        private bool CanExcute_LoadAllRoom(object o)
-        {
-            return true;
-        }
 
         private void Excute_LoadAllRoom(object p)
         {
-            using(var db = new hotelEntities())
+            resetRoom();
+            ListRoom = getAllRoom();
+            foreach (var item in ListRoom)
             {
-                var rooms = from room in db.rooms select room;
-                _listAllRoom = rooms.ToList<room>();
-                _totalRoom = _listAllRoom.Count;
-                RaisePropertyChanged("TotalRoom");
-                RaisePropertyChanged("ListAllRoom");
+                RoomStatus status = (RoomStatus)item.Status;
+                switch (status)
+                {
+                    case RoomStatus.available:
+                        AvailableRoom++;
+                        break;
+                    case RoomStatus.rented:
+                        RentedRoom++;
+                        break;
+                    case RoomStatus.cleaning:
+                        CleaningRoom++;
+                        break;
+                    case RoomStatus.fixing:
+                        FixingRoom++;
+                        break;
+                }
             }
         }
+        #endregion
+
+        #region load special Room
+        private ICommand _loadRoomCommand;
+        public ICommand LoadRoomCommand
+        {
+            get
+            {
+                return _loadRoomCommand ??
+                    (_loadRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_LoadRoom));
+            }
+        }
+
+
+        private void Excute_LoadRoom(object p)
+        {
+            RoomStatus status = (RoomStatus)Enum.ToObject(typeof(RoomStatus), Convert.ToInt32(p));
+            ListRoom = getListRoom(status, RoomType.all);
+        }
+        #endregion
+
+
+        private void resetRoom()
+        {
+            ListRoom.Clear();
+            TotalRoom = 0;
+            AvailableRoom = 0;
+            RentedRoom = 0;
+            CleaningRoom = 0;
+            FixingRoom = 0;
+        }
+        private List<room> getListRoom(RoomStatus status, RoomType type)
+        {
+            List<room> listRoom = new List<room>();
+            using (var db = new hotelEntities())
+            {
+                if(type == RoomType.all)
+                {
+                    listRoom = db.rooms.Where<room>(r => r.Status == (int)status).ToList<room>();
+                }
+                else
+                {
+                    listRoom = db.rooms.Where<room>(r => r.Status == (int)status && r.Type == (int)type).ToList<room>();
+                }
+            }
+            return listRoom;
+        }
+
+        private List<room> getAllRoom()
+        {
+
+            List<room> listRoom = new List<room>();
+            using (var db = new hotelEntities())
+            {
+                listRoom = db.rooms.ToList<room>();
+            }
+            return listRoom;
+
+        }
     }
+
 }

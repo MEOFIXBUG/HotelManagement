@@ -90,13 +90,14 @@ namespace Login2.ViewModels
         /// <returns></returns>
         private bool CanExecute_Login(object pass)
         {
-            if (pass != null)
-            {
-                var p = (System.Windows.Controls.PasswordBox)pass;
-                if (UserName == null || p.Password == null) return false;
-                return true;
-            }
-            return false;
+            return true;
+            //if (pass != null)
+            //{
+            //    var p = (System.Windows.Controls.PasswordBox)pass;
+            //    if (UserName == null || p.Password == null) return false;
+            //    return true;
+            //}
+            //return false;
         }
 
         /// <summary>

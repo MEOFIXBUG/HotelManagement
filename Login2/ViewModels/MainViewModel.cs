@@ -37,10 +37,11 @@ namespace Login2.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            _selectedViewModel = new MyBaseViewModel();
-            _selectedViewModel=ExtraFunction.getUserControl(0, LoginViewModel.session.getRole());
+            
             Roles role = LoginViewModel.session.getRole();
             _featuresCollection = ExtraFunction.featureOfRole(role);
+            _selectedViewModel = new MyBaseViewModel();
+            _selectedViewModel = ExtraFunction.getUserControl(0, role);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.

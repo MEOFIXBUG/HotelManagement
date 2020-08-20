@@ -10,12 +10,12 @@ namespace Login2.Auxiliary.Enums
     public enum Roles
     {
         [Description("Nhân Sự")]
-        HumanResources =1,
+        HumanResources =4,
         [Description("Kế Toán")]
-        Accountings =2,
+        Accountings =3,
         [Description("Lễ Tân")]
-        Receiptions =3,
+        Receiptions =2,
         [Description("Kinh Doanh")]
-        Sales =4
+        Sales = 1
     }
 }

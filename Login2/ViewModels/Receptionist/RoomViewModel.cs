@@ -106,7 +106,6 @@ namespace Login2.ViewModels.Receptionist
             }
         }
 
-
         private void Excute_LoadRoom(object p)
         {
             RoomStatus status = (RoomStatus)Enum.ToObject(typeof(RoomStatus), Convert.ToInt32(p));
@@ -131,11 +130,11 @@ namespace Login2.ViewModels.Receptionist
             {
                 if(type == RoomType.all)
                 {
-                    listRoom = db.rooms.Where<room>(r => r.Status == (int)status).ToList<room>();
+                    listRoom = db.rooms.Include("room_type.room_status").Where<room>(r => r.Status == (int)status).ToList<room>();
                 }
                 else
                 {
-                    listRoom = db.rooms.Where<room>(r => r.Status == (int)status && r.Type == (int)type).ToList<room>();
+                    listRoom = db.rooms.Include("room_type.room_status").Where<room>(r => r.Status == (int)status && r.Type == (int)type).ToList<room>();
                 }
             }
             return listRoom;
@@ -147,7 +146,7 @@ namespace Login2.ViewModels.Receptionist
             List<room> listRoom = new List<room>();
             using (var db = new hotelEntities())
             {
-                listRoom = db.rooms.ToList<room>();
+                listRoom = db.rooms.Include("room_type").Include("room_status").ToList<room>();
             }
             return listRoom;
 

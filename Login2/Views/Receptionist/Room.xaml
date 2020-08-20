@@ -23,24 +23,31 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Name="groupStatusTrangChu" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                        <Setter Property="FontSize" Value="15" ></Setter>
+                        <Setter Property="Foreground" Value="#DD292525"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                    </Style>
+                </StackPanel.Resources>
                 <Label Height="25" Width="auto" Content="Phòng trống:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
-                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="0" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding AvailableRoom}" Background="{StaticResource availableColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="15" Foreground="#DD292525"></Button>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="0" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding AvailableRoom}" Background="{StaticResource availableColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}"  ></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
                 <Label Height="25" Width="auto" Content="Có khách:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></Label>
-                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="1" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"   Height="25" Width="60" Content="{Binding RentedRoom}" Background="{StaticResource rentedColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" Foreground="#DD292525" FontSize="15" ></Button>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="1" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"   Height="25" Width="60" Content="{Binding RentedRoom}" Background="{StaticResource rentedColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" ></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
                 <Label Height="25" Width="auto" Content="Đang dọn:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
-                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="2" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding CleaningRoom}" Background="{StaticResource cleaningColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="15" ></Button>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="2" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding CleaningRoom}" Background="{StaticResource cleaningColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" ></Button>
                 <GridSplitter IsEnabled="False" Width="1" Margin="10,0,10,0" Background="#FFD6D6D6"></GridSplitter>
                 <Label Height="25" Width="auto" Content="Đang sữa chữa:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
-                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="3" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding FixingRoom}" Background="{StaticResource fixingColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" FontSize="15" ></Button>
-                </StackPanel>
+                <Button Margin="5,0,5,0" Command="{Binding Path=LoadRoomCommand}" Tag="3" CommandParameter="{Binding Tag, RelativeSource={RelativeSource Self}}"  Height="25" Width="60" Content="{Binding FixingRoom}" Background="{StaticResource fixingColor}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="{x:Null}" ></Button>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Name="gridTrangChu">
             <ScrollViewer Name="SrViewTrangChu" Margin="5,10,20,20">
                 <ItemsControl ItemsSource="{Binding ListRoom}">
                     <ItemsControl.Resources>
-                        <Style TargetType="Button">
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Status}" Value="0">
                                     <Setter Property="Background" Value="{StaticResource availableColor}"></Setter>
@@ -79,16 +86,22 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Width="127" Height="80" Margin="5" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold"
+                            <Button Width="127" Height="100" Margin="5" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold"
                                         Command="{Binding Path=SelectedRoomCommand}"  Tag="{Binding ID}" >
-                            <Grid HorizontalAlignment="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <TextBlock Name="txtMaPhong"  Grid.Row="0" Text="{Binding RoomName}" HorizontalAlignment="Center"></TextBlock>
-                                <TextBlock Grid.Row="1" Text="{Binding Type}" HorizontalAlignment="Center"></TextBlock>
+                                <Grid HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"></RowDefinition>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <TextBlock Name="txtMaPhong" FontSize="19" Foreground="Black"  Text="{Binding RoomName}"  TextAlignment="Center"></TextBlock>
+
+                                    </StackPanel>
                                     
+                                    <TextBlock Grid.Row="1" Text="{Binding room_type.TypeName}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Row="2" Text="{Binding room_status.StatusName}" HorizontalAlignment="Center"></TextBlock>
+
                                 </Grid>
                                 <Button.ContextMenu>
                                     <ContextMenu>

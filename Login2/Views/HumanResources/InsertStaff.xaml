@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Login2.Views"
              mc:Ignorable="d" 
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -26,7 +27,7 @@
                     <StackPanel Margin="10,0,0,0">
                         <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" DisplayDate="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5">
+                        <DatePicker x:Name="DOB" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}" materialDesign:HintAssist.Hint="Sinh Ngày" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5">
                         </DatePicker>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>

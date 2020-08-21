@@ -102,7 +102,7 @@ namespace Login2.Auxiliary.Helpers
                 res.Append(words[i][0]);
             }
             res.Append(words[words.Length - 1]);
-            res.Append(p.DOB.Year);
+            res.Append(p.DOB.Value.Year);
             return res.ToString();
         }
     }

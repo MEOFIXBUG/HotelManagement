@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Login2.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="770">
     <UserControl.Resources>
@@ -26,14 +27,14 @@
                     <RowDefinition Height="2.75*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,0,0,0">
-                        <TextBox x:Name="Name" Text="{Binding Path=CustomerName}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" Text="{Binding Path=DOB}" materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
                         <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
@@ -60,7 +61,7 @@
 
             </Grid>
         </GroupBox>
-        
+
         <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard"  Background="White" Grid.Row="2">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal">
@@ -103,24 +104,32 @@
                 Command="{Binding ResetCommand}" 
         CommandParameter="{Binding ElementName=dataGrid}"/>
                     </Grid>
-                   
+
                 </StackPanel>
             </GroupBox.Header>
             <Grid>
                 <StackPanel>
                     <syncfusion:SfDataGrid
-            SelectionUnit="Row"
-            ColumnSizer="Star"
-            HeaderStyle="{StaticResource headerStyle}" 
-            x:Name="dataGrid" 
-            Margin="5"
-            SelectedIndex="{Binding SelectedIndex}"
-            SelectedItem="{Binding SelectedItem}"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center"
-            ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}">
+                        SelectionUnit="Row"
+                        ColumnSizer="Star"
+                        HeaderStyle="{StaticResource headerStyle}" 
+                        x:Name="dataGrid" 
+                        Margin="5"
+                        AutoGenerateColumns="False"
+                        SelectedIndex="{Binding SelectedIndex}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}">
+                        <syncfusion:SfDataGrid.Columns>
+                            <syncfusion:GridTextColumn MappingName="Name" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="DOB" MappingName="DOB"  TextAlignment="Center"/>
+                            <syncfusion:GridTextColumn HeaderText="Phone" MappingName="Phone" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="Email" MappingName="Email" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="Address" MappingName="Address" TextAlignment="Center" />
+                        </syncfusion:SfDataGrid.Columns>
                         <syncfusion:SfDataGrid.SortColumnDescriptions>
-                            <syncfusion:SortColumnDescription ColumnName="CustomerName">
+                            <syncfusion:SortColumnDescription ColumnName="Name">
                             </syncfusion:SortColumnDescription>
                         </syncfusion:SfDataGrid.SortColumnDescriptions>
                     </syncfusion:SfDataGrid>
@@ -132,13 +141,12 @@
                 NumericButtonCount="5"
                 AutoEllipsisText="..." 
                 PageSize="5"
-                UseOnDemandPaging="True"
                 AccentBackground="#FF8CBF26"
                 AccentForeground="White" 
-                Source="{Binding Orders}"/>
+                Source="{Binding StaffList, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Grid>
-           
+
         </GroupBox>
     </Grid>
 </UserControl>

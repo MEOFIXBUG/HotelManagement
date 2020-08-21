@@ -111,6 +111,7 @@
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
     <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
+    <Compile Include="Auxiliary\DomainObjects\RePass.cs" />
     <Compile Include="Auxiliary\Enums\AccountantFeatures.cs" />
     <Compile Include="Auxiliary\Enums\AuthorizationType .cs" />
     <Compile Include="Auxiliary\Enums\HumanResourcesFeatures.cs" />

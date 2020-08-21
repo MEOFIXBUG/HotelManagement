@@ -2,6 +2,7 @@
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Commands;
+using Login2.Models;
 using Login2.Views.HumanResources;
 using Microsoft.Practices.ServiceLocation;
 using Syncfusion.UI.Xaml.Grid;
@@ -12,73 +13,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Login2.ViewModels.HumanResources
 {
-    public class OrderInfo
-    {
-        int orderID;
-        string customerId;
-        string country;
-        string customerName;
-        string shippingCity;
-
-        public int OrderID
-        {
-            get { return orderID; }
-            set { orderID = value; }
-        }
-
-        public string CustomerID
-        {
-            get { return customerId; }
-            set { customerId = value; }
-        }
-
-        public string CustomerName
-        {
-            get { return customerName; }
-            set { customerName = value; }
-        }
-
-        public string Country
-        {
-            get { return country; }
-            set { country = value; }
-        }
-
-        public string ShipCity
-        {
-            get { return shippingCity; }
-            set { shippingCity = value; }
-        }
-
-        public OrderInfo(int orderId, string customerName, string country, string customerId, string shipCity)
-        {
-            this.OrderID = orderId;
-            this.CustomerName = customerName;
-            this.Country = country;
-            this.CustomerID = customerId;
-            this.ShipCity = shipCity;
-        }
-    }
     public class StaffListViewModel : MyBaseViewModel
     {
-        //private List<string> _allRole;
+        private staff _selectedItem;
 
-        //public List<string> AllRole
-        //{
-        //    get { return _allRole; }
-        //    set { _allRole = value; RaisePropertyChanged(); }
-        //}
-
-        private ObservableCollection<OrderInfo> _orders;
-        public ObservableCollection<OrderInfo> Orders
+        public staff SelectedItem
         {
-            get { return _orders; }
-            set { _orders = value; }
+            get { return _selectedItem; }
+            set { _selectedItem = value; RaisePropertyChanged(); }
         }
+
+        private ObservableCollection<staff> _staffList;
+        public ObservableCollection<staff> StaffList
+        {
+            get { return _staffList; }
+            set { _staffList = value; }
+        }
+        private IRepository<staff> staffRepository = null;
+        private IRepository<account> accountRepository = null;
         public string KeyWord
         {
             get { return _keyVal; }
@@ -116,23 +74,14 @@ namespace Login2.ViewModels.HumanResources
             p.SearchHelper.Search(KeyWord);
         }
 
-        private void GenerateOrders()
-        {
-            _orders.Add(new OrderInfo(1001, "Maria Anders", "Germany", "ALFKI", "Berlin"));
-            _orders.Add(new OrderInfo(1002, "Ana Trujilo", "Mexico", "ANATR", "Mexico D.F."));
-            _orders.Add(new OrderInfo(1003, "Antonio Moreno", "Mexico", "ANTON", "Mexico D.F."));
-            _orders.Add(new OrderInfo(1004, "Thomas Hardy", "UK", "AROUT", "London"));
-            _orders.Add(new OrderInfo(1005, "Christina Berglund", "Sweden", "BERGS", "Lula"));
-            _orders.Add(new OrderInfo(1006, "Hanna Moos", "Germany", "BLAUS", "Mannheim"));
-            _orders.Add(new OrderInfo(1007, "Frederique Citeaux", "France", "BLONP", "Strasbourg"));
-            _orders.Add(new OrderInfo(1008, "Martin Sommer", "Spain", "BOLID", "Madrid"));
-            _orders.Add(new OrderInfo(1009, "Laurence Lebihan", "France", "BONAP", "Marseille"));
-            _orders.Add(new OrderInfo(1010, "Elizabeth Lincoln", "Canada", "BOTTM", "Tsawassen"));
-        }
         public StaffListViewModel()
         {
-            _orders = new ObservableCollection<OrderInfo>();
-            this.GenerateOrders();
+            var UID = (int)LoginViewModel.session.getAccountID();
+            staffRepository = new BaseRepository<staff>();
+            accountRepository = new BaseRepository<account>();
+            var res = staffRepository.Get(s => s.Account_id != UID);
+            _staffList = new ObservableCollection<staff>();
+            res.Distinct().ToList().ForEach(i => _staffList.Add(i));
             //AllRole = ConvertEnumToList.GetListOfDescription<Roles>();
         }
         private ICommand _resetCommand;
@@ -154,6 +103,10 @@ namespace Login2.ViewModels.HumanResources
         {
             var p = (SfDataGrid)obj;
             p.SearchHelper.ClearSearch();
+            var UID = (int)LoginViewModel.session.getAccountID();
+            var res = staffRepository.Get(s => s.Account_id != UID);
+            StaffList.Clear();
+            res.Distinct().ToList().ForEach(i => StaffList.Add(i));
         }
         private ICommand _updateRoleViewCommand;
         public ICommand UpdateRoleViewCommand
@@ -167,17 +120,17 @@ namespace Login2.ViewModels.HumanResources
 
         private bool CanExecute_UpdateRoleView(object arg)
         {
-            var p = (OrderInfo)arg;
+            var p = (staff)arg;
             if (p == null) return false;
             return true;
         }
         [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_UpdateRoleView(object obj)
         {
-            var p = (OrderInfo)obj;
-            var index = _orders.IndexOf(p);
+            var p = (staff)obj;
+            var index = _staffList.IndexOf(p);
             var popUpRole = new PopUpRole();
-            ParameterSetter.SetParameter(p.OrderID);
+            ParameterSetter.SetParameter(p.Account_id);
             popUpRole.ShowDialog();
         }
         private ICommand _updateInfoStaffCommand;
@@ -192,18 +145,28 @@ namespace Login2.ViewModels.HumanResources
 
         private bool CanExecute_UpdateInfoStaff(object arg)
         {
-            var p = (OrderInfo)arg;
+            var p = (staff)arg;
             if (p == null) return false;
             return true;
         }
         [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_UpdateInfoStaff(object obj)
         {
-            var p = (OrderInfo)obj;
-            var index = _orders.IndexOf(p);
-            var popUpRole = new PopUpRole();
-            ParameterSetter.SetParameter(p.OrderID);
-            popUpRole.ShowDialog();
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirmation", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var p = (staff)obj;
+                staffRepository.Update(p);
+                staffRepository.Save();
+                var selectedAcc = accountRepository.Get(acc => acc.ID == p.Account_id).FirstOrDefault();
+                selectedAcc.UserName = ExtraFunction.generateUserName(p);
+                accountRepository.Update(selectedAcc);
+                accountRepository.Save();
+                System.Windows.Forms.MessageBox.Show("Successfully updated", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
         }
     }
 

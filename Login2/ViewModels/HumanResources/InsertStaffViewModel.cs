@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Login2.ViewModels.HumanResources
@@ -95,7 +96,7 @@ namespace Login2.ViewModels.HumanResources
             staffRepository.Insert(p);
             staffRepository.Save();
             Visibility = Visibility.Visible;
-            MessageBox.Show("Tài Khoản Đã Được Tạo Tự Động");
+            System.Windows.Forms.MessageBox.Show("Successfully Auto Created", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private bool CanExecute_AddStaff(object obj)
         {

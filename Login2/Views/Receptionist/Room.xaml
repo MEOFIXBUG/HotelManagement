@@ -90,9 +90,9 @@
                                         Command="{Binding Path=SelectedRoomCommand}"  Tag="{Binding ID}" >
                                 <Grid HorizontalAlignment="Center">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="2*"></RowDefinition>
-                                        <RowDefinition Height="1*"></RowDefinition>
-                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="40"></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
+                                        <RowDefinition Height="20"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
                                         <TextBlock Name="txtMaPhong" FontSize="19" Foreground="Black"  Text="{Binding RoomName}"  TextAlignment="Center"></TextBlock>

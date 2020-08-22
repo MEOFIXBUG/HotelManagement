@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login2.Views.Receptionist"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thuê phòng" Height="450" Width="800">
+        Title="Thuê phòng" Height="792.6" Width="712">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="270"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -27,9 +27,63 @@
                         </ListView.View>
                     </ListView>
                 </Grid>
-               
+
 
             </GroupBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <GroupBox Header="Thông tin phòng" Height="80"></GroupBox>
+                <GroupBox Header="Thông tin khách hàng" Height="120">
+                    
+                </GroupBox>
+                <GroupBox Header="Dịch vụ" Height="180">
+                    <ListView>
+
+                    </ListView>
+                </GroupBox>
+                <GroupBox Header="Thông tin thuê phòng" Height="180">
+                    
+                </GroupBox>
+                <GroupBox Header="Thời gian">
+                    <StackPanel >
+                        <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
+                            <DatePicker 
+                        Width="130"
+                        Height="30"
+                      materialDesign:HintAssist.Hint="Ngày vào"
+                      Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <materialDesign:TimePicker Margin="20,2,20,2"
+                      Is24Hours="True"
+                      
+                      Width="100"
+                                               Height="30"
+                      materialDesign:HintAssist.Hint="Giờ vào"/>
+                            <Button Content="Thời gian hiện tại" Background="#FF3D9CBC" ></Button>
+                        </StackPanel>
+                        <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
+                            <DatePicker 
+                        Width="130"
+                        Height="30"
+                      materialDesign:HintAssist.Hint="Ngày ra"
+                      Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <materialDesign:TimePicker Margin="20,2,20,2"
+                      Is24Hours="True"
+                      
+                      Width="100"
+                                               Height="30"
+                      materialDesign:HintAssist.Hint="Giờ ra"/>
+                            <Button Content="Thời gian hiện tại" Background="#FF3D9CBC" ></Button>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                </GroupBox>
+                <StackPanel Height="40" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Lưu" Margin="0,0,20,0"></Button>
+                    <Button Content="Thoát" ></Button>
+                </StackPanel>
+
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

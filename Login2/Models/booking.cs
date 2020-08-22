@@ -24,10 +24,10 @@ namespace Login2.Models
         public int ID { get; set; }
         public int Customer_id { get; set; }
         public double Total { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public System.DateTime ModifiedAt { get; set; }
         public bool IsPaid { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public Nullable<System.DateTime> PaidTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<booking_details> booking_details { get; set; }

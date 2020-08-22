@@ -129,58 +129,58 @@
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
     <Compile Include="Models\account.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\booking.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\booking_details.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\booking_status.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\customer_type.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HotelDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HotelDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HotelDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HotelDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\HotelModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HotelModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HotelModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room_status.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\room_type.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\service.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\service_details.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\staff.cs">
-      <DependentUpon>HotelDB.tt</DependentUpon>
+      <DependentUpon>HotelModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\Receptionist\BookingRoomViewModel.cs" />
@@ -332,15 +332,15 @@
     <Folder Include="ViewModels\Accountant\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\HotelDB.Context.tt">
+    <Content Include="Models\HotelModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HotelModels.Context.cs</LastGenOutput>
       <DependentUpon>HotelDB.edmx</DependentUpon>
-      <LastGenOutput>HotelDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\HotelDB.tt">
+    <Content Include="Models\HotelModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HotelModels.cs</LastGenOutput>
       <DependentUpon>HotelDB.edmx</DependentUpon>
-      <LastGenOutput>HotelDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

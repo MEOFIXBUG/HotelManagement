@@ -5,8 +5,76 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Login2.Views.Accountant"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DesignWidth="800" Height="538.8">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <GroupBox Header="Thông tin khách hàng">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel >
+                            <TextBox Margin="1" Height="40" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel  >
+                            <TextBox Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel >
+                            <TextBox Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Grid Height="40">
+                            <DatePicker Margin="1"
+                            
+                            VerticalAlignment="Bottom"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        </Grid>
+                        <Grid Height="40">
+                            <CheckBox Content="Là khách nước ngoài"></CheckBox>
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" Height="40">
+                            <Button Content="Thêm khách hàng"></Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <GroupBox Header="Danh sách khách hàng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <TextBox
+                          materialDesign:HintAssist.Hint="Tìm kiếm"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center" />
+                        
+                    </Grid>
+                    <ListView Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên khách hàng"></GridViewColumn>
+                                <GridViewColumn Header="CMND"></GridViewColumn>
+                                <GridViewColumn Header="SĐT"></GridViewColumn>
+                                <GridViewColumn Header="Ngày Sinh"></GridViewColumn>
+                                <GridViewColumn Header="Khách nước ngoài"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </UserControl>

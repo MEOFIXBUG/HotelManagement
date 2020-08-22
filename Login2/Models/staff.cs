@@ -22,7 +22,7 @@ namespace Login2.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-
+    
         public virtual account account { get; set; }
     }
 }

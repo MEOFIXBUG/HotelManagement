@@ -22,16 +22,15 @@ namespace Login2.Models
     
         public int ID { get; set; }
         public string FullName { get; set; }
-        public int Age { get; set; }
+        public System.DateTime DOB { get; set; }
         public string IdentityCard { get; set; }
         public string Phone { get; set; }
-        public int Type { get; set; }
+        public bool isForeigner { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime ModifiedAt { get; set; }
         public Nullable<int> DeletedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<booking> bookings { get; set; }
-        public virtual customer_type customer_type { get; set; }
     }
 }

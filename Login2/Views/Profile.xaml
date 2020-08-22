@@ -8,16 +8,12 @@
         xmlns:converter="clr-namespace:Login2.Auxiliary.Converters"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Profile" Height="620" Width="350" 
+        Title="Profile" Height="600" Width="350" 
         ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None" 
         FontFamily="Segoe UI Emoji"
-        DataContext="{Binding Profile, Source={StaticResource Locator}}"
-        >
-    <Window.Resources>
-        <converter:ConvertObjectToString x:Key="ConverterToString"></converter:ConvertObjectToString>
-    </Window.Resources>
+        DataContext="{Binding Profile, Source={StaticResource Locator}}">
     <Grid>
         <StackPanel  Background="GhostWhite">
             <Grid Background="DarkGray">
@@ -31,33 +27,36 @@
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
             </Grid>
+            <StackPanel>
+                
+            </StackPanel>
             <Border Width="120" Height="120" CornerRadius="80" BorderThickness="1" BorderBrush="Black" Margin="115,0"/>
             <TextBlock Name="ID" Visibility="Hidden"></TextBlock>
-            <TextBox x:Name="fullname" Text="Sang Đoàn" materialDesign:HintAssist.Hint="Tên" HorizontalAlignment="Center" Margin="130,10,129,0" Foreground="DarkViolet" FontSize="18" FontWeight="Bold"/>
-            <TextBox  Name="role" Text="HumanResources" materialDesign:HintAssist.Hint="Chức vụ" FontSize="15" Foreground="Black" HorizontalAlignment="Center" FontWeight="Bold" Opacity="0.8" />
-            <DockPanel   Margin="20 10 20 10" LastChildFill="True" DataContext="{Binding Path= MyProfile}">
+            <TextBlock x:Name="Name" Text="{Binding Name}" materialDesign:HintAssist.Hint="Tên" HorizontalAlignment="Center"  Foreground="DarkViolet" FontSize="18" FontWeight="Bold"/>
+            <TextBlock  Name="role" Text="{Binding RoleName}" materialDesign:HintAssist.Hint="Chức vụ" FontSize="15" Foreground="Black" HorizontalAlignment="Center" FontWeight="Bold" Opacity="0.8" />
+            <DockPanel   Margin="20 10 20 10" LastChildFill="True" DataContext="{Binding MyProfile, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <StackPanel Width="150" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Margin="0 3">
                         <materialDesign:PackIcon Kind="Bookmark" Foreground="Gray"/>
-                        <TextBox Name="address" materialDesign:HintAssist.Hint="Địa Chỉ" Text="Bình Định" Margin="10 0" Foreground="Black"/>
+                        <TextBlock Name="address" materialDesign:HintAssist.Hint="Địa Chỉ" Text="{Binding Address}" Margin="10 0" Foreground="Black"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 3">
                         <materialDesign:PackIcon Kind="Cellphone" Foreground="Gray"/>
-                        <TextBox Name="phone" materialDesign:HintAssist.Hint="SĐT" Text="0389005648" Margin="10 0" Foreground="Black"/>
+                        <TextBlock Name="phone" materialDesign:HintAssist.Hint="SĐT" Text="{Binding Phone}" Margin="10 0" Foreground="Black"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 3">
                         <materialDesign:PackIcon Kind="Email" Foreground="Gray"/>
-                        <TextBox Name="email" materialDesign:HintAssist.Hint="Email" Text="email@gmail.com" Margin="10 0" Foreground="Black"/>
+                        <TextBlock Name="email" materialDesign:HintAssist.Hint="Email" Text="{Binding Email}" Margin="10 0" Foreground="Black"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 3">
                         <materialDesign:PackIcon Kind="AccountLocation" Foreground="Gray"/>
-                        <TextBox Name="identityCard" materialDesign:HintAssist.Hint="CMND" Text="215483062" Margin="10 0" Foreground="Black"/>
+                        <TextBlock Name="identityCard" materialDesign:HintAssist.Hint="CMND" Text="{Binding IdentityCard}" Margin="10 0" Foreground="Black"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0 3">
                         <materialDesign:PackIcon Kind="ViewDay" Foreground="Gray"/>
-                        <TextBox Name="DOB" materialDesign:HintAssist.Hint="Sinh ngày" Text="19/09/1999" Margin="10 0" Foreground="Black"/>
+                        <TextBlock Name="DOB" materialDesign:HintAssist.Hint="Sinh ngày" Text="{Binding DOB}" Margin="10 0" Foreground="Black"/>
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
@@ -67,41 +66,26 @@
                 VerticalAlignment="Bottom" Margin="5"
                 Content="Sửa" Background="#FF2281D1"
                 Command="{Binding Path=UpdateProfileCommand}">
-                    <Button.CommandParameter>
-                        <MultiBinding Converter="{StaticResource ConverterToString }">
-                            <Binding Path="Text" ElementName="fullname"/>
-                            <Binding Path="Text" ElementName="role"/>
-                            <Binding Path="Text" ElementName="DOB"/>
-                            <Binding Path="Text" ElementName="phone"/>
-                            <Binding Path="Text" ElementName="address"/>
-                            <Binding Path="Text" ElementName="email"/>
-                            <Binding Path="Text" ElementName="identityCard"/>
-                        </MultiBinding>
-                    </Button.CommandParameter>
                 </Button>
             </StackPanel>
-            <Expander Name="ExpanderControl" Header="Đổi Mật Khẩu" Height="213" >
-                <StackPanel x:Name="RePass" >
-                    <StackPanel Orientation="Vertical" Margin="20 0">
-                        <PasswordBox x:Name="curpassBox" Margin="3" materialDesign:HintAssist.Hint="Curent Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
-                        </PasswordBox>
-                        <PasswordBox x:Name="newpassBox" Margin="3" materialDesign:HintAssist.Hint="New Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
-                        </PasswordBox>
-                        <PasswordBox x:Name="repassBox" Margin="3" materialDesign:HintAssist.Hint="Re Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="14">
-                        </PasswordBox>
-                        <Button Width="150" HorizontalAlignment="Center" 
+            <Expander Name="ExpanderControl" Header="Đổi Mật Khẩu" Height="240" >
+                <StackPanel >
+                    <StackPanel x:Name="RePass"  Orientation="Vertical" Margin="20 0" DataContext="{Binding RePass,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                        <TextBox  x:Name="curpass" Text="{Binding curpass}"   Margin="3" materialDesign:HintAssist.Hint="Curent Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Webdings" FontSize="14">
+                        </TextBox>
+
+                        <TextBox  x:Name="newpass" Text="{Binding newpass}" Margin="3" materialDesign:HintAssist.Hint="New Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Webdings" FontSize="14">
+                        </TextBox>
+                        <TextBox  x:Name="repass" Text="{Binding repass}" Margin="3" materialDesign:HintAssist.Hint="Re Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Webdings" FontSize="14">
+                        </TextBox>
+                       
+                    </StackPanel>
+                    <Button Width="150" HorizontalAlignment="Center" 
                             VerticalAlignment="Bottom" Margin="5"
                             Content="OK" Background="#FF2281D1"
-                            Command="{Binding Path=UpdatePassCommand}">
-                            <Button.CommandParameter>
-                                <MultiBinding Converter="{StaticResource ConverterToString }">
-                                    <Binding Path="Password" ElementName="curpassBox"/>
-                                    <Binding Path="Password" ElementName="newpassBox"/>
-                                    <Binding Path="Password" ElementName="repassBox"/>
-                                </MultiBinding>
-                            </Button.CommandParameter>
-                        </Button>
-                    </StackPanel>
+                            Command="{Binding Path=UpdatePassCommand}"
+                            CommandParameter="{Binding ElementName= RePass ,Path=DataContext}">
+                    </Button>
                 </StackPanel>
             </Expander>
         </StackPanel>

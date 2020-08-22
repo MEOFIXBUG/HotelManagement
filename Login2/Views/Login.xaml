@@ -44,7 +44,7 @@
                 </PasswordBox>
             </StackPanel>
         </Grid>
-        <Button Width="150" HorizontalAlignment="Center" 
+        <Button IsDefault="True" Width="150" HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom" Margin="0,65" 
                 Content="LOGIN" Background="#FF2281D1"
                 Command="{Binding Path=LoginCommand}" 

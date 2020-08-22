@@ -17,7 +17,7 @@ namespace Login2.Models
         public int ID { get; set; }
         public int Account_id { get; set; }
         public string Name { get; set; }
-        public System.DateTime DOB { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
         public string IdentityCard { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

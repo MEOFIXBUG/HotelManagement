@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Commands;
+using Login2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +24,18 @@ namespace Login2.ViewModels.HumanResources
             get { return _allRole; }
             set { _allRole = value; RaisePropertyChanged(); }
         }
+        private account currentAcc;
         private int _roleId;
         public int RoleID
         {
             get { return _roleId; }
             set { _roleId = value; RaisePropertyChanged(); }
         }
+        private IRepository<account> accountRepository = null;
         public PopUpRoleViewModel()
         {
+            accountRepository = new BaseRepository<account>();
+            currentAcc = new account();
             Messenger.Default.Register<Parameter>(this,  res =>  Function(res.param));
             _allRole = new Dictionary<int, string>();
             _allRole = Enum.GetValues(typeof(Roles))
@@ -39,7 +44,8 @@ namespace Login2.ViewModels.HumanResources
         }
         private  void Function(object obj)
         {
-            RoleID = (int)obj%4;
+            currentAcc = accountRepository.GetByID((int)obj);
+            RoleID = currentAcc.Role-1;
         }
         private ICommand _closeWindowCommand;
         public ICommand CloseWindowCommand
@@ -77,8 +83,16 @@ namespace Login2.ViewModels.HumanResources
         [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_UpdateRole(object obj)
         {
-            var p = (int)obj;
-            System.Windows.MessageBox.Show(p.ToString());
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirmation", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var p = (int)obj + 1;
+                currentAcc.Role = p;
+                accountRepository.Update(currentAcc);
+                accountRepository.Save();
+                System.Windows.Forms.MessageBox.Show("Successfully updated", "Thong Bao", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+                
         }
     }
 }

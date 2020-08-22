@@ -51,20 +51,6 @@ namespace Login2.ViewModels
             ////    // Code runs "for real"
             ////}
         }
-        public StaffListViewModel StaffList
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<StaffListViewModel>();
-            }
-        }
-        public InsertStaffViewModel InsertStaff
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<InsertStaffViewModel>();
-            }
-        }
         private List<string> _featuresCollection;
 
         public List<string> FeaturesCollection
@@ -73,7 +59,7 @@ namespace Login2.ViewModels
             set { _featuresCollection = value; RaisePropertyChanged(); }
         }
 
-        #region Test command 
+        #region OpenProfileCommand 
 
         /*
 		 * First way of using the relay commands and ICommand. 

@@ -30,9 +30,12 @@ namespace Login2.Models
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime ModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
+        public string hasForeigner { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual booking booking { get; set; }
         public virtual room room { get; set; }
+        public virtual booking_status booking_status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<service_details> service_details { get; set; }
     }

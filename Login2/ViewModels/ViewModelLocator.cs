@@ -16,7 +16,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Login2.ViewModels.HumanResources;
 using Microsoft.Practices.ServiceLocation;
-
+using Login2.ViewModels.Receptionist;
 namespace Login2.ViewModels
 {
     /// <summary>
@@ -49,6 +49,10 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<PopUpRoleViewModel>();
             SimpleIoc.Default.Register<StaffListViewModel>();
             SimpleIoc.Default.Register<InsertStaffViewModel>();
+            SimpleIoc.Default.Register<CustomerViewModel>();
+            SimpleIoc.Default.Register<RoomViewModel>();
+            SimpleIoc.Default.Register<RentRoomViewModel>();
+            SimpleIoc.Default.Register<BookingRoomViewModel>();
         }
 
         public MainViewModel Main
@@ -93,6 +97,24 @@ namespace Login2.ViewModels
                 return ServiceLocator.Current.GetInstance<InsertStaffViewModel>();
             }
         }
+
+        //public RentRoomViewModel RentRoom
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<RentRoomViewModel>();
+        //    }
+        //}
+        //public CustomerViewModel Customer
+        //{
+        //    get
+        //    {
+        //        return ServiceLocator.Current.GetInstance<CustomerViewModel>();
+        //    }
+        //}
+
+        
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

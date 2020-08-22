@@ -2,6 +2,7 @@
 using Login2.Auxiliary.Enums;
 using Login2.Commands;
 using Login2.Models;
+using Login2.Views.Receptionist;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Login2.ViewModels.Receptionist
         private int _rentedRoom;
         private int _cleaningRoom;
         private int _fixingRoom;
+
 
         public RoomViewModel()
         {
@@ -64,7 +66,7 @@ namespace Login2.ViewModels.Receptionist
             get
             {
                 return _LoadAllRoomCommand ??
-                    (_LoadAllRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_LoadAllRoom));
+                    (_LoadAllRoomCommand = new RoleBasedSecurityCommand<object>(null,Excute_LoadAllRoom));
             }
         }
 
@@ -102,7 +104,7 @@ namespace Login2.ViewModels.Receptionist
             get
             {
                 return _loadRoomCommand ??
-                    (_loadRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_LoadRoom));
+                    (_loadRoomCommand = new RoleBasedSecurityCommand<object>(null,Excute_LoadRoom));
             }
         }
 
@@ -130,11 +132,11 @@ namespace Login2.ViewModels.Receptionist
             {
                 if(type == RoomType.all)
                 {
-                    listRoom = db.rooms.Include("room_type.room_status").Where<room>(r => r.Status == (int)status).ToList<room>();
+                    listRoom = db.rooms.Include("room_type").Include("room_status").Where<room>(r => r.Status == (int)status).ToList<room>();
                 }
                 else
                 {
-                    listRoom = db.rooms.Include("room_type.room_status").Where<room>(r => r.Status == (int)status && r.Type == (int)type).ToList<room>();
+                    listRoom = db.rooms.Include("room_type").Include("room_status").Where<room>(r => r.Status == (int)status && r.Type == (int)type).ToList<room>();
                 }
             }
             return listRoom;
@@ -151,6 +153,23 @@ namespace Login2.ViewModels.Receptionist
             return listRoom;
 
         }
+
+        private ICommand _rentRoomCommand;
+        public ICommand RentRoomCommand
+        {
+            get
+            {
+                return _rentRoomCommand ??
+                    (_rentRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_RentRoom));
+            }
+        }
+
+        private void Excute_RentRoom(object p)
+        {
+            var rentRoomWindow = new RentRoom();
+            rentRoomWindow.ShowDialog();
+        }
+
     }
 
 }

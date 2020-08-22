@@ -7,7 +7,6 @@
                     xmlns:humanResources_vm="clr-namespace:Login2.ViewModels.HumanResources"
                     xmlns:receptionist_views="clr-namespace:Login2.Views.Receptionist"
                     xmlns:receptionist_vm="clr-namespace:Login2.ViewModels.Receptionist"
-                    
                     >
     <DataTemplate DataType="{x:Type vm:LoginViewModel}">
         <views:Login/>
@@ -32,5 +31,10 @@
     <DataTemplate DataType="{x:Type receptionist_vm:CustomerViewModel}">
         <receptionist_views:Customer/>
     </DataTemplate>
-    
+    <DataTemplate DataType="{x:Type receptionist_vm:RentRoomViewModel}">
+        <receptionist_views:RentRoom/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type receptionist_vm:BookingRoomViewModel}">
+        <receptionist_views:BookingRoom/>
+    </DataTemplate>
 </ResourceDictionary>

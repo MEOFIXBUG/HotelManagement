@@ -8,6 +8,28 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Thuê phòng" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0">
+            <GroupBox Header="Dịch vụ">
+                <Grid>
+                    <ListView x:Name="ServiceListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên dịch vụ"></GridViewColumn>
+                                <GridViewColumn Header="Giá Bán"></GridViewColumn>
+                                <GridViewColumn Header="Thêm"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+               
+
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>

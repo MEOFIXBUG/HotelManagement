@@ -93,8 +93,10 @@ namespace Login2.Auxiliary.Helpers
                                 item = new RoomListViewModel();
                                 break;
                             case SalesFeatures.addRoom:
+                                item = new InsertRoomViewModel();
                                 break;
                             case SalesFeatures.customerList:
+                                item = new CustomerListViewModel();
                                 break;
                         }
                         break;

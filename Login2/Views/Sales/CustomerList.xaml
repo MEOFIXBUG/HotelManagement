@@ -27,21 +27,20 @@
                     <RowDefinition Height="2.75*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                <Grid x:Name="CusInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,0,0,0">
-                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <TextBox x:Name="FullName" Text="{Binding Path=FullName}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" SelectedDate="{Binding Path=DOB,TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
                         <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
                         <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
-                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <CheckBox x:Name="isForeigner" IsChecked="{Binding isForeigner}" Content="Là người nước ngoài" materialDesign:HintAssist.Hint="Là Người Nước Ngoài" Style="{StaticResource MaterialDesignCheckBox}" Margin="0,20,60,5"/>
                         <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
                     </StackPanel>
                 </Grid>
@@ -52,12 +51,12 @@
                         <ColumnDefinition Width="293*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="2" Content="Sửa" Margin="0,8,60,9"  HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            Command="{Binding Path=UpdateInfoStaffCommand}"
-                            CommandParameter="{Binding ElementName=StaffInfo,Path=DataContext}"/>
+                            Command="{Binding Path=UpdateInfoCusCommand}"
+                            CommandParameter="{Binding ElementName=CusInfo,Path=DataContext}"/>
                     <Button Grid.Column="1" Margin="15,8,0,9" 
-                            Command="{Binding Path=UpdateRoleViewCommand}"
+                            Command="{Binding Path=DelCusCommand}"
                             CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"
-                            Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                            Content="Xóa" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
                 </Grid>
 
             </Grid>
@@ -123,14 +122,13 @@
                         VerticalAlignment="Center"
                         ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}">
                         <syncfusion:SfDataGrid.Columns>
-                            <syncfusion:GridTextColumn MappingName="Name" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn MappingName="FullName" TextAlignment="Center" />
                             <syncfusion:GridTextColumn HeaderText="DOB" MappingName="DOB"  TextAlignment="Center"/>
                             <syncfusion:GridTextColumn HeaderText="Phone" MappingName="Phone" TextAlignment="Center" />
-                            <syncfusion:GridTextColumn HeaderText="Email" MappingName="Email" TextAlignment="Center" />
-                            <syncfusion:GridTextColumn HeaderText="Address" MappingName="Address" TextAlignment="Center" />
+                            <syncfusion:GridCheckBoxColumn AllowSorting="False" AllowFiltering="True" HeaderText="Is Foreigner" MappingName="isForeigner" TextAlignment="Center" />
                         </syncfusion:SfDataGrid.Columns>
                         <syncfusion:SfDataGrid.SortColumnDescriptions>
-                            <syncfusion:SortColumnDescription ColumnName="Name">
+                            <syncfusion:SortColumnDescription ColumnName="FullName">
                             </syncfusion:SortColumnDescription>
                         </syncfusion:SfDataGrid.SortColumnDescriptions>
                     </syncfusion:SfDataGrid>
@@ -144,7 +142,7 @@
                 PageSize="5"
                 AccentBackground="#FF8CBF26"
                 AccentForeground="White" 
-                Source="{Binding StaffList, UpdateSourceTrigger=PropertyChanged}"/>
+                Source="{Binding CusList}"/>
                 </StackPanel>
             </Grid>
 

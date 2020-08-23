@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:validations="clr-namespace:Login2.Auxiliary.Validations"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Login2.Views.Sales"
              mc:Ignorable="d" 
@@ -24,24 +25,53 @@
         <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN CƠ BẢN" Background="White">
             <Grid >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2.75*"></RowDefinition>
+                    <RowDefinition Height="3.7*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Margin="10,0,0,0">
-                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
-                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                    <StackPanel Margin="10,0,0,0" x:Name="RoomInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox x:Name="RoomName" Text="{Binding Path=RoomName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Tên Phòng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <syncfusion:IntegerTextBox x:Name="Price" MaxValue="999999999" MinValue="0"  Value="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <syncfusion:IntegerTextBox MaxValue="10" MinValue="0" x:Name="MaxPeople" materialDesign:HintAssist.Hint="Số Người" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5">
+                            <syncfusion:IntegerTextBox.Value>
+                                <Binding Path= "MaxPeople" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"  ValidatesOnDataErrors="True">
+                                    <!--<Binding.ValidationRules>
+                                        <validations:IsInt_Validation ValidatesOnTargetUpdated="True">
+                                        </validations:IsInt_Validation>
+                                    </Binding.ValidationRules>-->
+                                </Binding>
+                            </syncfusion:IntegerTextBox.Value>
+                        </syncfusion:IntegerTextBox>
+                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomstatus" MinValue="0" MaxValue="3" Value="{Binding Path=room_status.ID}"/>
+                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomtype" MinValue="0" MaxValue="1" Value="{Binding Path=room_type.ID}"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
-                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <ComboBox
+                      Name="TypeCombo"
+  materialDesign:HintAssist.Hint="Loại" 
+  IsEditable="True" Margin="0,5,100,5"
+                      ItemsSource="{Binding Path=RoomTypeList}"
+                      DisplayMemberPath="TypeName" 
+                      SelectedValuePath="ID"
+                            SelectedValue="{Binding Path=SelectedType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding ElementName=roomtype,Path=Value}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                        <ComboBox
+                      Name="StatusCombo"
+  materialDesign:HintAssist.Hint="Tình Trạng" 
+  IsEditable="True" Margin="0,5,100,5"
+                      ItemsSource="{Binding Path=RoomStatusList}"
+                      DisplayMemberPath="StatusName" 
+                      SelectedValuePath="ID"
+                      SelectedValue="{Binding Path=SelectedStatus, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding ElementName=roomstatus,Path=Value}"
+  Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                        <!--<TextBox x:Name="Status" Text="{Binding Path=room_status.StatusName}" materialDesign:HintAssist.Hint="Tình Trạng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>-->
                         <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
                     </StackPanel>
                 </Grid>
@@ -51,12 +81,12 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="1" Content="Sửa" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
-                            Command="{Binding Path=UpdateInfoStaffCommand}"
-                            CommandParameter="{Binding ElementName=StaffInfo,Path=DataContext}"/>
+                            Command="{Binding Path=UpdateInfoRoomCommand}"
+                            CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"/>
                     <Button Grid.Column="1" Margin="15,0,0,0" 
-                            Command="{Binding Path=UpdateRoleViewCommand}"
-                            CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"
-                            Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            Command="{Binding Path=AddRoomCommand}"
+                            CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"
+                            Content="Xóa" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>
 
             </Grid>
@@ -75,7 +105,7 @@
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center"
                     Margin="20,7">
-                            <materialDesign:PackIcon Margin="5" Width="30" Height="30" Kind="AccountSearch" Foreground="Gray" VerticalAlignment="Center"/>
+                            <materialDesign:PackIcon Margin="5" Width="30" Height="30" Kind="Ungroup" Foreground="Gray" VerticalAlignment="Center"/>
                             <TextBox
             Background="White"
             materialDesign:HintAssist.Hint="Key Word"  
@@ -125,11 +155,11 @@
                             <syncfusion:GridTextColumn MappingName="RoomName" TextAlignment="Center" />
                             <syncfusion:GridTextColumn HeaderText="Max People" MappingName="MaxPeople"  TextAlignment="Center"/>
                             <syncfusion:GridTextColumn HeaderText="Price" MappingName="Price" TextAlignment="Center" />
-                            <syncfusion:GridTextColumn HeaderText="Status" MappingName="Email" TextAlignment="Center" />
-                            <syncfusion:GridTextColumn HeaderText="Type" MappingName="Address" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn AllowSorting="False" AllowFiltering="True" HeaderText="Status" MappingName="room_status.StatusName" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn AllowSorting="False" AllowFiltering="True" HeaderText="Type" MappingName="room_type.TypeName" TextAlignment="Center" />
                         </syncfusion:SfDataGrid.Columns>
                         <syncfusion:SfDataGrid.SortColumnDescriptions>
-                            <syncfusion:SortColumnDescription ColumnName="Name">
+                            <syncfusion:SortColumnDescription ColumnName="Price" >
                             </syncfusion:SortColumnDescription>
                         </syncfusion:SfDataGrid.SortColumnDescriptions>
                     </syncfusion:SfDataGrid>

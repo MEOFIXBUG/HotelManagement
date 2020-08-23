@@ -71,7 +71,7 @@ namespace Login2.ViewModels.HumanResources
         {
             var p = (SfDataGrid)obj;
             p.SearchHelper.AllowFiltering = true;
-            p.SearchHelper.Search(KeyWord);
+            p.SearchHelper.Search(KeyWord); 
         }
 
         public StaffListViewModel()

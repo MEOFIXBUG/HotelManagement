@@ -8,6 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:hepler="clr-namespace:Login2.Auxiliary.Helpers"
              >
     <UserControl.Resources>
         <SolidColorBrush x:Key="availableColor" Color="#FF0CB132"/>
@@ -87,7 +88,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Width="127" Height="100" Margin="5" HorizontalAlignment="Center" BorderBrush="{x:Null}" FontFamily="Segoe UI Semibold"
-                                        Command="{Binding Path=SelectedRoomCommand}"  Tag="{Binding ID}" >
+                                         Command="{Binding Path=DataContext.RentRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Tag="{Binding ID}" >
                                 <Grid HorizontalAlignment="Center">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="40"></RowDefinition>
@@ -98,18 +99,89 @@
                                         <TextBlock Name="txtMaPhong" FontSize="19" Foreground="Black"  Text="{Binding RoomName}"  TextAlignment="Center"></TextBlock>
 
                                     </StackPanel>
-                                    
+
                                     <TextBlock Grid.Row="1" Text="{Binding room_type.TypeName}" HorizontalAlignment="Center"></TextBlock>
                                     <TextBlock Grid.Row="2" Text="{Binding room_status.StatusName}" HorizontalAlignment="Center"></TextBlock>
 
                                 </Grid>
                                 <Button.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Command="{Binding Path=RentRoomCommand}" Header="Khách thuê phòng" />
-                                        <MenuItem  Command="{Binding Path=BookingRoomCommand}" Header="Đặt phòng" />
+                                        <ContextMenu.Resources>
+
+                                        </ContextMenu.Resources>
+                                        <MenuItem Name="rentRoomMenu" Command="{Binding Path=RentRoomCommand}">
+                                            <MenuItem.Style>
+                                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                                    <Setter Property="Header" Value="Thuê phòng"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Status}" Value="0">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Thuê phòng"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="1">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Trả Phòng"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="2">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="3">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+                                        <MenuItem  Command="{Binding Path=DataContext.BookRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Header="Đặt phòng" />
                                         <Separator />
-                                        <MenuItem Command="{Binding Path=CleanRoomCommand}" Header="Dọn phòng" />
-                                        <MenuItem Command="{Binding Path=FixRoomCommand}" Header="Sửa phòng" />
+                                        <MenuItem  Command="{Binding Path=DataContext.CleanRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" >
+                                            <MenuItem.Style>
+                                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                                    <Setter Property="Header" Value="Dọn phòng"></Setter>
+                                                    <Style.Triggers>
+
+                                                        <DataTrigger Binding="{Binding Status}" Value="0">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Dọn phòng"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="1">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="2">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Kết thúc dọn phòng"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="3">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
+
+                                        <MenuItem  Command="{Binding Path=DataContext.FixRoomCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                                            <MenuItem.Style>
+                                                <Style TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+                                                    <Setter Property="Header" Value="Sửa phòng"></Setter>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Status}" Value="0">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Sửa phòng"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="1">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="2">
+                                                            <Setter Property="IsEnabled" Value="False"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="3">
+                                                            <Setter Property="IsEnabled" Value="True"></Setter>
+                                                            <Setter Property="Header" Value="Kết thúc sửa phòng"></Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </MenuItem.Style>
+                                        </MenuItem>
                                     </ContextMenu>
                                 </Button.ContextMenu>
                             </Button>

@@ -38,4 +38,10 @@
         <sales_views:RoomList/>
     </DataTemplate>
     
+    <DataTemplate DataType="{x:Type receptionist_vm:RentRoomViewModel}">
+        <receptionist_views:RentRoom/>
+    </DataTemplate>
+        <DataTemplate DataType="{x:Type receptionist_vm:BookingRoomViewModel}">
+            <receptionist_views:BookingRoom/>
+        </DataTemplate>
 </ResourceDictionary>

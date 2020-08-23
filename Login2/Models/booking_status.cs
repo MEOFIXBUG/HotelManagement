@@ -12,27 +12,18 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class booking
+    public partial class booking_status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public booking()
+        public booking_status()
         {
             this.booking_details = new HashSet<booking_details>();
-            this.rooms = new HashSet<room>();
         }
     
-        public int ID { get; set; }
-        public int Customer_id { get; set; }
-        public double Total { get; set; }
-        public bool IsPaid { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public Nullable<int> Discount { get; set; }
-        public Nullable<System.DateTime> PaidTime { get; set; }
+        public int StatusID { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<booking_details> booking_details { get; set; }
-        public virtual customer customer { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<room> rooms { get; set; }
     }
 }

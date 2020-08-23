@@ -27,6 +27,7 @@ namespace Login2.Models
     
         public virtual DbSet<account> accounts { get; set; }
         public virtual DbSet<booking_details> booking_details { get; set; }
+        public virtual DbSet<booking_status> booking_status { get; set; }
         public virtual DbSet<booking> bookings { get; set; }
         public virtual DbSet<customer_type> customer_type { get; set; }
         public virtual DbSet<customer> customers { get; set; }

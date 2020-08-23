@@ -1,0 +1,153 @@
+﻿<UserControl x:Class="Login2.Views.Sales.CustomerList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:Login2.Views.Sales"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="770">
+    <UserControl.Resources>
+        <Style TargetType="syncfusion:GridHeaderCellControl" x:Key="headerStyle">
+            <Setter Property="Background" Value="#FF7AA732"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2.65*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard" Header="THÔNG TIN CƠ BẢN" Background="White">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.75*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid x:Name="StaffInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="10,0,0,0">
+                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}"  materialDesign:HintAssist.Hint="Sinh Ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5"/>
+                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <!--<Button Content="Register" Margin="0 20"/>-->
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                        <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="376*"></ColumnDefinition>
+                        <ColumnDefinition Width="83*"></ColumnDefinition>
+                        <ColumnDefinition Width="293*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="2" Content="Sửa" Margin="0,8,60,9"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding Path=UpdateInfoStaffCommand}"
+                            CommandParameter="{Binding ElementName=StaffInfo,Path=DataContext}"/>
+                    <Button Grid.Column="1" Margin="15,8,0,9" 
+                            Command="{Binding Path=UpdateRoleViewCommand}"
+                            CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"
+                            Content="Phân quyền" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+                </Grid>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox MaxHeight="300" Margin="0" materialDesign:ColorZoneAssist.Mode="Standard"  Background="White" Grid.Row="2">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Column="0"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Margin="20,7">
+                            <materialDesign:PackIcon Margin="5" Width="30" Height="30" Kind="AccountSearch" Foreground="Gray" VerticalAlignment="Center"/>
+                            <TextBox
+            Background="White"
+            materialDesign:HintAssist.Hint="Key Word"  
+            FontFamily="Champagne &amp; Limousines" 
+            Height="45"
+            FontSize="15"
+            Width="250"
+            Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            >
+                                <TextBox.Resources>
+                                    <!--<Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>-->
+                                </TextBox.Resources>
+                                <TextBox.Style>
+                                    <StaticResource ResourceKey="MaterialDesignFloatingHintTextBox"/>
+                                </TextBox.Style>
+                            </TextBox>
+                        </StackPanel>
+                        <Button Grid.Column="1" Width="100" VerticalAlignment="Bottom" 
+                Content="Search" Background="#FF2281D1" Margin="10"
+                Command="{Binding SearchCommand}" 
+        CommandParameter="{Binding ElementName=dataGrid}"/>
+                        <Button Grid.Column="2" Width="100" Margin="10"
+                Content="Reset" Background="#FF2281D1" VerticalAlignment="Bottom"
+                Command="{Binding ResetCommand}" 
+        CommandParameter="{Binding ElementName=dataGrid}"/>
+                    </Grid>
+
+                </StackPanel>
+            </GroupBox.Header>
+            <Grid>
+                <StackPanel>
+                    <syncfusion:SfDataGrid
+                        SelectionUnit="Row"
+                        ColumnSizer="Star"
+                        HeaderStyle="{StaticResource headerStyle}" 
+                        x:Name="dataGrid" 
+                        Margin="5"
+                        AutoGenerateColumns="False"
+                        SelectedIndex="{Binding SelectedIndex}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}">
+                        <syncfusion:SfDataGrid.Columns>
+                            <syncfusion:GridTextColumn MappingName="Name" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="DOB" MappingName="DOB"  TextAlignment="Center"/>
+                            <syncfusion:GridTextColumn HeaderText="Phone" MappingName="Phone" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="Email" MappingName="Email" TextAlignment="Center" />
+                            <syncfusion:GridTextColumn HeaderText="Address" MappingName="Address" TextAlignment="Center" />
+                        </syncfusion:SfDataGrid.Columns>
+                        <syncfusion:SfDataGrid.SortColumnDescriptions>
+                            <syncfusion:SortColumnDescription ColumnName="Name">
+                            </syncfusion:SortColumnDescription>
+                        </syncfusion:SfDataGrid.SortColumnDescriptions>
+                    </syncfusion:SfDataGrid>
+                    <syncfusion:SfDataPager
+                x:Name="dataPager"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                AutoEllipsisMode="Both"
+                NumericButtonCount="5"
+                AutoEllipsisText="..." 
+                PageSize="5"
+                AccentBackground="#FF8CBF26"
+                AccentForeground="White" 
+                Source="{Binding StaffList, UpdateSourceTrigger=PropertyChanged}"/>
+                </StackPanel>
+            </Grid>
+
+        </GroupBox>
+    </Grid>
+</UserControl>

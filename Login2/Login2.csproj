@@ -191,6 +191,8 @@
     <Compile Include="ViewModels\MyBaseViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\StaffListViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\Sales\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\Sales\RoomListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -231,6 +233,15 @@
     </Compile>
     <Compile Include="Views\Accountant\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\CustomerList.xaml.cs">
+      <DependentUpon>CustomerList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\InsertRoom.xaml.cs">
+      <DependentUpon>InsertRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Sales\RoomList.xaml.cs">
+      <DependentUpon>RoomList.xaml</DependentUpon>
     </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
       <SubType>Designer</SubType>
@@ -283,6 +294,18 @@
     <Page Include="Views\Accountant\Statistics.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Sales\CustomerList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Sales\InsertRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Sales\RoomList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login2.Views.Receptionist"
         mc:Ignorable="d"
+        DataContext="{Binding RentRoom, Source={StaticResource Locator}}"
         ResizeMode="NoResize"
+        Name="myWindow"
+        WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Thuê phòng" Height="792.6" Width="712">
     <Grid>
@@ -33,7 +36,25 @@
         </Grid>
         <Grid Grid.Column="1">
             <StackPanel Orientation="Vertical">
-                <GroupBox Header="Thông tin phòng" Height="80"></GroupBox>
+                <GroupBox Header="Thông tin phòng" Height="110">
+                    <Grid>
+                        <TextBox Width="150"  HorizontalAlignment="Left"
+                      materialDesign:HintAssist.Hint="Tên Phòng"
+                      materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                      materialDesign:HintAssist.FloatingScale="0.50"
+                      Text="{Binding Room.RoomName}"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      FontSize="24" />
+                        <TextBox Width="200"  HorizontalAlignment="Right"
+                      materialDesign:HintAssist.Hint="Loại phòng"
+                      materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                      materialDesign:HintAssist.FloatingScale="0.50"
+                      Text="{Binding Room.room_type.TypeName}"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      FontSize="24" />
+                    </Grid>
+                   
+                </GroupBox>
                 <GroupBox Header="Thông tin khách hàng" Height="120">
                     
                 </GroupBox>

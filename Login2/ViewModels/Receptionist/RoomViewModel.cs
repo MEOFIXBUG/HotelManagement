@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Enums;
+using Login2.Auxiliary.Helpers;
 using Login2.Commands;
 using Login2.Models;
 using Login2.Views.Receptionist;
@@ -10,11 +11,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Login2.ViewModels.Receptionist
 {
-    class RoomViewModel : MyBaseViewModel
+    public class RoomViewModel : MyBaseViewModel
     {
         private List<room> _listRoom;
         private int _totalRoom;
@@ -154,20 +157,23 @@ namespace Login2.ViewModels.Receptionist
 
         }
 
-        private ICommand _rentRoomCommand;
-        public ICommand RentRoomCommand
+        private ICommand _roomOptionCommand;
+        public ICommand RoomOptionCommand
         {
             get
             {
-                return _rentRoomCommand ??
-                    (_rentRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_RentRoom));
+                return _roomOptionCommand ??
+                    (_roomOptionCommand = new RoleBasedSecurityCommand<object>(null, Excute_RoomOption));
             }
         }
 
-        private void Excute_RentRoom(object p)
+        private void Excute_RoomOption(object p)
         {
-            var rentRoomWindow = new RentRoom();
-            rentRoomWindow.ShowDialog();
+            var room = p as room;
+            //MessageBox.Show(room.ID.ToString());
+            var roomOptionDialog = new RoomOption();
+            ParameterSetter.SetParameter(room.ID);
+            roomOptionDialog.ShowDialog();
         }
 
     }

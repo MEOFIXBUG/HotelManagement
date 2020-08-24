@@ -36,18 +36,21 @@
 
     <DataTemplate DataType="{x:Type sales_vm:RoomListViewModel}">
         <sales_views:RoomList/>
-    </DataTemplate> 
+    </DataTemplate>
     <DataTemplate DataType="{x:Type sales_vm:InsertRoomViewModel}">
         <sales_views:InsertRoom/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type sales_vm:CustomerListViewModel}">
         <sales_views:CustomerList/>
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type receptionist_vm:RentRoomViewModel}">
         <receptionist_views:RentRoom/>
     </DataTemplate>
-        <DataTemplate DataType="{x:Type receptionist_vm:BookingRoomViewModel}">
-            <receptionist_views:BookingRoom/>
-        </DataTemplate>
+    <DataTemplate DataType="{x:Type receptionist_vm:BookingRoomViewModel}">
+        <receptionist_views:BookingRoom/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type receptionist_vm:RoomOptionViewModel}">
+        <receptionist_views:RoomOption/>
+    </DataTemplate>
 </ResourceDictionary>

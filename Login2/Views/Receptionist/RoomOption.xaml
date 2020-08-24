@@ -1,0 +1,127 @@
+﻿<Window x:Name="RoomOptionWindow"
+        x:Class="Login2.Views.Receptionist.RoomOption"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login2.Views.Receptionist"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        DataContext="{Binding RoomOption, Source={StaticResource Locator}}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="RoomOption" Height="219.6" Width="309.6">
+    <Window.Resources>
+        <SolidColorBrush x:Key="availableColor" Color="#FF0CB132"/>
+        <SolidColorBrush x:Key="rentedColor" Color="#FFBA4C4C"/>
+        <SolidColorBrush x:Key="cleaningColor" Color="#FFA58A72"/>
+        <SolidColorBrush x:Key="fixingColor" Color="#FFEDD53E"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="Gray">
+            <TextBlock Text="Chuyển Bộ Phận" FontSize="17" Margin="10,0,0,0" Foreground="White"></TextBlock>
+            <Button x:Name="ButtonExit" 
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" 
+                        Foreground="White"  VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Command="{Binding Path=CloseWindowCommand}"
+                        CommandParameter="{Binding ElementName=RoomOptionWindow}">
+                <materialDesign:PackIcon Kind="Power"/>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                </RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Name="rentRoomMenu"  Width="auto" Height="auto"  Command="{Binding Path=RentRoomCommand}" CommandParameter="{Binding Room.ID}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource  MaterialDesignRaisedButton}">
+                        <Setter Property="Content" Value="Thuê phòng"></Setter>
+                        <Setter Property="Background" Value="{StaticResource availableColor}"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Thuê phòng"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="1">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Trả Phòng"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="2">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="3">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+            </Button>
+            <Button Grid.Row="0" Grid.Column="1"  Width="auto" Height="auto"  Command="{Binding Path=BookRoomCommand}" Content="Đặt phòng" />
+            <Button Grid.Row="1" Grid.Column="0"  Width="auto" Height="auto"  Command="{Binding Path=CleanRoomCommand}" >
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                        <Setter Property="Content" Value="Dọn phòng"></Setter>
+                        <Setter Property="Background" Value="{StaticResource cleaningColor}"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Dọn phòng"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="1">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="2">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Kết thúc dọn phòng"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="3">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Grid.Row="1" Grid.Column="1"  Width="auto" Height="auto"  Command="{Binding Path=FixRoomCommand}">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                        <Setter Property="Content" Value="Sửa phòng"></Setter>
+                        <Setter Property="Background" Value="{StaticResource fixingColor}"></Setter>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Sửa phòng"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="1">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="2">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="3">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                                <Setter Property="Content" Value="Kết thúc sửa phòng"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+</Window>

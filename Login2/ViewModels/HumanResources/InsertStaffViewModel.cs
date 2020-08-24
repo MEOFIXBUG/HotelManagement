@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace Login2.ViewModels.HumanResources
 {
-    public class InsertStaffViewModel:MyBaseViewModel
+    public class InsertStaffViewModel : MyBaseViewModel
     {
         private Dictionary<int, string> _allRole;
 
@@ -60,7 +60,7 @@ namespace Login2.ViewModels.HumanResources
         private IRepository<account> accountRepository = null;
         public InsertStaffViewModel()
         {
-            staffRepository=new BaseRepository<staff>();
+            staffRepository = new BaseRepository<staff>();
             accountRepository = new BaseRepository<account>();
             _visibility = Visibility.Hidden;
             _allRole = new Dictionary<int, string>();

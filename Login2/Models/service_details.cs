@@ -12,7 +12,7 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class service_details
+    public partial class service_details : BaseModel
     {
         public int BookDetailID { get; set; }
         public int ServiceDetailsID { get; set; }

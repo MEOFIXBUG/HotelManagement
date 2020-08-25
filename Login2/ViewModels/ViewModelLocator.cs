@@ -47,8 +47,6 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>();
             SimpleIoc.Default.Register<PopUpRoleViewModel>();
-            SimpleIoc.Default.Register<StaffListViewModel>();
-            SimpleIoc.Default.Register<InsertStaffViewModel>();
             SimpleIoc.Default.Register<CustomerViewModel>();
             SimpleIoc.Default.Register<RoomViewModel>();
             SimpleIoc.Default.Register<RentRoomViewModel>();
@@ -133,8 +131,16 @@ namespace Login2.ViewModels
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
+            SimpleIoc.Default.Reset();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<ProfileViewModel>();
+            SimpleIoc.Default.Register<PopUpRoleViewModel>();
+            SimpleIoc.Default.Register<CustomerViewModel>();
+            SimpleIoc.Default.Register<RoomViewModel>();
+            SimpleIoc.Default.Register<RentRoomViewModel>();
+            SimpleIoc.Default.Register<BookingRoomViewModel>();
 
-            
         }
         public static void UnRegisterMainViewModel()
         {

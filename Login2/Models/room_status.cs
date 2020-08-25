@@ -12,7 +12,7 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class room_status
+    public partial class room_status : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public room_status()

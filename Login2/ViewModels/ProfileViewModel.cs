@@ -2,6 +2,7 @@
 using Login2.Auxiliary.DomainObjects;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
+using Login2.Auxiliary.Repository;
 using Login2.Commands;
 using Login2.Models;
 using Login2.Views;
@@ -47,13 +48,15 @@ namespace Login2.ViewModels
         int UID = 0;
         private IRepository<account> accountRepository = null;
         private IRepository<staff> staffRepository = null;
+        Session session;
         public ProfileViewModel()
         {
             accountRepository = new BaseRepository<account>();
             staffRepository = new BaseRepository<staff>();
             _rePass = new RePass();
-            UID = (int)LoginViewModel.session.getAccountID();
-            _roleName = LoginViewModel.session.getRole().ToString();
+            session = Session.GetCurrentSingleton();
+            UID = (int)session.AccountID;
+            _roleName = session.Role.ToString();
             _myProfile = staffRepository.GetByID(UID);
             _name = _myProfile.Name;
             /*

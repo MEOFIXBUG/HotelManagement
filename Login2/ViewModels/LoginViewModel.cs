@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
+using Login2.Auxiliary.Repository;
 using Login2.Models;
 using Login2.Views;
 using System;
@@ -20,10 +21,11 @@ namespace Login2.ViewModels
         /// Initializes a new instance of the Main_ViewModel class.
         /// </summary>
         /// 
-        public static Session session = new Session();
+        Session session;
         private IRepository<account> accountRepository = null;
         public LoginViewModel()
         {
+            session = Session.GetCurrentSingleton();
             accountRepository = new BaseRepository<account>();
             /*
 			 * Not much point in this case, but for the record, you can have 
@@ -119,7 +121,9 @@ namespace Login2.ViewModels
                 //Phan Quyen (Role-base....)
                 GenericIdentity identity = new GenericIdentity(UserName);
                 Thread.CurrentPrincipal = new GenericPrincipal(identity, new string[] { Role });
-                session.SetData(accountID, role);
+                session.AccountID = accountID;
+                session.Role = role;
+                System.Windows.Application.Current.Properties["Session"] = session;
                 var homePage = new Home();
                 homePage.Show();
                 Login login = App.Current.Windows.OfType<Login>().FirstOrDefault();

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
+using Login2.Auxiliary.Repository;
 using Login2.Commands;
 using Login2.Models;
 using Login2.Views.HumanResources;
@@ -73,10 +74,11 @@ namespace Login2.ViewModels.HumanResources
             p.SearchHelper.AllowFiltering = true;
             p.SearchHelper.Search(KeyWord); 
         }
-
+        Session session;
         public StaffListViewModel()
         {
-            var UID = (int)LoginViewModel.session.getAccountID();
+            session = Session.GetCurrentSingleton();
+            var UID = (int)session.AccountID;
             staffRepository = new BaseRepository<staff>();
             accountRepository = new BaseRepository<account>();
             var res = staffRepository.Get(s => s.Account_id != UID);
@@ -103,7 +105,7 @@ namespace Login2.ViewModels.HumanResources
         {
             var p = (SfDataGrid)obj;
             p.SearchHelper.ClearSearch();
-            var UID = (int)LoginViewModel.session.getAccountID();
+            var UID = session.AccountID;
             var res = staffRepository.Get(s => s.Account_id != UID);
             StaffList.Clear();
             res.Distinct().ToList().ForEach(i => StaffList.Add(i));

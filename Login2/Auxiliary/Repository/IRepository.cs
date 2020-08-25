@@ -5,9 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Login2.Auxiliary.Helpers
+namespace Login2.Auxiliary.Repository
 {
-
     public interface IRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> GetAll();

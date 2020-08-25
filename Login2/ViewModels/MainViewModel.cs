@@ -35,10 +35,11 @@ namespace Login2.ViewModels
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
+        Session session;
         public MainViewModel()
         {
-            
-            Roles role = LoginViewModel.session.getRole();
+            session = Session.GetCurrentSingleton();
+            Roles role = session.Role;
             _featuresCollection = ExtraFunction.featureOfRole(role);
             _selectedViewModel = new MyBaseViewModel();
             _selectedViewModel = ExtraFunction.getUserControl(0, role);
@@ -153,7 +154,7 @@ namespace Login2.ViewModels
             var p = param as ParametersForSwitchView;
             p.transitioningContentSlide.OnApplyTemplate();
             p.gridCursor.Margin = new Thickness(0, (100 + (60 * p.selectedIndex)), 0, 0);
-            SelectedViewModel = ExtraFunction.getUserControl(p.selectedIndex, LoginViewModel.session.getRole());
+            SelectedViewModel = ExtraFunction.getUserControl(p.selectedIndex, session.Role);
         }
         private ICommand _logOutCommand;
         public ICommand LogOutCommand
@@ -176,17 +177,15 @@ namespace Login2.ViewModels
         //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
         private void Execute_LogOut(object o)
         {
-            LoginViewModel.session.clear();
+            Session.Dispose();
             var Login = new Login();
-            Login.Show();
-            
             var HomePage = App.Current.Windows.OfType<Home>().FirstOrDefault();
             if (HomePage != null)
             {
-                this.Cleanup();
-                ViewModelLocator.UnRegisterMainViewModel();
+                ViewModelLocator.Cleanup();
                 HomePage.Close();
             }
+            Login.Show();
         }
     }
 }

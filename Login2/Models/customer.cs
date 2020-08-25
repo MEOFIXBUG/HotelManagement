@@ -11,7 +11,8 @@ namespace Login2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class customer : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,20 @@ namespace Login2.Models
         }
     
         public int ID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Name must not be empty.")]
+        [MaxLength(100, ErrorMessage = "Maximum of 100 characters is allowed.")]
         public string FullName { get; set; }
+        [RegularExpression(@"^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", ErrorMessage = "The date is invalid.")]
         public System.DateTime DOB { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "IdentityCard must not be empty.")]
+        [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
+        [RegularExpression("^[0-9]{9}$",
+         ErrorMessage = "Invalid IdentityCard")]
         public string IdentityCard { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]
+        [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
+        [RegularExpression("0([0-9]{9})",
+         ErrorMessage = "Invalid Phone")]
         public string Phone { get; set; }
         public bool isForeigner { get; set; }
         public System.DateTime CreatedAt { get; set; }

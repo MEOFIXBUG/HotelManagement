@@ -101,6 +101,8 @@ namespace Login2.ViewModels.HumanResources
         }
         private bool CanExecute_AddStaff(object obj)
         {
+            var p = (staff)obj;
+            if (p == null || p.HasErrors) return false;
             return true;
         }
     }

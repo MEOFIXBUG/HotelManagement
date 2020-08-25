@@ -103,6 +103,7 @@ namespace Login2.Auxiliary.Repository
             {
                 dbSet = context.Set<TEntity>();
                 dbSet.Add(entity);
+                context.SaveChanges();
             }
         }
 
@@ -113,6 +114,7 @@ namespace Login2.Auxiliary.Repository
                 dbSet = context.Set<TEntity>();
                 TEntity entityToDelete = dbSet.Find(id);
                 Delete(entityToDelete);
+                context.SaveChanges();
             }
         }
 
@@ -128,6 +130,7 @@ namespace Login2.Auxiliary.Repository
 
                 }
                 dbSet.Remove(entityToDelete);
+                context.SaveChanges();
             }
 
         }
@@ -141,6 +144,7 @@ namespace Login2.Auxiliary.Repository
                 dbSet.Attach(entityToUpdate);
 
                 context.Entry(entityToUpdate).State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
         public void Save()

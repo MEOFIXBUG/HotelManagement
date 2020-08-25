@@ -1,9 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Login2.Auxiliary.Helpers;
+using Login2.Auxiliary.Repository;
 using Login2.Models;
-using Microsoft.Practices.ServiceLocation;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

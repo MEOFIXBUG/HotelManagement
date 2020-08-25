@@ -106,7 +106,7 @@ namespace Login2.ViewModels.Sales
         private bool CanExecute_UpdateInfoCus(object arg)
         {
             var p = (customer)arg;
-            if (p == null) return false;
+            if (p == null||p.HasErrors) return false;
             return true;
         }
 

@@ -71,6 +71,8 @@ namespace Login2.ViewModels.Sales
 
         private bool CanExecute_AddRoom(object arg)
         {
+            var p = (room)arg;
+            if (p == null || p.HasErrors) return false;
             return true;
         }
 

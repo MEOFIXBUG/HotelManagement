@@ -25,16 +25,16 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,0,0,0">
-                        <TextBox x:Name="Name" Text="{Binding Path=Name}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <DatePicker x:Name="DOB" SelectedDate="{Binding Path=DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}" materialDesign:HintAssist.Hint="Sinh Ngày" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5">
+                        <TextBox x:Name="Name" Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Họ và Tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="IdentityCard" Text="{Binding Path=IdentityCard, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="CMND" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <DatePicker x:Name="DOB" SelectedDate="{Binding Path=DOB, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True,TargetNullValue={x:Static System:DateTime.Now}}" materialDesign:HintAssist.Hint="Sinh Ngày" DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="0,15,233,5">
                         </DatePicker>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
-                        <TextBox x:Name="Phone" Text="{Binding Path=Phone}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="Email" Text="{Binding Path=Email}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
-                        <TextBox x:Name="Address" Text="{Binding Path=Address}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <TextBox x:Name="Phone" Text="{Binding Path=Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="SĐT" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="Email" Text="{Binding Path=Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
+                        <TextBox x:Name="Address" Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Địa Chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>
                         <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->
                     </StackPanel>
                 </Grid>

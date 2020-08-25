@@ -148,7 +148,7 @@ namespace Login2.ViewModels.HumanResources
         private bool CanExecute_UpdateInfoStaff(object arg)
         {
             var p = (staff)arg;
-            if (p == null) return false;
+            if (p == null|| p.HasErrors) return false;
             return true;
         }
         [AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]

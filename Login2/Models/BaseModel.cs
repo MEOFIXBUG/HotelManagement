@@ -6,6 +6,8 @@ using Login2.Properties;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System;
+using System.Windows;
 
 /// <summary>
 /// Abstract base class for all models.
@@ -162,19 +164,28 @@ public abstract class BaseModel : INotifyPropertyChanged, IDataErrorInfo
     #endregion
     private bool TryValidateProperty(PropertyInfo propertyInfo, List<string> propertyErrors)
     {
-        var results = new List<ValidationResult>();
-        var context = new ValidationContext(this) { MemberName = propertyInfo.Name };
-
-        var propertyValue = propertyInfo?.GetValue(this);
-
-        // Validate the property
-        var isValid = Validator.TryValidateProperty(propertyValue, context, results);
-
-        if (results.Any())
+        try
         {
-            propertyErrors.AddRange(results.Select(c => c.ErrorMessage));
+            var results = new List<ValidationResult>();
+            var context = new ValidationContext(this) { MemberName = propertyInfo.Name };
+
+            var propertyValue = propertyInfo?.GetValue(this);
+
+            // Validate the property
+            var isValid = Validator.TryValidateProperty(propertyValue, context, results);
+
+            if (results.Any())
+            {
+                propertyErrors.AddRange(results.Select(c => c.ErrorMessage));
+            }
+            return isValid;
         }
-        return isValid;
+        catch(Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+            return false;
+        }
+        
 
 
     }

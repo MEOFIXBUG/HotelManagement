@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Login2.Auxiliary.Helpers;
+using Login2.Auxiliary.Repository;
 using Login2.Models;
 using System;
 using System.Collections.Generic;

@@ -43,7 +43,7 @@ namespace Login2.ViewModels.Receptionist
         private void resetCustomerInfo()
         {
             CustomerInfo = new customer();
-            //CustomerInfo.DOB = new DateTime();
+            CustomerInfo.DOB = new DateTime();
             CustomerInfo.DOB = DateTime.Now;
         }
         private ICommand _addCustomerCommand;
@@ -70,13 +70,13 @@ namespace Login2.ViewModels.Receptionist
         private void Execute_AddCustomer(object obj)
         {
             //var newCustomer = obj as customer;
-            using (var db = new hotelEntities())
-            {
-                db.customers.Add(CustomerInfo);
-                db.SaveChanges();
-            }
-            //    customerRepository.Insert(CustomerInfo);
-            //customerRepository.Save();
+            //using (var db = new hotelEntities())
+            //{
+            //    db.customers.Add(CustomerInfo);
+            //    db.SaveChanges();
+            //}
+            customerRepository.Insert(CustomerInfo);
+            customerRepository.Save();
             resetCustomerInfo();
             System.Windows.Forms.MessageBox.Show("Thêm khách hàng mới thành công", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

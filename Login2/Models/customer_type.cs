@@ -12,7 +12,7 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class customer_type : BaseModel
+    public partial class customer_type
     {
         public int ID { get; set; }
         public int ByName { get; set; }

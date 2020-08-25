@@ -10,10 +10,10 @@
         Name="myWindow"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thuê phòng" Height="792.6" Width="712">
+        Title="Thuê phòng" Height="792.6" Width="791.2">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="270"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
@@ -23,9 +23,17 @@
                     <ListView x:Name="ServiceListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Tên dịch vụ"></GridViewColumn>
-                                <GridViewColumn Header="Giá Bán"></GridViewColumn>
-                                <GridViewColumn Header="Thêm"></GridViewColumn>
+                                <GridViewColumn Header="Tên dịch vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
+                                <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="Thêm">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button Content="Thêm"></Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="538.8" Width="868.935">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" Height="574" Width="945.735">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
@@ -19,23 +19,23 @@
                 <Grid>
                     <StackPanel Orientation="Vertical" DataContext="{Binding CustomerInfo,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <StackPanel>
-                            <TextBox Margin="1" Height="40" Text="{Binding FullName,Mode=TwoWay}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            <TextBox Margin="1" Height="40" Text="{Binding FullName,Mode=TwoWay,ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel  >
-                            <TextBox Text="{Binding IdentityCard,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            <TextBox Text="{Binding IdentityCard,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel >
-                            <TextBox Text="{Binding Phone,Mode=TwoWay}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            <TextBox Text="{Binding Phone,Mode=TwoWay,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </StackPanel>
                         <Grid Height="40">
                             <DatePicker Margin="1"
-                            SelectedDate="{Binding DOB,Mode=TwoWay,TargetNullValue={x:Static System:DateTime.Now}}"
+                            SelectedDate="{Binding DOB,Mode=TwoWay,ValidatesOnDataErrors=True}"
                             VerticalAlignment="Bottom"
                             DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020"
                             materialDesign:HintAssist.Hint="Ngày sinh"
@@ -45,10 +45,10 @@
                             <CheckBox IsChecked="{Binding isForeigner,Mode=TwoWay}"  Content="Là khách nước ngoài"></CheckBox>
                         </Grid>
                         <Grid DataContext="{Binding Path=DataContext,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" HorizontalAlignment="Center" Height="40">
-                            <Button Content="Thêm khách hàng" Visibility="{Binding AddButtonVisbility}" Command="{Binding Path=AddCustomerCommand}" ></Button>
+                            <Button Content="Thêm khách hàng" Visibility="{Binding AddButtonVisbility}" Command="{Binding Path=AddCustomerCommand}" CommandParameter="{Binding CustomerInfo}" ></Button>
                         </Grid>
                         <Grid DataContext="{Binding Path=DataContext,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" HorizontalAlignment="Center" Height="40">
-                            <Button Content="Cập nhật" Visibility="{Binding UpdateButtonVisbility}" Command="{Binding Path=UpdateCustomerCommand}" ></Button>
+                            <Button Content="Cập nhật" Visibility="{Binding UpdateButtonVisbility}" Command="{Binding Path=UpdateCustomerCommand}" CommandParameter="{Binding CustomerInfo}"></Button>
                         </Grid>
                     </StackPanel>
                 </Grid>

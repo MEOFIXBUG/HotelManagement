@@ -32,7 +32,7 @@ namespace Login2.ViewModels.Receptionist
         private IRepository<customer> customerRepository = null;
         public CustomerViewModel()
         {
-            CustomerInfo = new customer();
+            resetCustomerInfo();
             AddButtonVisbility = Visibility.Visible;
             UpdateButtonVisbility = Visibility.Hidden;
             ContentButton = "Thêm khách hàng";
@@ -40,25 +40,44 @@ namespace Login2.ViewModels.Receptionist
             customerRepository = new BaseRepository<customer>();
             ListCustomer = customerRepository.GetAll().ToList();
         }
-
+        private void resetCustomerInfo()
+        {
+            CustomerInfo = new customer();
+            //CustomerInfo.DOB = new DateTime();
+            CustomerInfo.DOB = DateTime.Now;
+        }
         private ICommand _addCustomerCommand;
         public ICommand AddCustomerCommand
         {
             get
             {
                 return _addCustomerCommand ??
-                     (_addCustomerCommand = new RelayCommand<object>(Execute_AddCustomer, (x) => true));
+                     (_addCustomerCommand = new RelayCommand<object>(Execute_AddCustomer, CanExcute_AddCustomer));
             }
         }
 
-        
+        private bool CanExcute_AddCustomer(object obj)
+        {
+            if (obj != null)
+            {
+                var c = obj as customer;
+                if (c.HasErrors) return false;
+                return true;
+            }
+            return false;
+        }
 
         private void Execute_AddCustomer(object obj)
         {
             //var newCustomer = obj as customer;
-            customerRepository.Insert(CustomerInfo);
-            customerRepository.Save();
-            CustomerInfo = new customer();
+            using (var db = new hotelEntities())
+            {
+                db.customers.Add(CustomerInfo);
+                db.SaveChanges();
+            }
+            //    customerRepository.Insert(CustomerInfo);
+            //customerRepository.Save();
+            resetCustomerInfo();
             System.Windows.Forms.MessageBox.Show("Thêm khách hàng mới thành công", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -68,11 +87,21 @@ namespace Login2.ViewModels.Receptionist
             get
             {
                 return _updateCustomerCommand ??
-                     (_updateCustomerCommand = new RelayCommand<object>(Execute_UpdateCustomer, (x) => true));
+                     (_updateCustomerCommand = new RelayCommand<object>(Execute_UpdateCustomer, CanExcute_UpdateCustomer));
             }
         }
 
 
+        private bool CanExcute_UpdateCustomer(object obj)
+        {
+            if (obj != null)
+            {
+                var c = obj as customer;
+                if (c.HasErrors) return false;
+                return true;
+            }
+            return false;
+        }
 
         private void Execute_UpdateCustomer(object obj)
         {
@@ -80,7 +109,7 @@ namespace Login2.ViewModels.Receptionist
 
             UpdateButtonVisbility = Visibility.Hidden;
             AddButtonVisbility = Visibility.Visible;
-            CustomerInfo = new customer();
+            resetCustomerInfo();
             System.Windows.Forms.MessageBox.Show("Cập nhật thành công", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
         }
@@ -119,9 +148,14 @@ namespace Login2.ViewModels.Receptionist
 
         private void updateCustomer(customer customer)
         {
-            customerRepository.Update(customer);
+            //using (var db = new hotelEntities())
+            //{
+            //    var old = db.customers.Where(x => x.ID == CustomerInfo.ID).FirstOrDefault();
+            //    db.customers.Attach(CustomerInfo);
+            //    db.SaveChanges();
+            //}
+            customerRepository.Update(CustomerInfo);
             customerRepository.Save();
-            
 
         }
     }

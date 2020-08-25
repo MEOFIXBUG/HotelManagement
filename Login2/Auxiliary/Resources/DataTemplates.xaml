@@ -9,6 +9,8 @@
                     xmlns:receptionist_vm="clr-namespace:Login2.ViewModels.Receptionist"
                     xmlns:sales_views="clr-namespace:Login2.Views.Sales"
                     xmlns:sales_vm="clr-namespace:Login2.ViewModels.Sales"
+                    xmlns:accountant_views="clr-namespace:Login2.Views.Accountant"
+                    xmlns:accountant_vm="clr-namespace:Login2.ViewModels.Accountant"
                     >
     <DataTemplate DataType="{x:Type vm:LoginViewModel}">
         <views:Login/>
@@ -52,5 +54,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type receptionist_vm:RoomOptionViewModel}">
         <receptionist_views:RoomOption/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type accountant_vm:StatisticsViewModel}">
+        <accountant_views:Statistics/>
     </DataTemplate>
 </ResourceDictionary>

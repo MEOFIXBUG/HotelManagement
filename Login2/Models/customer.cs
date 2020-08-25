@@ -29,7 +29,7 @@ public partial class customer : BaseModel
     public System.DateTime DOB { get; set; }
     [Required(ErrorMessage = "IdentityCard must not be empty.")]
     [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
-    [RegularExpression("^[0-9]{10}$",
+    [RegularExpression("^[0-9]{9}$",
      ErrorMessage = "Invalid IdentityCard")]
     public string IdentityCard { get; set; }
     [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]

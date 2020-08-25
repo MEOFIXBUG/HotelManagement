@@ -84,7 +84,7 @@
                             Command="{Binding Path=UpdateInfoRoomCommand}"
                             CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"/>
                     <Button Grid.Column="1" Margin="15,0,0,0" 
-                            Command="{Binding Path=AddRoomCommand}"
+                            Command="{Binding Path=DelRoomCommand}"
                             CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"
                             Content="Xóa" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Grid>

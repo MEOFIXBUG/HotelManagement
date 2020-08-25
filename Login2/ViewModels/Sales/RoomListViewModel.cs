@@ -170,33 +170,30 @@ namespace Login2.ViewModels.Sales
 
         }
 
-        private ICommand _addRoomCommand;
-        public ICommand AddRoomCommand
+        private ICommand _delRoomCommand;
+        public ICommand DelRoomCommand
         {
             get
             {
-                return _addRoomCommand ??
-                     (_addRoomCommand = new RoleBasedSecurityCommand<object>(CanExecute_AddRoom, Execute_AddRoom));
+                return _delRoomCommand ??
+                     (_delRoomCommand = new RoleBasedSecurityCommand<object>(CanExecute_DelRoom, Execute_DelRoom));
             }
         }
 
-        private bool CanExecute_AddRoom(object arg)
+        private bool CanExecute_DelRoom(object arg)
         {
-            if (SelectedItem != null) return false;
+            if (SelectedItem == null) return false;
             return true;
         }
 
-        private void Execute_AddRoom(object obj)
+        private void Execute_DelRoom(object obj)
         {
 
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirmation", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
                 var p = (room)obj;
-                p.Status = SelectedStatus;
-                p.Type = SelectedType;
-                roomRepository.Insert(p);
-                roomRepository.Save();
+                roomRepository.Delete(p);
                 var res = roomRepository.Get(null, null, "room_status,room_type");
                 RoomList.Clear();
                 res.Distinct().ToList().ForEach(i => _roomList.Add(i));

@@ -127,5 +127,39 @@ namespace Login2.ViewModels.Sales
 
 
         }
+
+        private ICommand _delCusCommand;
+        public ICommand DelCusCommand
+        {
+            get
+            {
+                return _delCusCommand ??
+                     (_delCusCommand = new RoleBasedSecurityCommand<object>(CanExecute_DelCus, Execute_DelCus));
+            }
+        }
+
+        private bool CanExecute_DelCus(object arg)
+        {
+            var p = (customer)arg;
+            if ( p== null) return false;
+            return true;
+        }
+
+        private void Execute_DelCus(object obj)
+        {
+
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirmation", System.Windows.MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                var p = (customer)obj;
+                cusRepository.Delete(p);
+                var res = cusRepository.GetAll();
+                CusList.Clear();
+                res.Distinct().ToList().ForEach(i => _cusList.Add(i));
+                System.Windows.Forms.MessageBox.Show("Successfully updated", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+        }
     }
 }

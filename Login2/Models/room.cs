@@ -23,7 +23,7 @@ namespace Login2.Models
         }
 
         public int ID { get; set; }
-        [Required(ErrorMessage = "Room name must not be empty.")]
+        [Required(AllowEmptyStrings =false, ErrorMessage = "Room name must not be empty.")]
         [MaxLength(20, ErrorMessage = "Maximum of 20 characters is allowed.")]
         public string RoomName { get; set; }
         public int Status { get; set; }

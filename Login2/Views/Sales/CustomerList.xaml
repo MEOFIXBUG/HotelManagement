@@ -55,7 +55,7 @@
                             CommandParameter="{Binding ElementName=CusInfo,Path=DataContext}"/>
                     <Button Grid.Column="1" Margin="15,8,0,9" 
                             Command="{Binding Path=DelCusCommand}"
-                            CommandParameter="{Binding ElementName=dataGrid ,Path=SelectedItem}"
+                            CommandParameter="{Binding ElementName=CusInfo,Path=DataContext}"
                             Content="Xóa" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
                 </Grid>
 

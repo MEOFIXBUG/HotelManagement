@@ -64,7 +64,7 @@ namespace Login2.ViewModels
                     }
                 case "AF_statistical":
                     {
-                        return null;
+                        return new Accountant.StatisticsViewModel(); ;
                     }
 
                 case "AF_report":

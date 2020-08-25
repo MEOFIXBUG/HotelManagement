@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Margin="10,0,0,0" x:Name="RoomInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                    <StackPanel Margin="10,0,0,0" x:Name="RoomInfo" DataContext="{Binding Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox x:Name="RoomName" Text="{Binding Path=RoomName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Tên Phòng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <syncfusion:IntegerTextBox x:Name="Price" MaxValue="999999999" MinValue="0"  Value="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <syncfusion:IntegerTextBox MaxValue="10" MinValue="0" x:Name="MaxPeople" materialDesign:HintAssist.Hint="Số Người" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5">

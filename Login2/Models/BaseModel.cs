@@ -108,12 +108,12 @@ public abstract class BaseModel : INotifyPropertyChanged, IDataErrorInfo
         PropertyInfos.ForEach(
             prop =>
             {
-                        //Validate generically
-                        var errors = new List<string>();
+                //Validate generically
+                var errors = new List<string>();
                 var isValid = TryValidateProperty(prop, errors);
                 if (!isValid)
 
-                    Errors.Add(prop.Name, errors.First());
+                    Errors.Add(prop.Name, errors.FirstOrDefault());
             });
         // we have to this because the Dictionary does not implement INotifyPropertyChanged            
         OnPropertyChanged(nameof(HasErrors));
@@ -146,12 +146,16 @@ public abstract class BaseModel : INotifyPropertyChanged, IDataErrorInfo
     {
         get
         {
-            return _propertyInfos
-                   ?? (_propertyInfos =
+            return  (_propertyInfos =
                        GetType()
                            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                           .Where(prop => prop.IsDefined(typeof(RequiredAttribute), true) || prop.IsDefined(typeof(MaxLengthAttribute), true))
+                           .Where(prop => prop.IsDefined(typeof(ValidationAttribute), true))
                            .ToList());
+        }
+        set
+        {
+            _propertyInfos = value;
+            
         }
     }
 
@@ -180,12 +184,12 @@ public abstract class BaseModel : INotifyPropertyChanged, IDataErrorInfo
             }
             return isValid;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            MessageBox.Show(ex.ToString());
+            //MessageBox.Show(ex.ToString());
             return false;
         }
-        
+
 
 
     }

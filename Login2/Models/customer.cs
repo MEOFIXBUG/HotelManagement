@@ -22,19 +22,19 @@ namespace Login2.Models
         }
     
         public int ID { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Name must not be empty.")]
+        [Required( ErrorMessage = "Name must not be empty.")]
         [MaxLength(100, ErrorMessage = "Maximum of 100 characters is allowed.")]
         public string FullName { get; set; }
         [DataType(DataType.DateTime, ErrorMessage = "Invalid Datetime")]
         [Display(Name = "Date Of Birth")]
         //[RegularExpression(@"^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$", ErrorMessage = "The date is invalid.")]
         public System.DateTime DOB { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "IdentityCard must not be empty.")]
+        [Required(ErrorMessage = "IdentityCard must not be empty.")]
         [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
         [RegularExpression("^[0-9]{9}$",
          ErrorMessage = "Invalid IdentityCard")]
         public string IdentityCard { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]
+        [Required(ErrorMessage = "Phone must not be empty.")]
         [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
         [RegularExpression("0([0-9]{9})",
          ErrorMessage = "Invalid Phone")]

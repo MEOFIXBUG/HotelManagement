@@ -7,43 +7,41 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Login2.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+using Login2.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-    public partial class customer:BaseModel
+public partial class customer : BaseModel
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public customer()
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public customer()
-        {
-            this.bookings = new HashSet<booking>();
-        }
-    
-        public int ID { get; set; }
-        [Required( ErrorMessage = "Name must not be empty.")]
-        [MaxLength(100, ErrorMessage = "Maximum of 100 characters is allowed.")]
-        public string FullName { get; set; }
-        [DataType(DataType.DateTime, ErrorMessage = "Invalid Datetime")]
-        [Display(Name = "Date Of Birth")]
-        public System.DateTime DOB { get; set; }
-        [Required(ErrorMessage = "IdentityCard must not be empty.")]
-        [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
-        [RegularExpression("^[0-9]{15}$",
-         ErrorMessage = "Invalid IdentityCard")]
-        public string IdentityCard { get; set; }
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]
-        [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
-        [RegularExpression("0([0-9]{9})",
- ErrorMessage = "Invalid Phone")]
-        public string Phone { get; set; }
-        public bool isForeigner { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public System.DateTime ModifiedAt { get; set; }
-        public Nullable<int> DeletedAt { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<booking> bookings { get; set; }
+        this.bookings = new HashSet<booking>();
     }
+
+    public int ID { get; set; }
+    [Required(ErrorMessage = "Name must not be empty.")]
+    [MaxLength(100, ErrorMessage = "Maximum of 100 characters is allowed.")]
+    public string FullName { get; set; }
+    [DataType(DataType.DateTime, ErrorMessage = "Invalid Datetime")]
+    [Display(Name = "Date Of Birth")]
+    public System.DateTime DOB { get; set; }
+    [Required(ErrorMessage = "IdentityCard must not be empty.")]
+    [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
+    [RegularExpression("^[0-9]{10}$",
+     ErrorMessage = "Invalid IdentityCard")]
+    public string IdentityCard { get; set; }
+    [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]
+    [MaxLength(10, ErrorMessage = "Maximum of 10 characters is allowed.")]
+    [RegularExpression("0([0-9]{9})",
+ErrorMessage = "Invalid Phone")]
+    public string Phone { get; set; }
+    public bool isForeigner { get; set; }
+    public System.DateTime CreatedAt { get; set; }
+    public System.DateTime ModifiedAt { get; set; }
+    public Nullable<int> DeletedAt { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<booking> bookings { get; set; }
 }

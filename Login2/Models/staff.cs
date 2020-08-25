@@ -13,7 +13,7 @@ namespace Login2.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class staff:BaseModel
+    public partial class staff : BaseModel
     {
         public int ID { get; set; }
         public int Account_id { get; set; }
@@ -40,7 +40,8 @@ namespace Login2.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "IdentityCard must not be empty.")]
         [MaxLength(50, ErrorMessage = "Maximum of 50 characters is allowed.")]
         public string Address { get; set; }
-    
+
         public virtual account account { get; set; }
     }
 }
+

@@ -13,7 +13,7 @@ namespace Login2.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class room :BaseModel
+    public partial class room : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public room()
@@ -21,7 +21,7 @@ namespace Login2.Models
             this.booking_details = new HashSet<booking_details>();
             this.bookings = new HashSet<booking>();
         }
-    
+
         public int ID { get; set; }
         [Required(ErrorMessage = "Room name must not be empty.")]
         [MaxLength(20, ErrorMessage = "Maximum of 20 characters is allowed.")]
@@ -29,10 +29,10 @@ namespace Login2.Models
         public int Status { get; set; }
         public double Price { get; set; }
         public int Type { get; set; }
-        [Required( ErrorMessage = "Max people must not be empty.")]
+        [Required(ErrorMessage = "Max people must not be empty.")]
         [Range(1, 10, ErrorMessage = "Enter a value between 1 and 10")]
         public int MaxPeople { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<booking_details> booking_details { get; set; }
         public virtual room_status room_status { get; set; }

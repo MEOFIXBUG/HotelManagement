@@ -10,7 +10,7 @@
         Name="myWindow"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thuê phòng" Height="792.6" Width="791.2">
+        Title="Thuê phòng" Height="632.7" Width="846.4">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
@@ -18,7 +18,11 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-            <GroupBox Header="Dịch vụ">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Dịch vụ hiện có">
                 <Grid>
                     <ListView x:Name="ServiceListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
@@ -41,10 +45,31 @@
 
 
             </GroupBox>
+            <GroupBox Header="Dịch vụ đã thêm" Grid.Row="1">
+                <Grid>
+                    <ListView x:Name="ServiceAddedListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên dịch vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
+                                <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="Xóa">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button Content="Xóa"></Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </GroupBox>
         </Grid>
         <Grid Grid.Column="1">
             <StackPanel Orientation="Vertical">
-                <GroupBox Header="Thông tin phòng" Height="110">
+                <GroupBox Header="Thông tin phòng" Height="100">
                     <Grid>
                         <TextBox Width="150"  HorizontalAlignment="Left"
                       materialDesign:HintAssist.Hint="Tên Phòng"
@@ -52,28 +77,62 @@
                       materialDesign:HintAssist.FloatingScale="0.50"
                       Text="{Binding Room.RoomName}"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                      FontSize="24" />
+                      FontSize="20" />
                         <TextBox Width="200"  HorizontalAlignment="Right"
                       materialDesign:HintAssist.Hint="Loại phòng"
                       materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                       materialDesign:HintAssist.FloatingScale="0.50"
                       Text="{Binding Room.room_type.TypeName}"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                      FontSize="24" />
+                      FontSize="20" />
                     </Grid>
-                   
-                </GroupBox>
-                <GroupBox Header="Thông tin khách hàng" Height="120">
-                    
-                </GroupBox>
-                <GroupBox Header="Dịch vụ" Height="180">
-                    <ListView>
 
-                    </ListView>
                 </GroupBox>
-                <GroupBox Header="Thông tin thuê phòng" Height="180">
-                    
+                <GroupBox Header="Thông tin khách hàng" Height="140">
+                    <Grid DataContext="{Binding Customer}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <TextBox Margin="1" Height="40" Text="{Binding FullName,Mode=TwoWay,ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1" >
+                            <TextBox Text="{Binding IdentityCard,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="2">
+                            <TextBox Text="{Binding Phone,Mode=TwoWay,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0" >
+                            <DatePicker Margin="1"
+                            SelectedDate="{Binding DOB,Mode=TwoWay,ValidatesOnDataErrors=True}"
+                            VerticalAlignment="Bottom"
+                            DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+                            
+                            <CheckBox IsChecked="{Binding isForeigner,Mode=TwoWay}"  Content="Là khách nước ngoài" Grid.ColumnSpan="2"></CheckBox>
+                        </Grid>
+                        <Grid Margin="5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                            <Button Content="Thêm khách"></Button>
+                        </Grid>
+                    </Grid>
+
                 </GroupBox>
+                
                 <GroupBox Header="Thời gian">
                     <StackPanel >
                         <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
@@ -88,7 +147,9 @@
                       Width="100"
                                                Height="30"
                       materialDesign:HintAssist.Hint="Giờ vào"/>
-                            <Button Content="Thời gian hiện tại" Background="#FF3D9CBC" ></Button>
+                            <Button  Background="#FF3D9CBC" >
+                                <materialDesign:PackIcon Kind="Clock" />
+                            </Button>
                         </StackPanel>
                         <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
                             <DatePicker 
@@ -98,15 +159,47 @@
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             <materialDesign:TimePicker Margin="20,2,20,2"
                       Is24Hours="True"
-                      
-                      Width="100"
-                                               Height="30"
+                      Width="100" Height="30"
                       materialDesign:HintAssist.Hint="Giờ ra"/>
-                            <Button Content="Thời gian hiện tại" Background="#FF3D9CBC" ></Button>
+                            <Button Background="#FF3D9CBC" >
+                                <materialDesign:PackIcon Kind="Clock" />
+                            </Button>
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </GroupBox>
+                <GroupBox Header="Thông tin thuê phòng" Height="140">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1">
+
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0">
+
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0">
+
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="1">
+
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                
                 <StackPanel Height="40" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Lưu" Margin="0,0,20,0"></Button>
                     <Button Content="Thoát" ></Button>

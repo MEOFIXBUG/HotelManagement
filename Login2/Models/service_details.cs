@@ -12,13 +12,13 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class service_details : BaseModel
+    public partial class service_details:BaseModel
     {
         public int BookDetailID { get; set; }
         public int ServiceDetailsID { get; set; }
         public int ServiceID { get; set; }
         public int Price { get; set; }
-        public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         public virtual booking_details booking_details { get; set; }
         public virtual service service { get; set; }

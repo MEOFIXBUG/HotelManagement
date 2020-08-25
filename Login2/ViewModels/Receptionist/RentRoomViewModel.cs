@@ -2,6 +2,7 @@
 using Login2.Auxiliary.Helpers;
 using Login2.Auxiliary.Repository;
 using Login2.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace Login2.ViewModels.Receptionist
     {
         private room _room;
         private List<service> _listService;
+        //private Dictionary<int,>
         private IRepository<room> roomRepository = null;
         public RentRoomViewModel()
         {

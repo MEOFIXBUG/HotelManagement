@@ -12,7 +12,7 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class booking_details : BaseModel
+    public partial class booking_details
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public booking_details()
@@ -25,8 +25,8 @@ namespace Login2.Models
         public int Room_id { get; set; }
         public int NumberOfPeople { get; set; }
         public double Amount { get; set; }
-        public System.DateTime DateOfRentStart { get; set; }
-        public int DatesOfRent { get; set; }
+        public Nullable<System.DateTime> DateOfRentStart { get; set; }
+        public Nullable<System.DateTime> DateOfRentEnd { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime ModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }

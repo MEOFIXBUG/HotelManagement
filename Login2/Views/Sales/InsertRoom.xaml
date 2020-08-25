@@ -57,9 +57,13 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="Thêm" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button  Content="Thêm Bằng File Excel" Margin="20,0,120,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding Path=AddRoomExcelCommand}"/>
+                        <Button  Content="Thêm" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Command="{Binding Path=AddRoomCommand}"
                             CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"/>
+                    </StackPanel>
                 </Grid>
 
             </Grid>

@@ -55,7 +55,6 @@ namespace Login2.ViewModels.Accountant
             set { _what = value; RaisePropertyChanged(); }
         }
         private IRepository<booking> bookingRepository = null;
-        private IRepository<booking> bookingdetailRepository = null;
         public StatisticsViewModel()
         {
             bookingRepository = new BaseRepository<booking>();

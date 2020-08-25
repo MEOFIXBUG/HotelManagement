@@ -188,6 +188,7 @@
     <Compile Include="ViewModels\Receptionist\BookingRoomViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RentRoomViewModel.cs" />
+    <Compile Include="ViewModels\Receptionist\RoomOptionViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RoomViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\InsertStaffViewModel.cs" />
     <Compile Include="ViewModels\HumanResources\PopUpRoleViewModel.cs" />
@@ -240,6 +241,9 @@
     </Compile>
     <Compile Include="Views\Accountant\Statistics.xaml.cs">
       <DependentUpon>Statistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receptionist\RoomOption.xaml.cs">
+      <DependentUpon>RoomOption.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Sales\CustomerList.xaml.cs">
       <DependentUpon>CustomerList.xaml</DependentUpon>
@@ -301,6 +305,10 @@
     <Page Include="Views\Accountant\Statistics.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Receptionist\RoomOption.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Sales\CustomerList.xaml">
       <SubType>Designer</SubType>

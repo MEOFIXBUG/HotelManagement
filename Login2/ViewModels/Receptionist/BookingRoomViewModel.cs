@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Login2.ViewModels.Receptionist
 {
-    class BookingRoomViewModel:MyBaseViewModel
+    public class BookingRoomViewModel:MyBaseViewModel
     {
     }
 }

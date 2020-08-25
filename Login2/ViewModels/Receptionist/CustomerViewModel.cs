@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Login2.ViewModels.Receptionist
 {
-    class CustomerViewModel:MyBaseViewModel
+    public class CustomerViewModel:MyBaseViewModel
     {
 
     }

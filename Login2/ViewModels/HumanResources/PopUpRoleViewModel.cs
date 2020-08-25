@@ -43,6 +43,7 @@ namespace Login2.ViewModels.HumanResources
                                .Cast<Roles>()
                                .ToDictionary(t => (int)t, t => t.GetDescription());
         }
+
         private  void Function(object obj)
         {
             currentAcc = accountRepository.GetByID((int)obj);

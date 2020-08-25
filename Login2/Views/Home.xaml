@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d" 
         DataContext="{Binding Main, Source={StaticResource Locator}}"
-        Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Height="600" Width="1142.073" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Resources>
         <converter:ConverterForSelectedChange x:Key="ConverterForSelectedChange"></converter:ConverterForSelectedChange>
 

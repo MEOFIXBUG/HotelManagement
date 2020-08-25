@@ -10,11 +10,11 @@ namespace Login2.Auxiliary.Enums
     public enum SalesFeatures
     {
         [Description("Danh Sách Phòng")]
-        roomList=0,
+        SF_roomList=0,
         [Description("Tạo Phòng")]
-        addRoom=1,
+        SF_addRoom=1,
         [Description("Danh Sách Khách Hàng")]
-        customerList=2,
+        SF_customerList=2,
 
     }
 }

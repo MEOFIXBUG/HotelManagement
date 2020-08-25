@@ -10,8 +10,8 @@ namespace Login2.Auxiliary.Enums
     public enum ReceptionistFeatures
     {
         [Description("Danh sách phòng")]
-        roomList,
+        RF_roomList,
         [Description("Danh sách khách hàng")]
-        customList
+        RF_customerList
     }
 }

@@ -10,8 +10,8 @@ namespace Login2.Auxiliary.Enums
     public enum HumanResourcesFeatures
     {
         [Description("Danh Sách Nhân Viên")]
-        staffList=0,
+        HF_staffList=0,
         [Description("Thêm Tài Khoản")]
-        addAccount=1
+        HF_addAccount=1
     }
 }

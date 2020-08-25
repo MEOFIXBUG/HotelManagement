@@ -12,7 +12,7 @@ namespace Login2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class role
+    public partial class role : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public role()

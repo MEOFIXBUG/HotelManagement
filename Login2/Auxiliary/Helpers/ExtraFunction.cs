@@ -43,70 +43,37 @@ namespace Login2.Auxiliary.Helpers
 
         public static MyBaseViewModel getUserControl(int index, Roles role)
         {
-            MyBaseViewModel item = new MyBaseViewModel();
+            //MyBaseViewModel item = new MyBaseViewModel();
+            ViewModelFactory viewModelFactory = ViewModelFactory.Instance();
             switch (role)
             {
                 case Roles.HumanResources:
                     {
                         HumanResourcesFeatures feateture = (HumanResourcesFeatures)Enum.ToObject(typeof(HumanResourcesFeatures), index);
-                        switch (feateture)
-                        {
-                            case HumanResourcesFeatures.staffList:
-                                // code block
-                                item = new StaffListViewModel();
-                                break;
-                            case HumanResourcesFeatures.addAccount:
-                                // code block
-                                item = new InsertStaffViewModel();
-                                break;
-                            default:
-                                // code block
-                                item = new StaffListViewModel();
-                                break;
-                        }
-                        break;
+                        return viewModelFactory.getViewModel(feateture.ToString());
                     }
 
                 case Roles.Accountings:
-                    break;
+                    {
+                        AccountantFeatures feateture = (AccountantFeatures)Enum.ToObject(typeof(AccountantFeatures), index);
+                        return viewModelFactory.getViewModel(feateture.ToString());
+                    }
                 case Roles.Receiptions:
                     {
                         ReceptionistFeatures feateture = (ReceptionistFeatures)Enum.ToObject(typeof(ReceptionistFeatures), index);
-                        switch (feateture)
-                        {
-                            case ReceptionistFeatures.roomList:
-                                item = new RoomViewModel();
-                                break;
-                            case ReceptionistFeatures.customList:
-                                item = new CustomerViewModel();
-                                break;
-                        }
-                        break;
+                        return viewModelFactory.getViewModel(feateture.ToString());
                     }
 
                 case Roles.Sales:
                     {
                         SalesFeatures feateture = (SalesFeatures)Enum.ToObject(typeof(SalesFeatures), index);
-                        switch (feateture)
-                        {
-                            case SalesFeatures.roomList:
-                                item = new RoomListViewModel();
-                                break;
-                            case SalesFeatures.addRoom:
-                                item = new InsertRoomViewModel();
-                                break;
-                            case SalesFeatures.customerList:
-                                item = new CustomerListViewModel();
-                                break;
-                        }
-                        break;
+                        return viewModelFactory.getViewModel(feateture.ToString());
                     }
                 default:
                     // code block
                     break;
             }
-
-            return item;
+            return null;
         }
 
         public static string generateUserName(staff p)

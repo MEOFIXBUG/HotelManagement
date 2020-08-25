@@ -27,7 +27,7 @@
                     <RowDefinition Height="2.75*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Grid x:Name="CusInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem}">
+                <Grid x:Name="CusInfo" DataContext="{Binding ElementName=dataGrid ,Path=SelectedItem,UpdateSourceTrigger=PropertyChanged}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -142,7 +142,7 @@
                 PageSize="5"
                 AccentBackground="#FF8CBF26"
                 AccentForeground="White" 
-                Source="{Binding CusList}"/>
+                Source="{Binding CusList , UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Grid>
 

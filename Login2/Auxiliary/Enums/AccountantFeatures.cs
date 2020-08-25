@@ -10,8 +10,8 @@ namespace Login2.Auxiliary.Enums
     public enum AccountantFeatures
     {
         [Description("Thống kê")]
-        statistical,
+        AF_statistical,
         [Description("Báo cáo")]
-        report
+        AF_report
     }
 }

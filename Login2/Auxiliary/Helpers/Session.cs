@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Login2.Auxiliary.Helpers
 {
@@ -11,31 +12,56 @@ namespace Login2.Auxiliary.Helpers
     {
         private int _accountID;
         private Roles _role;
+        public int AccountID
+        {
+            get
+            {
+                return _accountID;
+            }
+            set
+            {
+                _accountID = value;
+            }
+        }
 
+        public Roles Role
+        {
+            get
+            {
+                return _role;
+            }
+            set
+            {
+                _role = value;
+            }
+        }
         public Session()
         {
         }
-        public Session(int AccountID, Roles Role)
+        public static Session GetCurrentSingleton()
         {
-            _accountID = AccountID;
-            _role = Role;
+            Session session;
+
+            if (null == System.Windows.Application.Current.Properties["Session"])
+            {
+                //No current session object exists, use private constructor to 
+                // create an instance, place it into the session
+                session = new Session();
+                System.Windows.Application.Current.Properties["Session"] = session;
+            }
+            else
+            {
+                //Retrieve the already instance that was already created
+                session = (Session)System.Windows.Application.Current.Properties["Session"];
+            }
+
+            //Return the single instance of this class that was stored in the session
+            return session;
         }
-        public void SetData(int AccountID, Roles Role)
+        public static void Dispose()
         {
-            _accountID = AccountID;
-            _role = Role;
-        }
-        public int getAccountID()
-        {
-            return _accountID;
-        }
-        public Roles getRole()
-        {
-            return _role;
-        }
-        public void clear()
-        {
-            _accountID = -1;
+            //Cleanup this object so that GC can reclaim space
+            System.Windows.Application.Current.Properties["Session"]=null;
         }
     }
 }

@@ -11,7 +11,8 @@ namespace Login2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class customer : BaseModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,16 @@ namespace Login2.Models
         }
     
         public int ID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Name must not be empty.")]
+        [MaxLength(45, ErrorMessage = "Maximum of 45 characters is allowed.")]
         public string FullName { get; set; }
+        
         public System.DateTime DOB { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Identity Card must not be empty.")]
+        [MaxLength(15, ErrorMessage = "Maximum of 12 characters is allowed.")]
         public string IdentityCard { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Phone must not be empty.")]
+        [MaxLength(12, ErrorMessage = "Maximum of 12 characters is allowed.")]
         public string Phone { get; set; }
         public bool isForeigner { get; set; }
         public System.DateTime CreatedAt { get; set; }

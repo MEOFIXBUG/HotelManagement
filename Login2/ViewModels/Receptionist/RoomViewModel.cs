@@ -128,6 +128,7 @@ namespace Login2.ViewModels.Receptionist
             CleaningRoom = 0;
             FixingRoom = 0;
         }
+
         private List<room> getListRoom(RoomStatus status, RoomType type)
         {
             List<room> listRoom = new List<room>();

@@ -10,17 +10,16 @@
         Name="myWindow"
         WindowStartupLocation="CenterScreen"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Thuê phòng" Height="632.7" Width="846.4">
+        Title="Thuê phòng" Height="660.7" Width="846.4">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="264" ></RowDefinition>
             </Grid.RowDefinitions>
             <GroupBox Header="Dịch vụ hiện có">
                 <Grid>
@@ -33,7 +32,7 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <Button Content="Thêm"></Button>
+                                                <Button Content="Thêm" Command="{Binding Path=DataContext.AddServiceCommand,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -42,12 +41,10 @@
                         </ListView.View>
                     </ListView>
                 </Grid>
-
-
             </GroupBox>
-            <GroupBox Header="Dịch vụ đã thêm" Grid.Row="1">
+            <GroupBox Header="Dịch vụ đã thêm" Grid.Row="1" >
                 <Grid>
-                    <ListView x:Name="ServiceAddedListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
+                    <ListView x:Name="ServiceAddedListView" ItemsSource="{Binding ListServiceAdded,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Tên dịch vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
@@ -56,7 +53,7 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid>
-                                                <Button Content="Xóa"></Button>
+                                                <Button Content="Xóa" Command="{Binding Path=DataContext.RemoveServiceCommand,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -100,23 +97,23 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
-                            <TextBox Margin="1" Height="40" Text="{Binding FullName,Mode=TwoWay,ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            <TextBox Margin="1" Height="40" Text="{Binding FullName}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1" >
-                            <TextBox Text="{Binding IdentityCard,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            <TextBox Text="{Binding IdentityCard}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="2">
-                            <TextBox Text="{Binding Phone,Mode=TwoWay,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            <TextBox Text="{Binding Phone}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0" >
                             <DatePicker Margin="1"
-                            SelectedDate="{Binding DOB,Mode=TwoWay,ValidatesOnDataErrors=True}"
+                            SelectedDate="{Binding DOB}"
                             VerticalAlignment="Bottom"
                             DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020"
                             materialDesign:HintAssist.Hint="Ngày sinh"
@@ -124,10 +121,11 @@
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
                             
-                            <CheckBox IsChecked="{Binding isForeigner,Mode=TwoWay}"  Content="Là khách nước ngoài" Grid.ColumnSpan="2"></CheckBox>
+                            <CheckBox IsChecked="{Binding isForeigner}"  Content="Là khách nước ngoài" Grid.ColumnSpan="2"></CheckBox>
                         </Grid>
                         <Grid Margin="5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
-                            <Button Content="Thêm khách"></Button>
+                            
+                            <Button Content="Chọn" Command="{Binding Path=DataContext.SelectCustomerCommand,ElementName=myWindow}"></Button>
                         </Grid>
                     </Grid>
 
@@ -137,27 +135,29 @@
                     <StackPanel >
                         <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
                             <DatePicker 
-                        Width="130"
-                        Height="30"
-                      materialDesign:HintAssist.Hint="Ngày vào"
-                      Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            Width="130"
+                            Height="30"
+                                SelectedDate="{Binding StartDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:HintAssist.Hint="Ngày vào"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             <materialDesign:TimePicker Margin="20,2,20,2"
-                      Is24Hours="True"
-                      
-                      Width="100"
-                                               Height="30"
-                      materialDesign:HintAssist.Hint="Giờ vào"/>
+                                                       SelectedTime="{Binding StartTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                              Is24Hours="True"
+                              Width="100" Height="30"
+                              materialDesign:HintAssist.Hint="Giờ vào"/>
                             <Button  Background="#FF3D9CBC" >
                                 <materialDesign:PackIcon Kind="Clock" />
                             </Button>
                         </StackPanel>
                         <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
                             <DatePicker 
+                                SelectedDate="{Binding EndDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         Width="130"
                         Height="30"
                       materialDesign:HintAssist.Hint="Ngày ra"
                       Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             <materialDesign:TimePicker Margin="20,2,20,2"
+                                                       SelectedTime="{Binding EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       Is24Hours="True"
                       Width="100" Height="30"
                       materialDesign:HintAssist.Hint="Giờ ra"/>
@@ -168,41 +168,49 @@
                     </StackPanel>
 
                 </GroupBox>
-                <GroupBox Header="Thông tin thuê phòng" Height="140">
+                <GroupBox Header="Thông tin thuê phòng" Height="200">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Row="0" Grid.Column="0">
-
+                        <Grid Grid.Row="0" Grid.Column="0" >
+                            <TextBox Margin="1" Height="40" Text="{Binding RoomCost}" FontWeight="DemiBold" IsEnabled="False" materialDesign:HintAssist.Hint="Tiền phòng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1">
-
+                            
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0">
-
+                            <TextBox Margin="1" Height="40" Text="{Binding ServiceCost}" FontWeight="DemiBold" IsEnabled="False" materialDesign:HintAssist.Hint="Tiền dịch Vụ"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">
-
+                            
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="0">
-
+                            <TextBox Margin="1" Height="40" FontSize="18" FontWeight="DemiBold" Text="{Binding Discount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" InputScope="Number"  materialDesign:HintAssist.Hint="Giảm giá"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="1">
-
+                            <TextBox Margin="1"  FontSize="18" FontWeight="DemiBold" Text="{Binding TotalCost}" IsEnabled="False" materialDesign:HintAssist.Hint="Tổng tiền"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                     </Grid>
                 </GroupBox>
                 
-                <StackPanel Height="40" Margin="10" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Lưu" Margin="0,0,20,0"></Button>
-                    <Button Content="Thoát" ></Button>
+                <StackPanel Height="40" Margin="10,10,20,10" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Lưu" Command="{Binding CommitCommand}" CommandParameter="{Binding}" Margin="0,4,30,4" Width="111"></Button>
+                    <Button Content="Thoát" Command="{Binding QuitCommand}" Margin="0,4" Width="107" ></Button>
                 </StackPanel>
 
             </StackPanel>

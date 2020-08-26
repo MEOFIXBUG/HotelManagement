@@ -24,7 +24,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="Gray">
-            <TextBlock Text="Chuyển Bộ Phận" FontSize="17" Margin="10,0,0,0" Foreground="White"></TextBlock>
+            <TextBlock Text="Thao tác" FontSize="17" Margin="10,0,0,0" Foreground="White"></TextBlock>
             <Button x:Name="ButtonExit" 
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
                         Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" 
@@ -55,8 +55,7 @@
                                 <Setter Property="Content" Value="Thuê phòng"></Setter>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Status}" Value="1">
-                                <Setter Property="IsEnabled" Value="True"></Setter>
-                                <Setter Property="Content" Value="Trả Phòng"></Setter>
+                                <Setter Property="IsEnabled" Value="False"></Setter>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding Status}" Value="2">
                                 <Setter Property="IsEnabled" Value="False"></Setter>
@@ -69,7 +68,27 @@
                 </Button.Style>
 
             </Button>
-            <Button Grid.Row="0" Grid.Column="1"  Width="auto" Height="auto"  Command="{Binding Path=BookRoomCommand}" Content="Đặt phòng" />
+            <Button Grid.Row="0" Grid.Column="1"  Width="auto" Height="auto"  Command="{Binding Path=CheckOutRoomCommand}"  >
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                        <Setter Property="Content" Value="Trả Phòng"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="1">
+                                <Setter Property="IsEnabled" Value="True"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="2">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="3">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Grid.Row="1" Grid.Column="0"  Width="auto" Height="auto"  Command="{Binding Path=CleanRoomCommand}" >
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">

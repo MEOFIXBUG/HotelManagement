@@ -1,0 +1,98 @@
+﻿<Window x:Class="Login2.Views.Receptionist.ChooseCustomer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Login2.ViewModels.Receptionist"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{Binding ChooseCustomer, Source={StaticResource Locator}}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Chọn khách hàng" Height="450" Width="880.368">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <GroupBox Header="Thông tin khách hàng">
+                <Grid>
+                    <StackPanel Orientation="Vertical" DataContext="{Binding CustomerInfo,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <StackPanel>
+                            <TextBox Margin="1" Height="40" Text="{Binding FullName,Mode=TwoWay,ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel  >
+                            <TextBox Text="{Binding IdentityCard,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel >
+                            <TextBox Text="{Binding Phone,Mode=TwoWay,ValidatesOnDataErrors=True}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Grid Height="40">
+                            <DatePicker Margin="1"
+                            SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
+                            VerticalAlignment="Bottom"
+                            DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        </Grid>
+                        <Grid Height="40">
+                            <CheckBox IsChecked="{Binding isForeigner,Mode=TwoWay}"  Content="Là khách nước ngoài"></CheckBox>
+                        </Grid>
+                        <Grid DataContext="{Binding Path=DataContext,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" HorizontalAlignment="Center" Height="40">
+                            <Button Content="Thêm khách hàng" Visibility="{Binding AddButtonVisbility}" Command="{Binding Path=AddCustomerCommand}" CommandParameter="{Binding CustomerInfo}" ></Button>
+                        </Grid>
+                        
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <GroupBox Header="Danh sách khách hàng">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <TextBox
+                          materialDesign:HintAssist.Hint="Tìm kiếm"
+                            Text="{Binding SearchString,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center" />
+
+                    </Grid>
+                    <ListView Name="customerListView"  SelectionMode="Single" Grid.Row="1" ItemsSource="{Binding ListCustomer}">
+                        <!--<i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding ElementName=customerListView, Path=SelectedItem}">
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>-->
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding FullName}"></GridViewColumn>
+                                <GridViewColumn Header="CMND" DisplayMemberBinding="{Binding IdentityCard}"></GridViewColumn>
+                                <GridViewColumn Header="SĐT" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
+                                <GridViewColumn Header="Ngày Sinh" DisplayMemberBinding="{Binding DOB}"></GridViewColumn>
+                                <GridViewColumn Header="Khách nước ngoài" DisplayMemberBinding="{Binding isForeigner}"></GridViewColumn>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid >
+                                                <Button Content="Chọn"  Command="{Binding Path=DataContext.SelectionChangedCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"></Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -186,6 +186,11 @@
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\Receptionist\BookingRoomViewModel.cs" />
+    <Compile Include="ViewModels\Receptionist\CheckOutViewModel.cs" />
+    <Compile Include="ViewModels\Receptionist\ChooseCustomerViewModel.cs" />
+    <Compile Include="Views\Receptionist\ChooseCustomer.xaml.cs">
+      <DependentUpon>ChooseCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Receptionist\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RentRoomViewModel.cs" />
     <Compile Include="ViewModels\Receptionist\RoomOptionViewModel.cs" />
@@ -208,6 +213,9 @@
     </Compile>
     <Compile Include="Views\Receptionist\BookingRoom.xaml.cs">
       <DependentUpon>BookingRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Receptionist\CheckOut.xaml.cs">
+      <DependentUpon>CheckOut.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Receptionist\Customer.xaml.cs">
       <DependentUpon>Customer.xaml</DependentUpon>
@@ -258,7 +266,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Receptionist\ChooseCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Receptionist\BookingRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Receptionist\CheckOut.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Login2.Auxiliary.Enums;
 using Login2.Auxiliary.Helpers;
 using Login2.Auxiliary.Repository;
 using Login2.Commands;
@@ -15,7 +16,7 @@ using System.Windows.Input;
 
 namespace Login2.ViewModels.Receptionist
 {
-    public class RoomOptionViewModel :MyBaseViewModel 
+    public class RoomOptionViewModel : MyBaseViewModel
     {
         private room _room;
         private int _status;
@@ -52,6 +53,7 @@ namespace Login2.ViewModels.Receptionist
             var p = (Window)obj;
             p.Close();
         }
+
         private bool CanExecute_CloseWindow(object obj)
         {
             return true;
@@ -67,7 +69,7 @@ namespace Login2.ViewModels.Receptionist
             }
         }
 
-        
+
 
         private void Excute_RentRoom(object p)
         {
@@ -75,7 +77,99 @@ namespace Login2.ViewModels.Receptionist
             ParameterSetter.SetParameter(_room.ID);
             rentRoomWindow.ShowDialog();
             closeDialog();
+
+            if (System.Windows.Application.Current.Properties["Commit"] != null)
+            {
+                bool isCommit = (Boolean)System.Windows.Application.Current.Properties["Commit"];
+                if (isCommit)
+                {
+                    Room.Status = (int)RoomStatus.rented;
+                    roomRepository.Update(Room);
+                    roomRepository.Save();
+
+                    System.Windows.Application.Current.Properties["Commit"] = null;
+                }
+            }
+            ViewModelLocator.RenewRentRoom();
         }
+
+        private ICommand _checkOutRoomCommand;
+        public ICommand CheckOutRoomCommand
+        {
+            get
+            {
+                return _checkOutRoomCommand ??
+                    (_checkOutRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_CheckOutRoom));
+            }
+        }
+
+
+
+        private void Excute_CheckOutRoom(object p)
+        {
+            //var checkOutWindow = new CheckOut();
+            //ParameterSetter.SetParameter(_room.ID);
+            //checkOutWindow.ShowDialog();
+            Room.Status = (int)RoomStatus.available;
+            roomRepository.Update(Room);
+            roomRepository.Save();
+            closeDialog();
+        }
+
+        private ICommand _cleanRoomCommand;
+        public ICommand CleanRoomCommand
+        {
+            get
+            {
+                return _cleanRoomCommand ??
+                    (_cleanRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_CleanRoom));
+            }
+        }
+
+
+
+        private void Excute_CleanRoom(object p)
+        {
+            if (Room.Status == (int)RoomStatus.available)
+            {
+                Room.Status = (int)RoomStatus.cleaning;
+            }
+            else if (Room.Status == (int)RoomStatus.cleaning)
+            {
+                Room.Status = (int)RoomStatus.available;
+            }
+
+            roomRepository.Update(Room);
+            roomRepository.Save();
+            closeDialog();
+        }
+
+        private ICommand _fixRoomCommand;
+        public ICommand FixRoomCommand
+        {
+            get
+            {
+                return _fixRoomCommand ??
+                    (_fixRoomCommand = new RoleBasedSecurityCommand<object>(null, Excute_FixRoom));
+            }
+        }
+
+        private void Excute_FixRoom(object p)
+        {
+            if (Room.Status == (int)RoomStatus.available)
+            {
+                Room.Status = (int)RoomStatus.fixing;
+            }
+            else if (Room.Status == (int)RoomStatus.fixing)
+            {
+                Room.Status = (int)RoomStatus.available;
+            }
+            roomRepository.Update(Room);
+            roomRepository.Save();
+            closeDialog();
+        }
+
+
 
         private void closeDialog()
         {

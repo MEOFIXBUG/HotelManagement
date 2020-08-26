@@ -174,6 +174,7 @@ namespace Login2.ViewModels.Receptionist
             var roomOptionDialog = new RoomOption();
             ParameterSetter.SetParameter(room.ID);
             roomOptionDialog.ShowDialog();
+            Excute_LoadAllRoom(null);
         }
 
     }

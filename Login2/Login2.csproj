@@ -371,6 +371,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Hotel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Auxiliary\ExcelPattern\sample.xlsx" />
     <None Include="Models\Hotel.edmx.diagram">
       <DependentUpon>Hotel.edmx</DependentUpon>
     </None>

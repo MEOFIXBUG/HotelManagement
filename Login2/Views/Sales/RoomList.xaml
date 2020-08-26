@@ -46,8 +46,8 @@
                                 </Binding>
                             </syncfusion:IntegerTextBox.Value>
                         </syncfusion:IntegerTextBox>
-                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomstatus" MinValue="0" MaxValue="3" Value="{Binding Path=room_status.ID}"/>
-                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomtype" MinValue="0" MaxValue="1" Value="{Binding Path=room_type.ID}"/>
+                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="Aroomstatus" MinValue="0" MaxValue="3" Value="{Binding Path=room_status.ID}"/>
+                        <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="Aroomtype" MinValue="0" MaxValue="1" Value="{Binding Path=room_type.ID}"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="10,0,0,0">
@@ -59,7 +59,7 @@
                       DisplayMemberPath="TypeName" 
                       SelectedValuePath="ID"
                             SelectedValue="{Binding Path=SelectedType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedIndex="{Binding ElementName=roomtype,Path=Value}"
+                      SelectedIndex="{Binding ElementName=Aroomtype,Path=Value}"
   Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                         <ComboBox
                       Name="StatusCombo"
@@ -69,7 +69,7 @@
                       DisplayMemberPath="StatusName" 
                       SelectedValuePath="ID"
                       SelectedValue="{Binding Path=SelectedStatus, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                      SelectedIndex="{Binding ElementName=roomstatus,Path=Value}"
+                      SelectedIndex="{Binding ElementName=Aroomstatus,Path=Value}"
   Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                         <!--<TextBox x:Name="Status" Text="{Binding Path=room_status.StatusName}" materialDesign:HintAssist.Hint="Tình Trạng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,57,5"/>-->
                         <!--<TextBox x:Name="Role" Text="{Binding Path=Role}" materialDesign:HintAssist.Hint="Chức Vụ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5"/>-->

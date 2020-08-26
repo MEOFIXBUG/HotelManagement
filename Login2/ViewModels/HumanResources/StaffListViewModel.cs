@@ -165,6 +165,10 @@ namespace Login2.ViewModels.HumanResources
                 selectedAcc.UserName = ExtraFunction.generateUserName(p);
                 accountRepository.Update(selectedAcc);
                 accountRepository.Save();
+                var UID = session.AccountID;
+                var res = staffRepository.Get(s => s.Account_id != UID);
+                StaffList.Clear();
+                res.Distinct().ToList().ForEach(i => StaffList.Add(i));
                 System.Windows.Forms.MessageBox.Show("Successfully updated", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 

@@ -138,7 +138,7 @@ namespace Login2.ViewModels.Sales
                                 count++;
                             }
                         }
-                        string report = $"Tổng cộng: {length}\n Thành công: {count} \n Thất bại: {length - count}";
+                        string report = $" Tổng cộng: {length}\n Thành công: {count} \n Thất bại: {length - count}";
                         System.Windows.Forms.MessageBox.Show(report, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }

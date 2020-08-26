@@ -159,6 +159,8 @@ namespace Login2.ViewModels.Sales
                 var p = (room)obj;
                 p.Status = SelectedStatus;
                 p.Type = SelectedType;
+                p.room_status = null;
+                p.room_type = null;
                 roomRepository.Update(p);
                 roomRepository.Save();
                 var res = roomRepository.Get(null, null, "room_status,room_type");

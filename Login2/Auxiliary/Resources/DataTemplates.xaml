@@ -58,4 +58,10 @@
     <DataTemplate DataType="{x:Type accountant_vm:StatisticsViewModel}">
         <accountant_views:Statistics/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type receptionist_vm:CheckOutViewModel}">
+        <receptionist_views:CheckOut></receptionist_views:CheckOut>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type receptionist_vm:ChooseCustomerViewModel}">
+        <receptionist_views:ChooseCustomer></receptionist_views:ChooseCustomer>
+    </DataTemplate>
 </ResourceDictionary>

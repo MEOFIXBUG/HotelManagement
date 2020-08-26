@@ -22,9 +22,9 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10,0,0,0" x:Name="RoomInfo" DataContext="{Binding Path=Room,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <TextBox x:Name="RoomName" Text="{Binding Path=RoomName}" materialDesign:HintAssist.Hint="Tên Phòng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="Price" Text="{Binding Path=Price}" materialDesign:HintAssist.Hint="Giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
-                        <TextBox x:Name="MaxPeople" Text="{Binding Path=MaxPeople}" materialDesign:HintAssist.Hint="Số Người" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="RoomName" Text="{Binding Path=RoomName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Tên Phòng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <syncfusion:IntegerTextBox x:Name="Price" MaxValue="999999999" MinValue="0"  Value="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Giá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
+                        <TextBox x:Name="MaxPeople" Text="{Binding Path=MaxPeople,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" materialDesign:HintAssist.Hint="Số Người" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,5,60,5"/>
                         <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomstatus" MinValue="0" MaxValue="3" Value="{Binding Path=room_status.ID}"/>
                         <syncfusion:IntegerTextBox  Visibility="Hidden" x:Name="roomtype" MinValue="0" MaxValue="1" Value="{Binding Path=room_type.ID}"/>
                         <!--<Button Content="Register" Margin="0 20"/>-->
@@ -57,9 +57,13 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Content="Thêm" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button  Content="Thêm Bằng File Excel" Margin="20,0,120,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
+                            Command="{Binding Path=AddRoomExcelCommand}"/>
+                        <Button  Content="Thêm" Margin="0,0,60,0"  HorizontalAlignment="Right" VerticalAlignment="Center" 
                             Command="{Binding Path=AddRoomCommand}"
                             CommandParameter="{Binding ElementName=RoomInfo,Path=DataContext}"/>
+                    </StackPanel>
                 </Grid>
 
             </Grid>

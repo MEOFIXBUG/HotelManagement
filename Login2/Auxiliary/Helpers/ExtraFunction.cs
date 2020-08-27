@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Login2.Auxiliary.Helpers
 {
@@ -221,6 +222,13 @@ namespace Login2.Auxiliary.Helpers
                     str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
             }
             return str;
+        }
+        public static SolidColorBrush getColorFrom(string hexCode)
+        {
+            byte R = Convert.ToByte(hexCode.Substring(1, 2), 16);
+            byte G = Convert.ToByte(hexCode.Substring(3, 2), 16);
+            byte B = Convert.ToByte(hexCode.Substring(5, 2), 16);
+            return new SolidColorBrush(Color.FromRgb(R, G, B));
         }
     }
 }

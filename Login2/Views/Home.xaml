@@ -21,6 +21,15 @@
                     <TextBlock Text="Hotel Management" VerticalAlignment="Center" FontSize="24" FontFamily="Champagne &amp; Limousines" Margin="13,10,13,11"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
+                    <CheckBox Style="{StaticResource MaterialDesignSwitchToggleButton}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ClickChBoxCommand}">
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+
                     <Button Command="{Binding Path=OpenProfileCommand}" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="DarkGreen" Margin="0 0 10 0">
                         <materialDesign:PackIcon Kind="Settings"/>
                     </Button>
@@ -39,7 +48,7 @@
             <ContentControl Content="{Binding SelectedViewModel,UpdateSourceTrigger=PropertyChanged}"></ContentControl>
         </Grid>
 
-        <Grid Width="250" HorizontalAlignment="Left" Background="#FF2281D1">
+        <Grid Width="250" HorizontalAlignment="Left" Background="{Binding ModeTheme,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
                 <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="Orange" Width="10" HorizontalAlignment="Left" Height="56" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
@@ -74,6 +83,6 @@
 
             </ListView>
         </Grid>
-
+       
     </Grid>
 </Window>

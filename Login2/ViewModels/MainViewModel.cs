@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Login2.ViewModels
 {
@@ -31,14 +32,28 @@ namespace Login2.ViewModels
     /// </summary>
     public class MainViewModel : MyBaseViewModel
     {
+        private SolidColorBrush _modeTheme;
+        public SolidColorBrush ModeTheme
+        {
+            get { return _modeTheme; }
+            set { _modeTheme = value; RaisePropertyChanged(); }
+        }
 
+        private List<SolidColorBrush> MyColors = new List<SolidColorBrush>
+        {
+            ExtraFunction.getColorFrom("#2281D1"),
+            new SolidColorBrush(Colors.Black) 
+        };
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         Session session;
+        int Ischeck = 0;
         public MainViewModel()
         {
-            session = Session.GetCurrentSingleton();
+
+            ModeTheme = MyColors[0];
+             session = Session.GetCurrentSingleton();
             Roles role = session.Role;
             _featuresCollection = ExtraFunction.featureOfRole(role);
             _selectedViewModel = new MyBaseViewModel();
@@ -92,7 +107,7 @@ namespace Login2.ViewModels
             }
         }
 
-        private MyBaseViewModel _selectedViewModel ;
+        private MyBaseViewModel _selectedViewModel;
 
         public MyBaseViewModel SelectedViewModel
         {
@@ -122,7 +137,7 @@ namespace Login2.ViewModels
             profilePage.ShowDialog();
         }
         #endregion
-       
+
         private ICommand _switchViewCommand;
         public ICommand SwitchViewCommand
         {
@@ -186,6 +201,30 @@ namespace Login2.ViewModels
                 HomePage.Close();
             }
             Login.Show();
+        }
+        private ICommand _clickChBoxCommand;
+        public ICommand ClickChBoxCommand
+        {
+            get
+            {
+                return _clickChBoxCommand ??
+                     (_clickChBoxCommand = new RoleBasedSecurityCommand<object>(CanExecute_ClickChBox, Execute_ClickChBox));
+            }
+        }
+        private bool CanExecute_ClickChBox(object o)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// This happens when you click the button.
+        /// </summary>
+        /// <param name="arg"></param>
+        //[AuthorizationAttribute(AuthorizationType.Allow, "HumanResources")]
+        private void Execute_ClickChBox(object o)
+        {
+            ModeTheme = MyColors[1-Ischeck];
+            Ischeck = 1-Ischeck;
         }
     }
 }

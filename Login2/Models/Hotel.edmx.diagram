@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="hotelModel.room_status" Width="1.5" PointX="6" PointY="9.25" />
         <EntityTypeShape EntityType="hotelModel.room_type" Width="1.5" PointX="6" PointY="1" />
         <EntityTypeShape EntityType="hotelModel.room" Width="1.5" PointX="8.25" PointY="4.5" />
-        <EntityTypeShape EntityType="hotelModel.service_details" Width="1.5" PointX="10.5" PointY="4.75" />
+        <EntityTypeShape EntityType="hotelModel.service_details" Width="1.5" PointX="10.5" PointY="4.625" />
         <EntityTypeShape EntityType="hotelModel.service" Width="1.5" PointX="8.25" PointY="0.75" />
         <EntityTypeShape EntityType="hotelModel.staff" Width="1.5" PointX="13.25" PointY="8.75" />
         <AssociationConnector Association="hotelModel.account_ibfk_1" />

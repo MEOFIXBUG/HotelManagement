@@ -18,7 +18,8 @@ namespace Login2.Models
         public int ServiceDetailsID { get; set; }
         public int ServiceID { get; set; }
         public int Price { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public System.DateTime Date { get; set; }
+        public int Number { get; set; }
     
         public virtual booking_details booking_details { get; set; }
         public virtual service service { get; set; }

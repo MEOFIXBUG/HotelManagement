@@ -31,7 +31,7 @@
           <Property Name="CreatedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ModifiedAt" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DeletedAt" Type="timestamp" Precision="0" />
-          <Property Name="hasForeigner" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="hasForeigner" Type="bit" Nullable="false" />
           <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="booking_status">
@@ -90,7 +90,6 @@
         <EntityType Name="room_state">
           <Key>
             <PropertyRef Name="RoomID" />
-            <PropertyRef Name="BookingID" />
           </Key>
           <Property Name="RoomID" Type="int" Nullable="false" />
           <Property Name="BookingID" Type="int" Nullable="false" />
@@ -129,7 +128,8 @@
           <Property Name="ServiceDetailsID" Type="int" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="Date" Type="timestamp" Precision="0" />
+          <Property Name="Date" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="services">
           <Key>
@@ -253,7 +253,7 @@
         </Association>
         <Association Name="FK_STATE_ROOM">
           <End Role="rooms" Type="Self.rooms" Multiplicity="1" />
-          <End Role="room_state" Type="Self.room_state" Multiplicity="*" />
+          <End Role="room_state" Type="Self.room_state" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="rooms">
               <PropertyRef Name="ID" />
@@ -454,7 +454,7 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeletedAt" Type="DateTime" />
-          <Property Name="hasForeigner" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="hasForeigner" Type="Boolean" Nullable="false" />
           <Property Name="Status" Type="Int32" />
           <NavigationProperty Name="booking" Relationship="hotelModel.booking_details_ibfk_1" FromRole="booking_details" ToRole="booking" />
           <NavigationProperty Name="room" Relationship="hotelModel.booking_details_ibfk_2" FromRole="booking_details" ToRole="room" />
@@ -549,7 +549,7 @@
           <NavigationProperty Name="booking_details" Relationship="hotelModel.booking_details_ibfk_2" FromRole="room" ToRole="booking_details" />
           <NavigationProperty Name="room_status" Relationship="hotelModel.rooms_ibfk_2" FromRole="room" ToRole="room_status" />
           <NavigationProperty Name="room_type" Relationship="hotelModel.rooms_ibfk_1" FromRole="room" ToRole="room_type" />
-          <NavigationProperty Name="bookings" Relationship="hotelModel.room_state" FromRole="room" ToRole="booking" />
+          <NavigationProperty Name="booking" Relationship="hotelModel.room_state" FromRole="room" ToRole="booking" />
         </EntityType>
         <EntityType Name="service_details">
           <Key>
@@ -560,7 +560,8 @@
           <Property Name="ServiceDetailsID" Type="Int32" Nullable="false" />
           <Property Name="ServiceID" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
           <NavigationProperty Name="booking_details" Relationship="hotelModel.FK_SD_BOOKINGDETAIL" FromRole="service_details" ToRole="booking_details" />
           <NavigationProperty Name="service" Relationship="hotelModel.FK_SD_SERVICE" FromRole="service_details" ToRole="service" />
         </EntityType>
@@ -711,7 +712,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="room_state">
-          <End Type="hotelModel.booking" Role="booking" Multiplicity="*" />
+          <End Type="hotelModel.booking" Role="booking" Multiplicity="0..1" />
           <End Type="hotelModel.room" Role="room" Multiplicity="*" />
         </Association>
         </Schema>
@@ -840,6 +841,7 @@
           <EntitySetMapping Name="service_details">
             <EntityTypeMapping TypeName="hotelModel.service_details">
               <MappingFragment StoreEntitySet="service_details">
+                <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
@@ -881,6 +883,7 @@
             <EndProperty Name="booking">
               <ScalarProperty Name="ID" ColumnName="BookingID" />
             </EndProperty>
+            <Condition ColumnName="BookingID" IsNull="false" />
           </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>

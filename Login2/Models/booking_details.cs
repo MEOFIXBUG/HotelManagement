@@ -30,7 +30,7 @@ namespace Login2.Models
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime ModifiedAt { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
-        public string hasForeigner { get; set; }
+        public bool hasForeigner { get; set; }
         public Nullable<int> Status { get; set; }
     
         public virtual booking booking { get; set; }

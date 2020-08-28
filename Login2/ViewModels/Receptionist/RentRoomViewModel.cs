@@ -39,11 +39,16 @@ namespace Login2.ViewModels.Receptionist
 
         //private Dictionary<int,>
         private IRepository<room> roomRepository = null;
-
+        private IRepository<booking> bookingRepository = null;
+        private IRepository<booking_details> bookingDetailRepository = null;
+        private IRepository<service_details> serviceDetailRepository = null;
 
         public RentRoomViewModel()
         {
             roomRepository = new BaseRepository<room>();
+            bookingRepository = new BaseRepository<booking>();
+            bookingDetailRepository = new BaseRepository<booking_details>();
+            serviceDetailRepository = new BaseRepository<service_details>();
 
             Messenger.Default.Register<Parameter>(this, res => Room = GetRoom(((int)res.param)));
             ListService = getFullService();
@@ -85,7 +90,8 @@ namespace Login2.ViewModels.Receptionist
         private room GetRoom(int roomID)
         {
             room r;
-            using (var db = new hotelEntities()) {
+            using (var db = new hotelEntities())
+            {
                 r = db.rooms.Include("room_status").Include("room_type").Where<room>(x => x.ID == roomID).FirstOrDefault();
             }
             
@@ -174,12 +180,34 @@ namespace Login2.ViewModels.Receptionist
             }
         }
 
-
+       
         private void Excute_Commit(object p)
         {
             //Room.Status = 1;
             //roomRepository.Update(Room);
             //roomRepository.Save();
+
+            //Luu booking
+            booking newbooking = new booking();
+
+            //newbooking.customer = Customer;
+            newbooking.Customer_id = Customer.ID;
+            newbooking.IsPaid = false;
+            newbooking.Total = TotalCost;
+            newbooking.Discount = Discount;
+
+            //insert booking_details
+            booking_details details = new booking_details();
+
+            details.Status = 2;
+            details.Room_id = Room.ID;
+            details.NumberOfPeople = 1;
+            details.Amount = Room.Price;
+            details.DateOfRentStart = datePlusTime(StartDate, StartTime);
+            details.DateOfRentEnd = datePlusTime(EndDate, EndTime);
+            details.hasForeigner = Customer.isForeigner;
+
+            bookingRepository.Insert(newbooking);
 
             System.Windows.Application.Current.Properties["Commit"] = true;
             closeDialog();

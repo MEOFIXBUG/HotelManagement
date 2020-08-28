@@ -44,4 +44,3 @@ namespace Login2.Models
         public virtual account account { get; set; }
     }
 }
-

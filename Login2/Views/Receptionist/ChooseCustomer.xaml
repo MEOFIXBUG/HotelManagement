@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding ChooseCustomer, Source={StaticResource Locator}}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Chọn khách hàng" Height="450" Width="880.368">
+        Title="Chọn khách hàng" Height="450" Width="976.81">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>

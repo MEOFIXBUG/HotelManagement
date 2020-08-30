@@ -35,8 +35,8 @@ namespace Login2.Models
         public virtual DbSet<room_status> room_status { get; set; }
         public virtual DbSet<room_type> room_type { get; set; }
         public virtual DbSet<room> rooms { get; set; }
-        public virtual DbSet<service_details> service_details { get; set; }
         public virtual DbSet<service> services { get; set; }
         public virtual DbSet<staff> staffs { get; set; }
+        public virtual DbSet<service_details> service_details { get; set; }
     }
 }

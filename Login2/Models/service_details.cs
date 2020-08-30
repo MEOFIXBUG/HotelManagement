@@ -14,8 +14,8 @@ namespace Login2.Models
     
     public partial class service_details
     {
-        public int BookDetailID { get; set; }
         public int ServiceDetailsID { get; set; }
+        public int BookDetailID { get; set; }
         public int ServiceID { get; set; }
         public int Price { get; set; }
         public System.DateTime Date { get; set; }

@@ -121,11 +121,11 @@
         </EntityType>
         <EntityType Name="service_details">
           <Key>
-            <PropertyRef Name="BookDetailID" />
             <PropertyRef Name="ServiceDetailsID" />
+            <PropertyRef Name="BookDetailID" />
           </Key>
+          <Property Name="ServiceDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookDetailID" Type="int" Nullable="false" />
-          <Property Name="ServiceDetailsID" Type="int" Nullable="false" />
           <Property Name="ServiceID" Type="int" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Date" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
@@ -215,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SD_BOOKINGDETAIL">
+        <Association Name="FK_DETAIL_BOOKING_DETAIL">
           <End Role="booking_details" Type="Self.booking_details" Multiplicity="1" />
           <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,7 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SD_SERVICE">
+        <Association Name="FK_DETAIL_SERVICE">
           <End Role="services" Type="Self.services" Multiplicity="1" />
           <End Role="service_details" Type="Self.service_details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -334,11 +334,11 @@
             <End Role="booking_status" EntitySet="booking_status" />
             <End Role="booking_details" EntitySet="booking_details" />
           </AssociationSet>
-          <AssociationSet Name="FK_SD_BOOKINGDETAIL" Association="Self.FK_SD_BOOKINGDETAIL">
+          <AssociationSet Name="FK_DETAIL_BOOKING_DETAIL" Association="Self.FK_DETAIL_BOOKING_DETAIL">
             <End Role="booking_details" EntitySet="booking_details" />
             <End Role="service_details" EntitySet="service_details" />
           </AssociationSet>
-          <AssociationSet Name="FK_SD_SERVICE" Association="Self.FK_SD_SERVICE">
+          <AssociationSet Name="FK_DETAIL_SERVICE" Association="Self.FK_DETAIL_SERVICE">
             <End Role="services" EntitySet="services" />
             <End Role="service_details" EntitySet="service_details" />
           </AssociationSet>
@@ -378,7 +378,6 @@
           <EntitySet Name="room_status" EntityType="hotelModel.room_status" />
           <EntitySet Name="room_type" EntityType="hotelModel.room_type" />
           <EntitySet Name="rooms" EntityType="hotelModel.room" />
-          <EntitySet Name="service_details" EntityType="hotelModel.service_details" />
           <EntitySet Name="services" EntityType="hotelModel.service" />
           <EntitySet Name="staffs" EntityType="hotelModel.staff" />
           <AssociationSet Name="account_ibfk_1" Association="hotelModel.account_ibfk_1">
@@ -401,10 +400,6 @@
             <End Role="booking_status" EntitySet="booking_status" />
             <End Role="booking_details" EntitySet="booking_details" />
           </AssociationSet>
-          <AssociationSet Name="FK_SD_BOOKINGDETAIL" Association="hotelModel.FK_SD_BOOKINGDETAIL">
-            <End Role="booking_details" EntitySet="booking_details" />
-            <End Role="service_details" EntitySet="service_details" />
-          </AssociationSet>
           <AssociationSet Name="bookings_ibfk_1" Association="hotelModel.bookings_ibfk_1">
             <End Role="customer" EntitySet="customers" />
             <End Role="booking" EntitySet="bookings" />
@@ -417,13 +412,18 @@
             <End Role="room_type" EntitySet="room_type" />
             <End Role="room" EntitySet="rooms" />
           </AssociationSet>
-          <AssociationSet Name="FK_SD_SERVICE" Association="hotelModel.FK_SD_SERVICE">
-            <End Role="service" EntitySet="services" />
-            <End Role="service_details" EntitySet="service_details" />
-          </AssociationSet>
           <AssociationSet Name="room_state" Association="hotelModel.room_state">
             <End Role="booking" EntitySet="bookings" />
             <End Role="room" EntitySet="rooms" />
+          </AssociationSet>
+          <EntitySet Name="service_details" EntityType="hotelModel.service_details" />
+          <AssociationSet Name="FK_DETAIL_BOOKING_DETAIL" Association="hotelModel.FK_DETAIL_BOOKING_DETAIL">
+            <End Role="booking_details" EntitySet="booking_details" />
+            <End Role="service_details" EntitySet="service_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETAIL_SERVICE" Association="hotelModel.FK_DETAIL_SERVICE">
+            <End Role="service" EntitySet="services" />
+            <End Role="service_details" EntitySet="service_details" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="account">
@@ -459,7 +459,7 @@
           <NavigationProperty Name="booking" Relationship="hotelModel.booking_details_ibfk_1" FromRole="booking_details" ToRole="booking" />
           <NavigationProperty Name="room" Relationship="hotelModel.booking_details_ibfk_2" FromRole="booking_details" ToRole="room" />
           <NavigationProperty Name="booking_status" Relationship="hotelModel.fk_booking_status" FromRole="booking_details" ToRole="booking_status" />
-          <NavigationProperty Name="service_details" Relationship="hotelModel.FK_SD_BOOKINGDETAIL" FromRole="booking_details" ToRole="service_details" />
+          <NavigationProperty Name="service_details" Relationship="hotelModel.FK_DETAIL_BOOKING_DETAIL" FromRole="booking_details" ToRole="service_details" />
         </EntityType>
         <EntityType Name="booking_status">
           <Key>
@@ -482,7 +482,6 @@
           <Property Name="PaidTime" Type="DateTime" />
           <NavigationProperty Name="booking_details" Relationship="hotelModel.booking_details_ibfk_1" FromRole="booking" ToRole="booking_details" />
           <NavigationProperty Name="customer" Relationship="hotelModel.bookings_ibfk_1" FromRole="booking" ToRole="customer" />
-          <NavigationProperty Name="rooms" Relationship="hotelModel.room_state" FromRole="booking" ToRole="room" />
         </EntityType>
         <EntityType Name="customer_type">
           <Key>
@@ -549,21 +548,6 @@
           <NavigationProperty Name="booking_details" Relationship="hotelModel.booking_details_ibfk_2" FromRole="room" ToRole="booking_details" />
           <NavigationProperty Name="room_status" Relationship="hotelModel.rooms_ibfk_2" FromRole="room" ToRole="room_status" />
           <NavigationProperty Name="room_type" Relationship="hotelModel.rooms_ibfk_1" FromRole="room" ToRole="room_type" />
-          <NavigationProperty Name="booking" Relationship="hotelModel.room_state" FromRole="room" ToRole="booking" />
-        </EntityType>
-        <EntityType Name="service_details">
-          <Key>
-            <PropertyRef Name="BookDetailID" />
-            <PropertyRef Name="ServiceDetailsID" />
-          </Key>
-          <Property Name="BookDetailID" Type="Int32" Nullable="false" />
-          <Property Name="ServiceDetailsID" Type="Int32" Nullable="false" />
-          <Property Name="ServiceID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="booking_details" Relationship="hotelModel.FK_SD_BOOKINGDETAIL" FromRole="service_details" ToRole="booking_details" />
-          <NavigationProperty Name="service" Relationship="hotelModel.FK_SD_SERVICE" FromRole="service_details" ToRole="service" />
         </EntityType>
         <EntityType Name="service">
           <Key>
@@ -575,7 +559,7 @@
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DeletedAt" Type="DateTime" />
           <Property Name="ModifiedAt" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="service_details" Relationship="hotelModel.FK_SD_SERVICE" FromRole="service" ToRole="service_details" />
+          <NavigationProperty Name="service_details" Relationship="hotelModel.FK_DETAIL_SERVICE" FromRole="service" ToRole="service_details" />
         </EntityType>
         <EntityType Name="staff">
           <Key>
@@ -651,18 +635,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SD_BOOKINGDETAIL">
-          <End Type="hotelModel.booking_details" Role="booking_details" Multiplicity="1" />
-          <End Type="hotelModel.service_details" Role="service_details" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="booking_details">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="service_details">
-              <PropertyRef Name="BookDetailID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="bookings_ibfk_1">
           <End Type="hotelModel.customer" Role="customer" Multiplicity="1" />
           <End Type="hotelModel.booking" Role="booking" Multiplicity="*" />
@@ -699,7 +671,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SD_SERVICE">
+        <Association Name="room_state">
+          <End Type="hotelModel.booking" Role="booking" Multiplicity="0..1" />
+          <End Type="hotelModel.room" Role="room" Multiplicity="*" />
+        </Association>
+        <EntityType Name="service_details">
+          <Key>
+            <PropertyRef Name="ServiceDetailsID" />
+            <PropertyRef Name="BookDetailID" />
+          </Key>
+          <Property Name="ServiceDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookDetailID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="booking_details" Relationship="hotelModel.FK_DETAIL_BOOKING_DETAIL" FromRole="service_details" ToRole="booking_details" />
+          <NavigationProperty Name="service" Relationship="hotelModel.FK_DETAIL_SERVICE" FromRole="service_details" ToRole="service" />
+        </EntityType>
+        <Association Name="FK_DETAIL_BOOKING_DETAIL">
+          <End Type="hotelModel.booking_details" Role="booking_details" Multiplicity="1" />
+          <End Type="hotelModel.service_details" Role="service_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="booking_details">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="service_details">
+              <PropertyRef Name="BookDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETAIL_SERVICE">
           <End Type="hotelModel.service" Role="service" Multiplicity="1" />
           <End Type="hotelModel.service_details" Role="service_details" Multiplicity="*" />
           <ReferentialConstraint>
@@ -710,10 +712,6 @@
               <PropertyRef Name="ServiceID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="room_state">
-          <End Type="hotelModel.booking" Role="booking" Multiplicity="0..1" />
-          <End Type="hotelModel.room" Role="room" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -838,18 +836,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="service_details">
-            <EntityTypeMapping TypeName="hotelModel.service_details">
-              <MappingFragment StoreEntitySet="service_details">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
-                <ScalarProperty Name="ServiceDetailsID" ColumnName="ServiceDetailsID" />
-                <ScalarProperty Name="BookDetailID" ColumnName="BookDetailID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="services">
             <EntityTypeMapping TypeName="hotelModel.service">
               <MappingFragment StoreEntitySet="services">
@@ -885,6 +871,18 @@
             </EndProperty>
             <Condition ColumnName="BookingID" IsNull="false" />
           </AssociationSetMapping>
+          <EntitySetMapping Name="service_details">
+            <EntityTypeMapping TypeName="hotelModel.service_details">
+              <MappingFragment StoreEntitySet="service_details">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="BookDetailID" ColumnName="BookDetailID" />
+                <ScalarProperty Name="ServiceDetailsID" ColumnName="ServiceDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

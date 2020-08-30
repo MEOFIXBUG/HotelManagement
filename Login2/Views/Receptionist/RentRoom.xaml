@@ -13,7 +13,7 @@
         Title="Thuê phòng" Height="660.7" Width="846.4">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="320"></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -47,8 +47,9 @@
                     <ListView x:Name="ServiceAddedListView" ItemsSource="{Binding ListServiceAdded,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Tên dịch vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
+                                <GridViewColumn Header="Dịch vụ" DisplayMemberBinding="{Binding service.ServiceName}"></GridViewColumn>
                                 <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="SL" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
                                 <GridViewColumn Header="Xóa">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -137,7 +138,7 @@
                             <DatePicker 
                             Width="130"
                             Height="30"
-                                SelectedDate="{Binding StartDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                SelectedDate="{Binding StartDate, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                           materialDesign:HintAssist.Hint="Ngày vào"
                           Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                             <materialDesign:TimePicker Margin="20,2,20,2"

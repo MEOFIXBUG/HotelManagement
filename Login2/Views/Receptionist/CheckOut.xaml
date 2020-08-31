@@ -5,8 +5,212 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login2.Views.Receptionist"
         mc:Ignorable="d"
-        Title="CheckOut" Height="450" Width="800">
-    <Grid>
+        WindowStartupLocation="CenterScreen"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        DataContext="{Binding CheckOut, Source={StaticResource Locator}}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         
+        Title="Trả phòng" Height="662.291" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="264" ></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Dịch vụ hiện có">
+                <Grid>
+                    <ListView x:Name="ServiceListView" ItemsSource="{Binding ListService,UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên dịch vụ" DisplayMemberBinding="{Binding ServiceName}"></GridViewColumn>
+                                <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="Thêm">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button Content="Thêm" Command="{Binding Path=DataContext.AddServiceCommand,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Dịch vụ đã thêm" Grid.Row="1" >
+                <Grid>
+                    <ListView x:Name="ServiceAddedListView" ItemsSource="{Binding ListServiceAdded,UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Dịch vụ" DisplayMemberBinding="{Binding service.ServiceName}"></GridViewColumn>
+                                <GridViewColumn Header="Giá Bán" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Header="SL" DisplayMemberBinding="{Binding Number}"></GridViewColumn>
+                                <GridViewColumn Header="Xóa">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Button Content="Xóa" Command="{Binding Path=DataContext.RemoveServiceCommand,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <GroupBox Header="Thông tin phòng" Height="100">
+                    <Grid>
+                        <TextBox Width="150"  HorizontalAlignment="Left"
+                      materialDesign:HintAssist.Hint="Tên Phòng"
+                      materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                      materialDesign:HintAssist.FloatingScale="0.50"
+                      Text="{Binding Room.RoomName}"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      FontSize="20" />
+                        <TextBox Width="200"  HorizontalAlignment="Right"
+                      materialDesign:HintAssist.Hint="Loại phòng"
+                      materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+                      materialDesign:HintAssist.FloatingScale="0.50"
+                      Text="{Binding Room.room_type.TypeName}"
+                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                      FontSize="20" />
+                    </Grid>
+
+                </GroupBox>
+                <GroupBox Header="Thông tin khách hàng" Height="140">
+                    <Grid DataContext="{Binding Customer}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <TextBox IsReadOnly="True" Margin="1" Height="40" Text="{Binding FullName}" materialDesign:HintAssist.Hint="Họ tên khách hàng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1" >
+                            <TextBox IsReadOnly="True" Text="{Binding IdentityCard}" Margin="1" Height="40" materialDesign:HintAssist.Hint="CMND"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="2">
+                            <TextBox IsReadOnly="True" Text="{Binding Phone}" Margin="1" Height="40" materialDesign:HintAssist.Hint="Số điện thoại"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0" >
+                            <DatePicker Margin="1"
+                            SelectedDate="{Binding DOB}"
+                            VerticalAlignment="Bottom"
+                            DisplayDateStart="1/1/1900" DisplayDateEnd="12/31/2020"
+                            materialDesign:HintAssist.Hint="Ngày sinh"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+
+                            <CheckBox IsChecked="{Binding isForeigner}"  Content="Là khách nước ngoài" Grid.ColumnSpan="2"></CheckBox>
+                        </Grid>
+                        <Grid Margin="5" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                    </Grid>
+
+                </GroupBox>
+
+                <GroupBox Header="Thời gian">
+                    <StackPanel >
+                        <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
+                            <DatePicker 
+                            Width="130"
+                            Height="30"
+                            
+                            SelectedDate="{Binding StartDate}"
+                            materialDesign:HintAssist.Hint="Ngày vào"
+                          Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <materialDesign:TimePicker Margin="20,2,20,2"
+                             SelectedTime="{Binding StartTime}"
+                             Is24Hours="True"
+                             Width="100" Height="30"
+                             materialDesign:HintAssist.Hint="Giờ vào"/>
+                        </StackPanel>
+                        <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
+                            <DatePicker 
+                                SelectedDate="{Binding EndDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        Width="130"
+                        Height="30"
+                      materialDesign:HintAssist.Hint="Ngày ra"
+                      Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <materialDesign:TimePicker Margin="20,2,20,2"
+                                                       SelectedTime="{Binding EndTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      Is24Hours="True"
+                      Width="100" Height="30"
+                      materialDesign:HintAssist.Hint="Giờ ra"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                </GroupBox>
+                <GroupBox Header="Thông tin thuê phòng" Height="200">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0" >
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding RoomCost}" FontWeight="DemiBold" IsReadOnly="True" materialDesign:HintAssist.Hint="Tiền phòng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding Room.Price}" IsReadOnly="True" materialDesign:HintAssist.Hint="Giá Phòng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding ServiceCost}" FontWeight="DemiBold" IsReadOnly="True" materialDesign:HintAssist.Hint="Tiền dịch Vụ"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <syncfusion:IntegerTextBox MinValue="1" MaxValue="{Binding Room.MaxPeople}" IsReadOnly="True"  Margin="1" Height="40" Value="{Binding BookingDetails.NumberOfPeople}" FontWeight="DemiBold"  materialDesign:HintAssist.Hint="Số người ở"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0">
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40"  MinValue="0"  Value="{Binding BookingInfo.Discount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" InputScope="Number"  materialDesign:HintAssist.Hint="Giảm giá"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Bottom" />
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <syncfusion:IntegerTextBox  Margin="1"  FontSize="18" FontWeight="DemiBold" Value="{Binding TotalCost}" IsReadOnly="True" materialDesign:HintAssist.Hint="Tổng tiền"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+
+                <StackPanel Height="40" Margin="10,10,20,10" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Thanh toán" Command="{Binding CommitCommand}" CommandParameter="{Binding}" Margin="0,4,30,4" Width="111"></Button>
+                    <Button Content="Thoát" Command="{Binding QuitCommand}" Margin="0,4" Width="107" ></Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

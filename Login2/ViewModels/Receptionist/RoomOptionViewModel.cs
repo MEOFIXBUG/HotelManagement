@@ -76,7 +76,8 @@ namespace Login2.ViewModels.Receptionist
             var rentRoomWindow = new RentRoom();
             ParameterSetter.SetParameter(_room.ID);
             rentRoomWindow.ShowDialog();
-            closeDialog();
+            
+            
 
             if (System.Windows.Application.Current.Properties["Commit"] != null)
             {
@@ -85,12 +86,12 @@ namespace Login2.ViewModels.Receptionist
                 {
                     Room.Status = (int)RoomStatus.rented;
                     roomRepository.Update(Room);
-                    roomRepository.Save();
-
-                    System.Windows.Application.Current.Properties["Commit"] = null;
                 }
+                System.Windows.Application.Current.Properties["Commit"] = null;
             }
+            
             ViewModelLocator.RenewRentRoom();
+            closeDialog();
         }
 
         private ICommand _checkOutRoomCommand;
@@ -107,12 +108,24 @@ namespace Login2.ViewModels.Receptionist
 
         private void Excute_CheckOutRoom(object p)
         {
-            //var checkOutWindow = new CheckOut();
-            //ParameterSetter.SetParameter(_room.ID);
-            //checkOutWindow.ShowDialog();
-            Room.Status = (int)RoomStatus.available;
-            roomRepository.Update(Room);
-            roomRepository.Save();
+            var checkOutWindow = new CheckOut();
+            ParameterSetter.SetParameter(_room.ID);
+            checkOutWindow.ShowDialog();
+            if (System.Windows.Application.Current.Properties["Commit"] != null)
+            {
+                bool isCommit = (Boolean)System.Windows.Application.Current.Properties["Commit"];
+                if (isCommit)
+                {
+                    Room.Status = (int)RoomStatus.available;
+                    roomRepository.Update(Room);
+                }
+                System.Windows.Application.Current.Properties["Commit"] = null;
+            }
+
+            //Room.Status = (int)RoomStatus.available;
+            //roomRepository.Update(Room);
+
+            ViewModelLocator.RenewCheckOut();
             closeDialog();
         }
 

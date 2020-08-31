@@ -19,6 +19,7 @@
         <SolidColorBrush x:Key="fixingColor" Color="#FFEDD53E"/>
     </Window.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>

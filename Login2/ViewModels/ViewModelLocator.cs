@@ -53,6 +53,7 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<BookingRoomViewModel>();
             SimpleIoc.Default.Register<RoomOptionViewModel>();
             SimpleIoc.Default.Register<ChooseCustomerViewModel>();
+            SimpleIoc.Default.Register<CheckOutViewModel>();
 
         }
 
@@ -136,6 +137,14 @@ namespace Login2.ViewModels
             }
         }
 
+        public CheckOutViewModel CheckOut
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CheckOutViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
@@ -150,6 +159,7 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<BookingRoomViewModel>();
 
         }
+
         public static void UnRegisterMainViewModel()
         {
             SimpleIoc.Default.Unregister<MainViewModel>();
@@ -160,6 +170,16 @@ namespace Login2.ViewModels
         {
             SimpleIoc.Default.Unregister<RentRoomViewModel>();
             SimpleIoc.Default.Register<RentRoomViewModel>();
+        }
+        public static void RenewRoomOption()
+        {
+            SimpleIoc.Default.Unregister<RoomOptionViewModel>();
+            SimpleIoc.Default.Register<RoomOptionViewModel>();
+        }
+        public static void RenewCheckOut()
+        {
+            SimpleIoc.Default.Unregister<CheckOutViewModel>();
+            SimpleIoc.Default.Register<CheckOutViewModel>();
         }
     }
 }

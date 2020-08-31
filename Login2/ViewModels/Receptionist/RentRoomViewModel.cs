@@ -24,7 +24,7 @@ namespace Login2.ViewModels.Receptionist
         private BindingList<service_details> _listServiceAdded;
         private booking _bookingInfo;
         private customer _customer;
-
+        private int _numOfPeople;
         private int _serviceCost;
         private int _roomCost;
         private int _discount;
@@ -56,6 +56,8 @@ namespace Login2.ViewModels.Receptionist
             BookingInfo = new booking();
             ListServiceAdded = new BindingList<service_details>();
 
+            NumOfPeole = 1;
+
             RoomCost = 0;
             ServiceCost = 0;
             Discount = 0;
@@ -79,6 +81,7 @@ namespace Login2.ViewModels.Receptionist
         public BindingList<service_details> ListServiceAdded { get => _listServiceAdded; set { _listServiceAdded = value; RaisePropertyChanged(); } }
         public booking BookingInfo { get => _bookingInfo; set { _bookingInfo = value; RaisePropertyChanged(); } }
         public customer Customer { get => _customer; set { _customer = value; RaisePropertyChanged(); } }
+        public int NumOfPeole { get => _numOfPeople; set { _numOfPeople = value; RaisePropertyChanged(); } }
         public int ServiceCost { get => _serviceCost; set { _serviceCost = value; RaisePropertyChanged(); TotalCost = calcTotal(); } }
         public int RoomCost { get => _roomCost; set { _roomCost = value; RaisePropertyChanged(); TotalCost = calcTotal(); } }
         public int Discount { get => _discount; set { _discount = value;RaisePropertyChanged(); TotalCost = calcTotal(); } }
@@ -206,7 +209,7 @@ namespace Login2.ViewModels.Receptionist
             details.Status = 2;
             
             details.Room_id = Room.ID;
-            details.NumberOfPeople = 1;
+            details.NumberOfPeople = NumOfPeole;
             details.Amount = Room.Price;
             details.DateOfRentStart = datePlusTime(StartDate, StartTime);
             details.DateOfRentEnd = datePlusTime(EndDate, EndTime);
@@ -229,7 +232,22 @@ namespace Login2.ViewModels.Receptionist
             closeDialog();
         }
 
+        private ICommand _QuitCommand;
+        public ICommand QuitCommand
+        {
+            get
+            {
+                return _QuitCommand ??
+                    (_QuitCommand = new RoleBasedSecurityCommand<object>(null, Excute_Quit));
+            }
+        }
 
+
+
+        private void Excute_Quit(object p)
+        {
+            closeDialog();
+        }
 
         private int calcRoomCost(DateTime start,DateTime end)
         {
@@ -271,6 +289,7 @@ namespace Login2.ViewModels.Receptionist
             RentRoom dialog = App.Current.Windows.OfType<RentRoom>().FirstOrDefault();
             if (dialog != null)
             {
+                Messenger.Default.Unregister<Parameter>(this, res => Room = GetRoom(((int)res.param)));
                 dialog.Close();
             }
         }

@@ -9,11 +9,12 @@
         ResizeMode="NoResize"
         Name="myWindow"
         WindowStartupLocation="CenterScreen"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Thuê phòng" Height="660.7" Width="846.4">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"></ColumnDefinition>
+            <ColumnDefinition Width="360"></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -69,14 +70,14 @@
             <StackPanel Orientation="Vertical">
                 <GroupBox Header="Thông tin phòng" Height="100">
                     <Grid>
-                        <TextBox Width="150"  HorizontalAlignment="Left"
+                        <TextBox IsReadOnly="True" Width="150"  HorizontalAlignment="Left"
                       materialDesign:HintAssist.Hint="Tên Phòng"
                       materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                       materialDesign:HintAssist.FloatingScale="0.50"
                       Text="{Binding Room.RoomName}"
                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                       FontSize="20" />
-                        <TextBox Width="200"  HorizontalAlignment="Right"
+                        <TextBox IsReadOnly="True" Width="200"  HorizontalAlignment="Right"
                       materialDesign:HintAssist.Hint="Loại phòng"
                       materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                       materialDesign:HintAssist.FloatingScale="0.50"
@@ -146,9 +147,6 @@
                               Is24Hours="True"
                               Width="100" Height="30"
                               materialDesign:HintAssist.Hint="Giờ vào"/>
-                            <Button  Background="#FF3D9CBC" >
-                                <materialDesign:PackIcon Kind="Clock" />
-                            </Button>
                         </StackPanel>
                         <StackPanel Margin="2" VerticalAlignment="Center" Height="33.432"  Orientation="Horizontal">
                             <DatePicker 
@@ -162,9 +160,6 @@
                       Is24Hours="True"
                       Width="100" Height="30"
                       materialDesign:HintAssist.Hint="Giờ ra"/>
-                            <Button Background="#FF3D9CBC" >
-                                <materialDesign:PackIcon Kind="Clock" />
-                            </Button>
                         </StackPanel>
                     </StackPanel>
 
@@ -181,30 +176,34 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0" >
-                            <TextBox Margin="1" Height="40" Text="{Binding RoomCost}" FontWeight="DemiBold" IsEnabled="False" materialDesign:HintAssist.Hint="Tiền phòng"
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding RoomCost}" FontWeight="DemiBold" IsReadOnly="True" materialDesign:HintAssist.Hint="Tiền phòng"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="0" Grid.Column="1">
-                            
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding Room.Price}" IsReadOnly="True" materialDesign:HintAssist.Hint="Giá Phòng"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="0">
-                            <TextBox Margin="1" Height="40" Text="{Binding ServiceCost}" FontWeight="DemiBold" IsEnabled="False" materialDesign:HintAssist.Hint="Tiền dịch Vụ"
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40" Value="{Binding ServiceCost}" FontWeight="DemiBold" IsReadOnly="True" materialDesign:HintAssist.Hint="Tiền dịch Vụ"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">
-                            
+                            <syncfusion:IntegerTextBox MinValue="1" MaxValue="{Binding Room.MaxPeople}"  Margin="1" Height="40" Value="{Binding NumOfPeole}" FontWeight="DemiBold"  materialDesign:HintAssist.Hint="Số người ở"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="0">
-                            <TextBox Margin="1" Height="40" FontSize="18" FontWeight="DemiBold" Text="{Binding Discount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" InputScope="Number"  materialDesign:HintAssist.Hint="Giảm giá"
+                            <syncfusion:IntegerTextBox  Margin="1" Height="40"  MinValue="0"  Value="{Binding Discount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" InputScope="Number"  materialDesign:HintAssist.Hint="Giảm giá"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Bottom" />
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="1">
-                            <TextBox Margin="1"  FontSize="18" FontWeight="DemiBold" Text="{Binding TotalCost}" IsEnabled="False" materialDesign:HintAssist.Hint="Tổng tiền"
+                            <syncfusion:IntegerTextBox  Margin="1"  FontSize="18" FontWeight="DemiBold" Value="{Binding TotalCost}" IsReadOnly="True" materialDesign:HintAssist.Hint="Tổng tiền"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Bottom" />
                         </Grid>
                     </Grid>
                 </GroupBox>

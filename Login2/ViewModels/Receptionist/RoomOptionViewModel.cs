@@ -73,8 +73,9 @@ namespace Login2.ViewModels.Receptionist
 
         private void Excute_RentRoom(object p)
         {
+            System.Windows.Application.Current.Properties["CurrentRoomID"] = _room.ID;
             var rentRoomWindow = new RentRoom();
-            ParameterSetter.SetParameter(_room.ID);
+            //ParameterSetter.SetParameter(_room.ID);
             rentRoomWindow.ShowDialog();
             
             
@@ -108,8 +109,9 @@ namespace Login2.ViewModels.Receptionist
 
         private void Excute_CheckOutRoom(object p)
         {
+            System.Windows.Application.Current.Properties["CurrentRoomID"] = _room.ID;
             var checkOutWindow = new CheckOut();
-            ParameterSetter.SetParameter(_room.ID);
+            //ParameterSetter.SetParameter(_room.ID);
             checkOutWindow.ShowDialog();
             if (System.Windows.Application.Current.Properties["Commit"] != null)
             {
@@ -189,6 +191,7 @@ namespace Login2.ViewModels.Receptionist
             RoomOption dialog = App.Current.Windows.OfType<RoomOption>().FirstOrDefault();
             if (dialog != null)
             {
+                Messenger.Default.Unregister<Parameter>(this, res => GetRoom((int)res.param));
                 dialog.Close();
             }
         }

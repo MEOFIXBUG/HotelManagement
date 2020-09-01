@@ -53,8 +53,10 @@ namespace Login2.ViewModels.Receptionist
             servicelRepository = new BaseRepository<service>();
             customerRepository = new BaseRepository<customer>();
 
-            Messenger.Default.Register<Parameter>(this, res => getData(((int)res.param)));
+            //Messenger.Default.Register<Parameter>(this, res => getData(((int)res.param)));
             ListService = getFullService();
+            getData();
+            
             
             //ListServiceAdded = new BindingList<service_details>(BookingInfo.booking_details.FirstOrDefault().service_details.ToList());
 
@@ -89,12 +91,13 @@ namespace Login2.ViewModels.Receptionist
         public DateTime StartTime { get => _startTime; set { _startTime = value; RaisePropertyChanged(); calcRoomCost(); } }
         public DateTime EndTime { get => _endTime; set { _endTime = value; RaisePropertyChanged(); calcRoomCost(); } }
 
-        private void getData(int roomID)
+        private void getData()
         {
+            int id = (int)System.Windows.Application.Current.Properties["CurrentRoomID"];
             room r;
             using (var db = new hotelEntities())
             {
-                r = db.rooms.Include("room_status").Include("room_type").Where<room>(x => x.ID == roomID).FirstOrDefault();
+                r = db.rooms.Include("room_status").Include("room_type").Where<room>(x => x.ID == id).FirstOrDefault();
             }
 
             Room = r;
@@ -254,7 +257,7 @@ namespace Login2.ViewModels.Receptionist
             {
                 return 0;
             }
-            return (int)length.TotalDays * (int)Room.Price;
+            return (int)length.TotalDays * ((int)Room.Price);
         }
 
         private int calcServiceCost()
@@ -287,7 +290,7 @@ namespace Login2.ViewModels.Receptionist
             CheckOut dialog = App.Current.Windows.OfType<CheckOut>().FirstOrDefault();
             if (dialog != null)
             {
-                Messenger.Default.Unregister<Parameter>(this, res => getData(((int)res.param)));
+                //Messenger.Default.Unregister<Parameter>(this, res => getData(((int)res.param)));
                 dialog.Close();
             }
         }

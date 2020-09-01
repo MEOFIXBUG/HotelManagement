@@ -51,7 +51,11 @@ namespace Login2.ViewModels.Receptionist
             bookingDetailRepository = new BaseRepository<booking_details>();
             serviceDetailRepository = new BaseRepository<service_details>();
             servicelRepository = new BaseRepository<service>();
-            Messenger.Default.Register<Parameter>(this, res => Room = GetRoom(((int)res.param)));
+
+            int roomID = (int)System.Windows.Application.Current.Properties["CurrentRoomID"];
+
+            //Messenger.Default.Register<Parameter>(this, res => Room = GetRoom(((int)res.param)));
+            Room = GetRoom(roomID);
             ListService = getFullService();
             BookingInfo = new booking();
             ListServiceAdded = new BindingList<service_details>();
@@ -253,14 +257,14 @@ namespace Login2.ViewModels.Receptionist
             closeDialog();
         }
 
-        private int calcRoomCost(DateTime start,DateTime end)
+        private int calcRoomCost(DateTime start, DateTime end)
         {
             TimeSpan length = end.Subtract(start);
             if (length.TotalDays <= 0)
             {
                 return 0;
             }
-            return (int)length.TotalDays * (int)Room.Price;
+            return (int)length.TotalDays * ((int)Room.Price);
         }
 
         private int calcServiceCost()

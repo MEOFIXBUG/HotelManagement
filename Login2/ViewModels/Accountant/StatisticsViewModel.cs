@@ -88,7 +88,7 @@ namespace Login2.ViewModels.Accountant
                     double b = 0;
                     foreach (var item in a)
                     {
-                        b += item.booking_details.Select(x => x.Amount).Sum();
+                        b += item.booking_details.Select(x => calcRoomCost(x.DateOfRentStart.Value, x.DateOfRentEnd.Value, x.Amount)).Sum();
                     }
                     Data.Add(new Data
                     {
@@ -108,7 +108,7 @@ namespace Login2.ViewModels.Accountant
                     double b = 0;
                     foreach (var item in a)
                     {
-                        b += item.booking_details.Select(x => x.Amount).Sum();
+                        b += item.booking_details.Select(x => calcRoomCost(x.DateOfRentStart.Value,x.DateOfRentEnd.Value,x.Amount)).Sum();
                     }
                     Data.Add(new Data
                     {
@@ -120,6 +120,15 @@ namespace Login2.ViewModels.Accountant
             }
            
             
+        }
+        private int calcRoomCost(DateTime start, DateTime end , double price)
+        {
+            TimeSpan length = end.Subtract(start);
+            if (length.TotalDays <= 0)
+            {
+                return 0;
+            }
+            return (int)length.TotalDays *(int) price;
         }
         private bool CanExecute_DrawChart(object obj)
         {

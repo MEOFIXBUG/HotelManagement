@@ -199,7 +199,7 @@ namespace Login2.ViewModels.Receptionist
             BookingInfo.IsPaid = true;
             BookingInfo.Total = TotalCost;
             BookingInfo.Discount = Discount;
-
+            BookingInfo.PaidTime = DateTime.Now;
             bookingRepository.Update(BookingInfo);
 
             //Update Booking Details

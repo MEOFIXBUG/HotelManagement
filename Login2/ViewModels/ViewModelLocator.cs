@@ -157,6 +157,9 @@ namespace Login2.ViewModels
             SimpleIoc.Default.Register<RoomViewModel>();
             SimpleIoc.Default.Register<RentRoomViewModel>();
             SimpleIoc.Default.Register<BookingRoomViewModel>();
+            SimpleIoc.Default.Register<RoomOptionViewModel>();
+            SimpleIoc.Default.Register<ChooseCustomerViewModel>();
+            SimpleIoc.Default.Register<CheckOutViewModel>();
 
         }
 

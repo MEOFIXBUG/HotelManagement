@@ -389,6 +389,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Assets\check-out.png" />
+    <Resource Include="Assets\hotel-key.png" />
+    <Resource Include="Assets\cleaning.png" />
+    <Resource Include="Assets\tools.png" />
+    <Resource Include="Assets\hotel.png" />
+    <Resource Include="Assets\bed.png" />
+    <Resource Include="Assets\single-bed.png" />
     <Content Include="Models\HotelModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>HotelModels.Context.cs</LastGenOutput>

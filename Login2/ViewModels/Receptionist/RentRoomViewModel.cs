@@ -181,11 +181,15 @@ namespace Login2.ViewModels.Receptionist
             get
             {
                 return _commitCommand ??
-                    (_commitCommand = new RoleBasedSecurityCommand<object>(null, Excute_Commit));
+                    (_commitCommand = new RoleBasedSecurityCommand<object>(CanExcute_Commit, Excute_Commit));
             }
         }
 
-
+        private bool CanExcute_Commit(object obj)
+        {
+            if (Customer != null) return true;
+            return false;
+        }
         private void Excute_Commit(object p)
         {
             
@@ -252,11 +256,11 @@ namespace Login2.ViewModels.Receptionist
         private int calcRoomCost(DateTime start,DateTime end)
         {
             TimeSpan length = end.Subtract(start);
-            if (length.Days<= 0)
+            if (length.TotalDays <= 0)
             {
                 return 0;
             }
-            return length.Days * (int)Room.Price;
+            return (int)length.TotalDays * (int)Room.Price;
         }
 
         private int calcServiceCost()

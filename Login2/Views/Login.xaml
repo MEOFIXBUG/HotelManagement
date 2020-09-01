@@ -50,7 +50,7 @@
                 Command="{Binding Path=LoginCommand}" 
         CommandParameter="{Binding ElementName=passBox}" />
         <TextBlock Text="" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray" Cursor="Hand"/>
-        <Image Source="/Assets/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
+        <Image Source="/Assets/hotel.png" Width="120" Height="120" VerticalAlignment="Top" Margin="30"/>
         <Button x:Name="ButtonFechar" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Width="25" Height="25" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="ButtonPower_Click" VerticalAlignment="Top" HorizontalAlignment="Right">
             <materialDesign:PackIcon Kind="Power"/>
         </Button>

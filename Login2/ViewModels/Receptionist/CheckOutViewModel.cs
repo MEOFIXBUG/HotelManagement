@@ -250,11 +250,11 @@ namespace Login2.ViewModels.Receptionist
         private int calcRoomCost(DateTime start, DateTime end)
         {
             TimeSpan length = end.Subtract(start);
-            if (length.Days <= 0)
+            if (length.TotalDays <= 0)
             {
                 return 0;
             }
-            return length.Days * (int)Room.Price;
+            return (int)length.TotalDays * (int)Room.Price;
         }
 
         private int calcServiceCost()

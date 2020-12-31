@@ -40,6 +40,22 @@
     <StartupObject>Login2.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\webcam\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\webcam\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\webcam\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="DarrenLee.Media, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\webcam\DarrenLee.Media.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -69,6 +85,9 @@
     </Reference>
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.20.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.EntityFramework.8.0.20\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.Data.WPF, Version=18.2460.0.47, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Data.WPF.18.2.0.47\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
@@ -111,6 +130,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -119,6 +139,7 @@
     </ApplicationDefinition>
     <Compile Include="Auxiliary\Converters\ConverterForSelectedChange.cs" />
     <Compile Include="Auxiliary\Converters\ConvertObjectToString.cs" />
+    <Compile Include="Auxiliary\DomainObjects\FPTInfo.cs" />
     <Compile Include="Auxiliary\DomainObjects\ParametersForSwitchView.cs" />
     <Compile Include="Auxiliary\DomainObjects\RePass.cs" />
     <Compile Include="Auxiliary\Enums\AccountantFeatures.cs" />
@@ -136,7 +157,13 @@
     <Compile Include="Auxiliary\Helpers\Session.cs" />
     <Compile Include="Auxiliary\Repository\BaseRepository.cs" />
     <Compile Include="Auxiliary\Repository\IRepository.cs" />
+    <Compile Include="Auxiliary\Scanner\CaptureScreen.xaml.cs">
+      <DependentUpon>CaptureScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Auxiliary\Validations\Simple_Validations.cs" />
+    <Compile Include="Auxiliary\WebAPIRequest\IWebApiRequest.cs" />
+    <Compile Include="Auxiliary\WebAPIRequest\ParamObject.cs" />
+    <Compile Include="Auxiliary\WebAPIRequest\FPTApiRequest.cs" />
     <Compile Include="Commands\RoleBasedSecurityCommand.cs" />
     <Compile Include="Models\account.cs">
       <DependentUpon>HotelModels.tt</DependentUpon>
@@ -273,6 +300,10 @@
       <DependentUpon>RoomList.xaml</DependentUpon>
     </Compile>
     <Page Include="Auxiliary\Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Auxiliary\Scanner\CaptureScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

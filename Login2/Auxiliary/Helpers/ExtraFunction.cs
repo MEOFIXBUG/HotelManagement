@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
@@ -17,6 +18,12 @@ namespace Login2.Auxiliary.Helpers
 {
     public static class ExtraFunction
     {
+        public static Match  getHW(string value) 
+        {
+            Regex regex = new Regex(@"Width=(?<Width>[0-9]+),Height=(?<Height>[0-9]+)");
+
+            return regex.Match(value.TrimStart().TrimEnd());
+        }
         public static List<string> featureOfRole(Roles role)
         {
             List<string> items = new List<string>();

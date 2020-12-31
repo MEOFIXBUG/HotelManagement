@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Login2.Auxiliary.Scanner"
         mc:Ignorable="d"
         Closing="Window_Closing"
-        Title="CaptureScreen" Height="450" Width="800">
+        Title="CaptureScreen" Height="600" Width="800">
     <Canvas>
         <TextBlock Text="Type Photo :" Canvas.Left="270" Canvas.Top="44"></TextBlock>
         <ComboBox Name="TypePhoto" Width="158" Canvas.Left="360" Canvas.Top="32"></ComboBox>
@@ -16,10 +16,10 @@
         <ComboBox Name="TypeCamera" Width="158" Canvas.Left="360" Canvas.Top="65" SelectionChanged="TypeCamera_SelectionChanged" ></ComboBox>
         <TextBlock Text="Camera Resolution :" Canvas.Left="231" Canvas.Top="110" RenderTransformOrigin="0.135,0.71"></TextBlock>
         <ComboBox Name="Resolution" Width="158" Canvas.Left="360" Canvas.Top="98" SelectionChanged="Resolution_SelectionChanged"></ComboBox>
-        <wfi:WindowsFormsHost Height="208" Width="547" Canvas.Left="160" Canvas.Top="144">
+        <wfi:WindowsFormsHost Height="351" Width="547" Canvas.Left="160" Canvas.Top="144">
             <winForms:PictureBox x:Name="pictureBoxLoading" >
             </winForms:PictureBox>
         </wfi:WindowsFormsHost>
-        <Button Click="Capture_Click" Name="Capture" Content="Capture" FontSize="12" Canvas.Left="632" Canvas.Top="360" RenderTransformOrigin="0.902,1.375" Height="25" Width="75"></Button>
+        <Button Click="Capture_Click" Name="Capture" Content="Capture" FontSize="12" Canvas.Left="632" Canvas.Top="500" RenderTransformOrigin="0.902,1.375" Height="25" Width="75"></Button>
     </Canvas>
 </Window>
